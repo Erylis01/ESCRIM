@@ -1,6 +1,6 @@
 package application;
 
-
+import gui.Interface;
 
 public class Application {
 
@@ -12,7 +12,8 @@ public class Application {
 	}
 
 	private static void PierreTests() {
-
+		Interface i=new Interface();
+		i.createwindow();
 	}
 
 	private static void CharlieTests() {
