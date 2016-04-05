@@ -104,4 +104,37 @@ public class Storage {
 	public void setList_product(ArrayList<Product> list_product) {
 		this.list_product = list_product;
 	}
+	
+	/**
+	 * Ajoute un produit à la liste courante
+	 * @param produit : Produit que l'on souhaite ajouter à la liste
+	 */
+	public void ajouterProduit(Product produit){
+		list_product.add(produit);
+	}
+	
+	/**
+	 * Supprime un produit (repérer par son numéro de lot) de la liste courante
+	 * @param produit : Produit que l'on souhaite supprimer de la liste
+	 */
+	public void supprimerProduit(Product produit){
+		for(int i = 0;i<list_product.size();i++){
+			if(list_product.get(i).getLot() == produit.getLot()){
+				list_product.remove(i);
+				i--;
+			}				
+		}
+	}
+	
+	/**
+	 * Méthode de modification d'un produit (repérer par son numéro de lot)
+	 * @param produit : Produit que l'on souhaite modifier
+	 */
+	public void modifierProduit(Product produit){
+		for(int i = 0;i<list_product.size();i++){
+			if(list_product.get(i).getLot() == produit.getLot()){
+				list_product.set(i, produit);
+			}				
+		}
+	}
 }
