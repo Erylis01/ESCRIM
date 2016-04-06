@@ -1,6 +1,8 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
@@ -9,6 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.WindowConstants;
+
 
 /**
  * La Classe Interface représente la JFrame générale du logiciel.
@@ -19,6 +22,7 @@ public class Interface extends JFrame {
 	
 	private String path_icon="src/assets/icone.png";
 	private int width_window,height_window;
+	private Color font_color=new Color(44,34,85);
 
 	/**
 	 * Permet de créer une fenetre;
@@ -36,6 +40,7 @@ public class Interface extends JFrame {
 		int windowLeftPosition = screenSize.width / 2 - this.width_window /2;
 		int windowRightPostion = screenSize.height / 2 - this.height_window / 2;
 		this.setLocation(windowLeftPosition, windowRightPostion);
+		
 		// Donne le titre de la fenêtre
 		this.setTitle("ESCRIM");
 
@@ -47,9 +52,27 @@ public class Interface extends JFrame {
 		// fenêtre (arrêt du procéssus)
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
+		//Ajout d'une couleur de font
+		this.getContentPane().setBackground(font_color);
+		
+		// Création du JMenu
+		JMenuBar menu = new JMenuBar();
+		
+		
+		// Ajout du Menu aide
+		JMenu menuAide = new JMenu("Help");
+		menuAide.getAccessibleContext().setAccessibleDescription("Menu d'aide");
+		JMenuItem menuItemGuide=new JMenuItem("User guide");
+		JMenuItem menuItemInfo=new JMenuItem("Info");
+		menuAide.add(menuItemInfo);
+		menuAide.add(menuItemGuide);
+		menu.add(menuAide);
+		this.setJMenuBar(menu);
+		
 		// Packing et affichage de la JFrame
 		this.pack();
 		this.setVisible(true);
 	}
+
 
 }
