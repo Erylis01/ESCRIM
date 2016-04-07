@@ -1,5 +1,9 @@
 package model;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Date;
 
 public class Product {
@@ -139,5 +143,16 @@ public class Product {
 		test_quantite = true;
 		return test_quantite;
 	}
+	
+	/**
+	 * Fonction appeller pour la génération d'un fichier texte simple de récapitulatif des informations
+	 * @throws IOException 
+	 */
+	public void printFile() throws IOException{
+		BufferedWriter writer = new BufferedWriter(new FileWriter(new File("assets/produit"+name+".txt")));
+		String toWrite ="Fiche du produit :"+name+"\n"+"\n"+"Le produit composé de "+dcl+" et de dosage "+dosage+" dans le lot n° "+lot+" est disponible dans la quantité "+quantity+".\n\n"+"Son seuil critique est fixé à "+critical_threshold;
+		writer.write(toWrite);
+		writer.close();
+		}
+	}
 
-}
