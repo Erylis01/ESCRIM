@@ -4,14 +4,35 @@ import java.util.ArrayList;
 
 public class Storage {
 
-	private int number,width,height,depth;
+	private float number,width,height,depth;
 	private String type,localisation,state;
 	private ArrayList<Product> list_product = new  ArrayList<Product>();
+	/**
+	 * Constructeur de la classe storage
+	 * @param number
+	 * @param width
+	 * @param height
+	 * @param depth
+	 * @param type
+	 * @param localisation
+	 * @param state
+	 * @param list_product
+	 */
+	public Storage(float number,float width,float height,float depth,String type,String localisation,String state,ArrayList<Product> list_product ){
+		this.number = number;
+		this.width = width;
+		this.height = height;
+		this.depth = depth;
+		this.type = type;
+		this.localisation = localisation;
+		this.state = state;
+		this.list_product = list_product;
+	}
 	
 	/**
 	 * @return the number
 	 */
-	public int getNumber() {
+	public float getNumber() {
 		return number;
 	}
 	/**
@@ -23,7 +44,7 @@ public class Storage {
 	/**
 	 * @return the width
 	 */
-	public int getWidth() {
+	public float getWidth() {
 		return width;
 	}
 	/**
@@ -35,7 +56,7 @@ public class Storage {
 	/**
 	 * @return the height
 	 */
-	public int getHeight() {
+	public float getHeight() {
 		return height;
 	}
 	/**
@@ -47,7 +68,7 @@ public class Storage {
 	/**
 	 * @return the depth
 	 */
-	public int getDepth() {
+	public float getDepth() {
 		return depth;
 	}
 	/**
@@ -104,6 +125,11 @@ public class Storage {
 	public void setList_product(ArrayList<Product> list_product) {
 		this.list_product = list_product;
 	}
+	
+	/*
+	 * Toutes les méthodes qui suivent sont à réécrire lorsque la BDD sera mise en place
+	 * Voir si on stock uniquement sur BDD ou si on garde des variables local
+	 */
 	
 	/**
 	 * Ajoute un produit à la liste courante

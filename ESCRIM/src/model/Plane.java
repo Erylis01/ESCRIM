@@ -8,6 +8,17 @@ public class Plane {
 	private int maxload;
 	private ArrayList <Container> list_container= new ArrayList <Container>();
 	
+	/**
+	 * Constructeur de la classe plane
+	 * @param type
+	 * @param maxload
+	 * @param list_container
+	 */
+	public Plane(String type, int maxload, ArrayList<Container> list_container) {
+		this.type = type;
+		this.maxload = maxload;
+		this.list_container = list_container;
+	}
 	
 	/**
 	 * @return the type

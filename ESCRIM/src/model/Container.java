@@ -3,6 +3,20 @@ package model;
 public class Container {
 
 	private int volume,depth,width,height;
+	
+	/**
+	 * Constructeur de la classe Container
+	 * @param volume
+	 * @param depth
+	 * @param width
+	 * @param height
+	 */
+	public Container(int volume, int depth, int width, int height){ 
+		this.volume = volume;
+		this.depth = depth;
+		this.width = width;
+		this.height = height;
+	}
 
 	/**
 	 * @return the volume

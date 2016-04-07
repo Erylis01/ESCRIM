@@ -9,6 +9,30 @@ public class Product {
 	private String dcl,dosage,reference,name;
 	
 	/**
+	 * Constructeur de la classe Product
+	 * @param dlu
+	 * @param quantity
+	 * @param lot
+	 * @param critical_threshold
+	 * @param dcl
+	 * @param dosage
+	 * @param reference
+	 * @param name
+	 */
+	
+	public Product(Date dlu, int quantity, int lot, int critical_threshold, String dcl, String dosage, String reference,
+			String name) {
+		this.dlu = dlu;
+		this.quantity = quantity;
+		this.lot = lot;
+		this.critical_threshold = critical_threshold;
+		this.dcl = dcl;
+		this.dosage = dosage;
+		this.reference = reference;
+		this.name = name;
+	}
+	
+	/**
 	 * @return the dlu
 	 */
 	public Date getDlu() {

@@ -3,6 +3,20 @@ package controller;
 public class User {
 
 	private String lastname,firstname,login,password;
+	
+	/**
+	 * Constructeur de la classe user
+	 * @param lastname
+	 * @param firstname
+	 * @param login
+	 * @param password
+	 */
+	public User(String lastname, String firstname, String login, String password) {
+		this.lastname = lastname;
+		this.firstname = firstname;
+		this.login = login;
+		this.password = password;
+	}
 
 	/**
 	 * @return the lastname
