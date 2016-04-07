@@ -128,5 +128,16 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	/**
+	 * Méthode permettant de vérifier l'état de criticité du stock de produit
+	 * @return test_quantite
+	 */
+	public boolean etatCritique(){
+		boolean test_quantite = false;
+		if(quantity <= critical_threshold) 
+		test_quantite = true;
+		return test_quantite;
+	}
 
 }
