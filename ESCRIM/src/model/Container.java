@@ -2,21 +2,42 @@ package model;
 
 public class Container {
 
-	private int volume,depth,width,height;
+	private int ID_contenair,volume,depth,width,height;
 	
 	/**
 	 * Constructeur de la classe Container
+	 * @param ID_contenair
 	 * @param volume
 	 * @param depth
 	 * @param width
 	 * @param height
 	 */
-	public Container(int volume, int depth, int width, int height){ 
+	public Container(int ID_contenair, int volume, int depth, int width, int height){ 
 		this.volume = volume;
 		this.depth = depth;
 		this.width = width;
 		this.height = height;
 	}
+
+	
+	/**
+	 * 
+	 * @return ID_contenair
+	 */
+	public int getID_contenair() {
+		return ID_contenair;
+	}
+
+
+	/**
+	 * 
+	 * @param iD_contenair
+	 */
+	public void setID_contenair(int iD_contenair) {
+		ID_contenair = iD_contenair;
+	}
+
+
 
 	/**
 	 * @return the volume

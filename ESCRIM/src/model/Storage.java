@@ -3,10 +3,11 @@ package model;
 import java.util.ArrayList;
 
 public class Storage {
-
+	
 	private float number,width,height,depth;
 	private String type,localisation,state;
 	private ArrayList<Product> list_product = new  ArrayList<Product>();
+	
 	/**
 	 * Constructeur de la classe storage
 	 * @param number
@@ -27,8 +28,8 @@ public class Storage {
 		this.localisation = localisation;
 		this.state = state;
 		this.list_product = list_product;
-	}
-	
+	}	
+
 	/**
 	 * @return the number
 	 */
