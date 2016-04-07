@@ -1,6 +1,6 @@
 package application;
 
-import gui.Interface;
+import gui.Log;
 
 public class Application {
 
@@ -12,8 +12,8 @@ public class Application {
 	}
 
 	private static void PierreTests() {
-		Interface i=new Interface();
-		i.createwindow();
+		Log l= new Log();
+
 	}
 
 	private static void CharlieTests() {
