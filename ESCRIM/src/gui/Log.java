@@ -22,11 +22,12 @@ import java.awt.SystemColor;
 
 public class Log extends JFrame {
 
-	private int LARGEUR_FENETRE = 600, HAUTEUR_FENETRE = 600;
+	private final int LARGEUR_FENETRE = 600, HAUTEUR_FENETRE = 600;
 	private JPasswordField passwordField;
 	private JTextField textField;
 
 	public Log() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setEnabled(false);
 
 		
@@ -63,7 +64,7 @@ public class Log extends JFrame {
 		springLayout.putConstraint(SpringLayout.SOUTH, btnNewButton_1, -190, SpringLayout.SOUTH, getContentPane());
 		getContentPane().add(btnNewButton_1);
 		
-		passwordField = new JPasswordField();
+		passwordField = new JPasswordField("mot de passe");
 		springLayout.putConstraint(SpringLayout.WEST, passwordField, 166, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, passwordField, -219, SpringLayout.SOUTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, passwordField, -176, SpringLayout.EAST, getContentPane());
@@ -71,7 +72,7 @@ public class Log extends JFrame {
 		springLayout.putConstraint(SpringLayout.EAST, btnNewButton_1, 0, SpringLayout.EAST, passwordField);
 		getContentPane().add(passwordField);
 		
-		textField = new JTextField();
+		textField = new JTextField("Utilisateur");
 		springLayout.putConstraint(SpringLayout.WEST, textField, 166, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, textField, -176, SpringLayout.EAST, getContentPane());
 		springLayout.putConstraint(SpringLayout.NORTH, passwordField, 6, SpringLayout.SOUTH, textField);

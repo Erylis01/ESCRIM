@@ -1,6 +1,7 @@
 package application;
 
 import gui.Log;
+import gui.Menu;
 
 public class Application {
 
@@ -12,7 +13,8 @@ public class Application {
 	}
 
 	private static void PierreTests() {
-		Log l= new Log();
+		Log l = new Log();
+		//Menu m=new Menu();
 
 	}
 
