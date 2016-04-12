@@ -17,7 +17,7 @@ public class Bdd {
 		
 		Connection conn = null;
 		try {
-		    conn = DriverManager.getConnection("jdbc:mysql://51.254.124.54:465/ESCRIM_BDD","ESCRIM","w859uxZrvpBwb4Vt");
+		    conn = DriverManager.getConnection("jdbc:mysql://51.254.124.54:3306/ESCRIM_BDD","ESCRIM","w859uxZrvpBwb4Vt");
 		    System.out.println("Okk !");
 
 		   
@@ -27,5 +27,9 @@ public class Bdd {
 		    System.out.println("SQLState: " + ex.getSQLState());
 		    System.out.println("VendorError: " + ex.getErrorCode());
 		}
+	}
+	
+	public static void Authenticate(){
+		
 	}
 }
