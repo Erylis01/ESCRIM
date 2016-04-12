@@ -27,7 +27,14 @@ public class Log extends JFrame {
 	private JTextField textField;
 
 	public Log() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+
+		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		// Empêcher agrandissement fenêtre
+		this.setResizable(false);
+		
 		getContentPane().setEnabled(false);
 
 		
