@@ -1,5 +1,6 @@
 package application;
 
+import controller.Bdd;
 import gui.Log;
 import gui.Menu;
 
@@ -7,9 +8,9 @@ public class Application {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		PierreTests();
+		//PierreTests();
 		CharlieTests();
-		WilliamTests();
+		//WilliamTests();
 	}
 
 	private static void PierreTests() {
@@ -19,7 +20,8 @@ public class Application {
 	}
 
 	private static void CharlieTests() {
-
+         Bdd.ConnectDB();
+         
 	}
 	
 	private static void WilliamTests() {

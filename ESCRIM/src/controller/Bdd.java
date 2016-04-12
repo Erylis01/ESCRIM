@@ -9,17 +9,16 @@ public class Bdd {
 		//Récupérer le Driver
 		try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
+            System.out.println("Ok !");
         } 
 		catch (Exception e) {
-        	
+        	System.out.println("erreur");
 		}
 		
 		Connection conn = null;
 		try {
-		    conn =
-		       DriverManager.getConnection("jdbc:mysql://51.254.124.54//ESCRIM_BDD?" +
-		                                   "user=ESCRIM&password=w859uxZrvpBwb4Vt");
-
+		    conn = DriverManager.getConnection("jdbc:mysql://51.254.124.54:465/ESCRIM_BDD","ESCRIM","w859uxZrvpBwb4Vt");
+		    System.out.println("Okk !");
 
 		   
 		} catch (SQLException ex) {
