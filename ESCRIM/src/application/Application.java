@@ -9,15 +9,15 @@ public class Application {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//PierreTests();
-		CharlieTests();
+		PierreTests();
+		//CharlieTests();
 		//WilliamTests();
 	}
 
 	private static void PierreTests() {
 		//Log l = new Log();
-		//Menu m=new Menu();
-		ModifProduit mp= new ModifProduit();
+		Menu m=new Menu();
+		//ModifProduit mp= new ModifProduit();
 
 	}
 

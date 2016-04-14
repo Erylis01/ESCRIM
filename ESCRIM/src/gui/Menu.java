@@ -11,12 +11,14 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTabbedPane;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.Box;
 import java.awt.Canvas;
 import javax.swing.JTextField;
@@ -58,8 +60,7 @@ public class Menu extends JFrame {
 		choisir_config.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				cp.removeAll();
-				cp.repaint();
+
 			}
 		});
 		springLayout.putConstraint(SpringLayout.NORTH, choisir_config, 180, SpringLayout.NORTH, getContentPane());
@@ -72,8 +73,7 @@ public class Menu extends JFrame {
 		gestion_stock.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				cp.removeAll();
-				cp.repaint();
+
 			}
 		});
 		springLayout.putConstraint(SpringLayout.SOUTH, gestion_stock, 0, SpringLayout.SOUTH, getContentPane());
@@ -86,7 +86,16 @@ public class Menu extends JFrame {
 		modif_produit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ModifProduit mp = new ModifProduit(f);
+				JPanel panel = new JPanel(new GridLayout(0, 1));
+				JTextField field1 = new JTextField("");
+		        JTextField field2 = new JTextField("");
+		        panel.add(new JLabel("Nom du produit"));
+		        panel.add(field1);
+		        panel.add(new JLabel("N° de lot"));
+		        panel.add(field2);
+		        int result = JOptionPane.showConfirmDialog(null, panel, "Test",
+		            JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+				//ModifProduit mp = new ModifProduit(f);
 			}
 		});
 		springLayout.putConstraint(SpringLayout.NORTH, modif_produit, 0, SpringLayout.NORTH, getContentPane());
@@ -109,8 +118,8 @@ public class Menu extends JFrame {
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				cp.removeAll();
-				cp.repaint();
+				//cp.removeAll();
+				//cp.repaint();
 			}
 		});
 		lblNewLabel.setIcon(new ImageIcon(Menu.class.getResource("/assets/utilisateur.png")));

@@ -9,6 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
+
+
+import controller.Bdd;
+
 import javax.swing.SpringLayout;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
@@ -18,13 +22,19 @@ import java.awt.Color;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
 
 
-public class Log extends JFrame {
+public class Log extends JFrame implements ActionListener {
 
 	private final int LARGEUR_FENETRE = 600, HAUTEUR_FENETRE = 600;
+	private JButton btnConnexion,btnInscription;
 	private JPasswordField passwordField;
-	private JTextField textField;
+	private JTextField UserField;
 
 	public Log() {
 		
@@ -55,50 +65,67 @@ public class Log extends JFrame {
 		SpringLayout springLayout = new SpringLayout();
 		getContentPane().setLayout(springLayout);
 		
-		JButton btnNewButton = new JButton("Connexion");
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setBackground(new Color(255, 0, 0));
-		springLayout.putConstraint(SpringLayout.WEST, btnNewButton, 166, SpringLayout.WEST, getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, btnNewButton, -190, SpringLayout.SOUTH, getContentPane());
-		getContentPane().add(btnNewButton);
+		btnConnexion = new JButton("Connexion");
+		btnConnexion.setForeground(Color.WHITE);
+		btnConnexion.setBackground(new Color(255, 0, 0));
+		springLayout.putConstraint(SpringLayout.WEST, btnConnexion, 166, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, btnConnexion, -190, SpringLayout.SOUTH, getContentPane());
+		getContentPane().add(btnConnexion);
 		
-		JButton btnNewButton_1 = new JButton("Inscription");
-		btnNewButton_1.setForeground(Color.WHITE);
-		btnNewButton_1.setBackground(new Color(0, 51, 204));
-		springLayout.putConstraint(SpringLayout.NORTH, btnNewButton, 0, SpringLayout.NORTH, btnNewButton_1);
-		springLayout.putConstraint(SpringLayout.EAST, btnNewButton, -6, SpringLayout.WEST, btnNewButton_1);
-		springLayout.putConstraint(SpringLayout.WEST, btnNewButton_1, 290, SpringLayout.WEST, getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, btnNewButton_1, -190, SpringLayout.SOUTH, getContentPane());
-		getContentPane().add(btnNewButton_1);
+		btnInscription = new JButton("Inscription");
+		btnInscription.setForeground(Color.WHITE);
+		btnInscription.setBackground(new Color(0, 51, 204));
+		springLayout.putConstraint(SpringLayout.NORTH, btnConnexion, 0, SpringLayout.NORTH, btnInscription);
+		springLayout.putConstraint(SpringLayout.EAST, btnConnexion, -6, SpringLayout.WEST, btnInscription);
+		springLayout.putConstraint(SpringLayout.WEST, btnInscription, 290, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, btnInscription, -190, SpringLayout.SOUTH, getContentPane());
+		getContentPane().add(btnInscription);
 		
 		passwordField = new JPasswordField("mot de passe");
 		springLayout.putConstraint(SpringLayout.WEST, passwordField, 166, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, passwordField, -219, SpringLayout.SOUTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, passwordField, -176, SpringLayout.EAST, getContentPane());
-		springLayout.putConstraint(SpringLayout.NORTH, btnNewButton_1, 6, SpringLayout.SOUTH, passwordField);
-		springLayout.putConstraint(SpringLayout.EAST, btnNewButton_1, 0, SpringLayout.EAST, passwordField);
+		springLayout.putConstraint(SpringLayout.NORTH, btnInscription, 6, SpringLayout.SOUTH, passwordField);
+		springLayout.putConstraint(SpringLayout.EAST, btnInscription, 0, SpringLayout.EAST, passwordField);
 		getContentPane().add(passwordField);
 		
-		textField = new JTextField("Utilisateur");
-		springLayout.putConstraint(SpringLayout.WEST, textField, 166, SpringLayout.WEST, getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, textField, -176, SpringLayout.EAST, getContentPane());
-		springLayout.putConstraint(SpringLayout.NORTH, passwordField, 6, SpringLayout.SOUTH, textField);
-		springLayout.putConstraint(SpringLayout.SOUTH, textField, -248, SpringLayout.SOUTH, getContentPane());
-		getContentPane().add(textField);
+		UserField = new JTextField("Utilisateur");
+		springLayout.putConstraint(SpringLayout.WEST, UserField, 166, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, UserField, -176, SpringLayout.EAST, getContentPane());
+		springLayout.putConstraint(SpringLayout.NORTH, passwordField, 6, SpringLayout.SOUTH, UserField);
+		springLayout.putConstraint(SpringLayout.SOUTH, UserField, -248, SpringLayout.SOUTH, getContentPane());
+		getContentPane().add(UserField);
 		
-		JLabel lblNewLabel = new JLabel("");
-		springLayout.putConstraint(SpringLayout.SOUTH, lblNewLabel, -277, SpringLayout.SOUTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel, -176, SpringLayout.EAST, getContentPane());
-		springLayout.putConstraint(SpringLayout.NORTH, textField, 6, SpringLayout.SOUTH, lblNewLabel);
-		lblNewLabel.setIcon(new ImageIcon(Log.class.getResource("/assets/icone.png")));
-		getContentPane().add(lblNewLabel);
+		JLabel imgEscrim = new JLabel("");
+		springLayout.putConstraint(SpringLayout.SOUTH, imgEscrim, -277, SpringLayout.SOUTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, imgEscrim, -176, SpringLayout.EAST, getContentPane());
+		springLayout.putConstraint(SpringLayout.NORTH, UserField, 6, SpringLayout.SOUTH, imgEscrim);
+		imgEscrim.setIcon(new ImageIcon(Log.class.getResource("/assets/icone.png")));
+		getContentPane().add(imgEscrim);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(Log.class.getResource("/assets/fond_logpan.jpg")));
-		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel_1, 0, SpringLayout.NORTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel_1, 0, SpringLayout.WEST, getContentPane());
-		getContentPane().add(lblNewLabel_1);
+		JLabel imgFond = new JLabel("");
+		imgFond.setIcon(new ImageIcon(Log.class.getResource("/assets/fond_logpan.jpg")));
+		springLayout.putConstraint(SpringLayout.NORTH, imgFond, 0, SpringLayout.NORTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, imgFond, 0, SpringLayout.WEST, getContentPane());
+		getContentPane().add(imgFond);
 		this.setVisible(true);
 
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		Object source = e.getSource();
+		char[] c = passwordField.getPassword();
+		if (source==btnConnexion){
+			Connection conn=Bdd.ConnectDB();
+			try {
+				boolean authenticated=Bdd.Authenticate(UserField.getText(), passwordField.getText(), conn);
+			} catch (NoSuchAlgorithmException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 	}
 }
