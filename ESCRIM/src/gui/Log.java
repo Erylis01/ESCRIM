@@ -47,9 +47,9 @@ public class Log extends JFrame implements ActionListener {
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(Log.class.getResource("/assets/icone.png")));
 
 		// Ajout d'un layout à la JFrame
-		getContentPane().setEnabled(false);
+		this.getContentPane().setEnabled(false);
 		SpringLayout springLayout = new SpringLayout();
-		getContentPane().setLayout(springLayout);
+		this.getContentPane().setLayout(springLayout);
 
 		// Ajout du bouton de Connexion
 		btnConnexion = new JButton("Connexion");
@@ -58,7 +58,7 @@ public class Log extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.WEST, btnConnexion, 166, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, btnConnexion, -190, SpringLayout.SOUTH, getContentPane());
 		btnConnexion.addActionListener(this);
-		getContentPane().add(btnConnexion);
+		this.getContentPane().add(btnConnexion);
 
 		// Ajout du bouton d'Inscription
 		btnInscription = new JButton("Inscription");
@@ -68,7 +68,8 @@ public class Log extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.EAST, btnConnexion, -6, SpringLayout.WEST, btnInscription);
 		springLayout.putConstraint(SpringLayout.WEST, btnInscription, 290, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, btnInscription, -190, SpringLayout.SOUTH, getContentPane());
-		getContentPane().add(btnInscription);
+		btnInscription.addActionListener(this);
+		this.getContentPane().add(btnInscription);
 
 		// Ajout du champ pour le mot de passe
 		passwordField = new JPasswordField("mot de passe");
@@ -77,7 +78,8 @@ public class Log extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.EAST, passwordField, -176, SpringLayout.EAST, getContentPane());
 		springLayout.putConstraint(SpringLayout.NORTH, btnInscription, 6, SpringLayout.SOUTH, passwordField);
 		springLayout.putConstraint(SpringLayout.EAST, btnInscription, 0, SpringLayout.EAST, passwordField);
-		getContentPane().add(passwordField);
+		passwordField.addActionListener(this);
+		this.getContentPane().add(passwordField);
 
 		// Ajout du champ pour le nom d'utilisateur
 		UserField = new JTextField("Utilisateur");
@@ -85,7 +87,7 @@ public class Log extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.EAST, UserField, -176, SpringLayout.EAST, getContentPane());
 		springLayout.putConstraint(SpringLayout.NORTH, passwordField, 6, SpringLayout.SOUTH, UserField);
 		springLayout.putConstraint(SpringLayout.SOUTH, UserField, -248, SpringLayout.SOUTH, getContentPane());
-		getContentPane().add(UserField);
+		this.getContentPane().add(UserField);
 
 		// Ajout de l'image ESCRIM
 		JLabel imgEscrim = new JLabel("");
@@ -93,14 +95,14 @@ public class Log extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.EAST, imgEscrim, -176, SpringLayout.EAST, getContentPane());
 		springLayout.putConstraint(SpringLayout.NORTH, UserField, 6, SpringLayout.SOUTH, imgEscrim);
 		imgEscrim.setIcon(new ImageIcon(Log.class.getResource("/assets/icone.png")));
-		getContentPane().add(imgEscrim);
+		this.getContentPane().add(imgEscrim);
 
 		// Ajout du fond
 		JLabel imgFond = new JLabel("");
 		imgFond.setIcon(new ImageIcon(Log.class.getResource("/assets/fond_logpan.jpg")));
 		springLayout.putConstraint(SpringLayout.NORTH, imgFond, 0, SpringLayout.NORTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, imgFond, 0, SpringLayout.WEST, getContentPane());
-		getContentPane().add(imgFond);
+		this.getContentPane().add(imgFond);
 
 		// Packing et affichage de la JFrame
 		this.pack();
@@ -111,8 +113,6 @@ public class Log extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		Object source = e.getSource();
-		System.out.println(source);
-		char[] c = passwordField.getPassword();
 
 		if (source == btnConnexion) {
 			Connection conn = Bdd.ConnectDB();
@@ -132,6 +132,10 @@ public class Log extends JFrame implements ActionListener {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		}else if (source==btnInscription){
+			JOptionPane.showMessageDialog(this, "Pas d'action sur le bouton");
+		}else if (source==passwordField){
+			passwordField.setText("");
 		}
 	}
 }
