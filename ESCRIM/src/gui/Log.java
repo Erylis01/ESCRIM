@@ -6,48 +6,35 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
-
-
+import javax.swing.JOptionPane;
 import controller.Bdd;
-
 import javax.swing.SpringLayout;
+import javax.swing.WindowConstants;
 import javax.swing.JTextField;
-import java.awt.GridLayout;
 import javax.swing.JButton;
-import java.awt.FlowLayout;
 import java.awt.Color;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
-import java.awt.SystemColor;
-import java.awt.event.ActionListener;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
-
+import java.awt.event.ActionListener;
 
 public class Log extends JFrame implements ActionListener {
 
 	private final int LARGEUR_FENETRE = 600, HAUTEUR_FENETRE = 600;
-	private JButton btnConnexion,btnInscription;
+	private JButton btnConnexion, btnInscription;
 	private JPasswordField passwordField;
 	private JTextField UserField;
 
 	public Log() {
-		
 
-		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		// Enregistrement de l'option EXIT_ON_CLOSE lors de la fermeture de la fenêtre (arrêt du procéssus)
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
 		// Empêcher agrandissement fenêtre
 		this.setResizable(false);
-		
-		getContentPane().setEnabled(false);
 
-		
 		// Centrage de la fenêtre et choix de la taille de la fenêtre
 		Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
 		this.setPreferredSize(new Dimension(this.LARGEUR_FENETRE, this.HAUTEUR_FENETRE));
@@ -58,20 +45,22 @@ public class Log extends JFrame implements ActionListener {
 		// Choix du titre et de l'icone de la JFrame
 		this.setTitle("Connexion");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(Log.class.getResource("/assets/icone.png")));
-		
-			
-		// Packing et affichage de la JFrame
-		this.pack();
+
+		// Ajout d'un layout à la JFrame
+		getContentPane().setEnabled(false);
 		SpringLayout springLayout = new SpringLayout();
 		getContentPane().setLayout(springLayout);
-		
+
+		// Ajout du bouton de Connexion
 		btnConnexion = new JButton("Connexion");
 		btnConnexion.setForeground(Color.WHITE);
 		btnConnexion.setBackground(new Color(255, 0, 0));
 		springLayout.putConstraint(SpringLayout.WEST, btnConnexion, 166, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, btnConnexion, -190, SpringLayout.SOUTH, getContentPane());
+		btnConnexion.addActionListener(this);
 		getContentPane().add(btnConnexion);
-		
+
+		// Ajout du bouton d'Inscription
 		btnInscription = new JButton("Inscription");
 		btnInscription.setForeground(Color.WHITE);
 		btnInscription.setBackground(new Color(0, 51, 204));
@@ -80,7 +69,8 @@ public class Log extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.WEST, btnInscription, 290, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, btnInscription, -190, SpringLayout.SOUTH, getContentPane());
 		getContentPane().add(btnInscription);
-		
+
+		// Ajout du champ pour le mot de passe
 		passwordField = new JPasswordField("mot de passe");
 		springLayout.putConstraint(SpringLayout.WEST, passwordField, 166, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, passwordField, -219, SpringLayout.SOUTH, getContentPane());
@@ -88,37 +78,53 @@ public class Log extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.NORTH, btnInscription, 6, SpringLayout.SOUTH, passwordField);
 		springLayout.putConstraint(SpringLayout.EAST, btnInscription, 0, SpringLayout.EAST, passwordField);
 		getContentPane().add(passwordField);
-		
+
+		// Ajout du champ pour le nom d'utilisateur
 		UserField = new JTextField("Utilisateur");
 		springLayout.putConstraint(SpringLayout.WEST, UserField, 166, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, UserField, -176, SpringLayout.EAST, getContentPane());
 		springLayout.putConstraint(SpringLayout.NORTH, passwordField, 6, SpringLayout.SOUTH, UserField);
 		springLayout.putConstraint(SpringLayout.SOUTH, UserField, -248, SpringLayout.SOUTH, getContentPane());
 		getContentPane().add(UserField);
-		
+
+		// Ajout de l'image ESCRIM
 		JLabel imgEscrim = new JLabel("");
 		springLayout.putConstraint(SpringLayout.SOUTH, imgEscrim, -277, SpringLayout.SOUTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, imgEscrim, -176, SpringLayout.EAST, getContentPane());
 		springLayout.putConstraint(SpringLayout.NORTH, UserField, 6, SpringLayout.SOUTH, imgEscrim);
 		imgEscrim.setIcon(new ImageIcon(Log.class.getResource("/assets/icone.png")));
 		getContentPane().add(imgEscrim);
-		
+
+		// Ajout du fond
 		JLabel imgFond = new JLabel("");
 		imgFond.setIcon(new ImageIcon(Log.class.getResource("/assets/fond_logpan.jpg")));
 		springLayout.putConstraint(SpringLayout.NORTH, imgFond, 0, SpringLayout.NORTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, imgFond, 0, SpringLayout.WEST, getContentPane());
 		getContentPane().add(imgFond);
+
+		// Packing et affichage de la JFrame
+		this.pack();
 		this.setVisible(true);
 
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
+
 		Object source = e.getSource();
+		System.out.println(source);
 		char[] c = passwordField.getPassword();
-		if (source==btnConnexion){
-			Connection conn=Bdd.ConnectDB();
+
+		if (source == btnConnexion) {
+			Connection conn = Bdd.ConnectDB();
 			try {
-				boolean authenticated=Bdd.Authenticate(UserField.getText(), passwordField.getText(), conn);
+				boolean authenticated = Bdd.Authenticate(UserField.getText(), passwordField.getText(), conn);
+				if (authenticated == true) {
+					this.dispose();
+					Menu m = new Menu();
+				} else {
+					JOptionPane.showMessageDialog(this, "Le nom d'utilisateur ou le mot de passe ne sont pas valides");
+				}
+
 			} catch (NoSuchAlgorithmException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
