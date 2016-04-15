@@ -3,10 +3,13 @@ package gui;
 import javax.swing.JFrame;
 
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import controller.Bdd;
 import javax.swing.SpringLayout;
 import javax.swing.WindowConstants;
@@ -19,17 +22,23 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class Log extends JFrame implements ActionListener {
+public class Log extends JFrame implements ActionListener, KeyListener {
 
 	private final int LARGEUR_FENETRE = 600, HAUTEUR_FENETRE = 600;
 	private JButton btnConnexion, btnInscription;
 	private JPasswordField passwordField;
 	private JTextField UserField;
+	private String Username = null;
 
 	public Log() {
 
-		// Enregistrement de l'option EXIT_ON_CLOSE lors de la fermeture de la fenêtre (arrêt du procéssus)
+		// Enregistrement de l'option EXIT_ON_CLOSE lors de la fermeture de la
+		// fenêtre (arrêt du procéssus)
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		// Empêcher agrandissement fenêtre
@@ -58,6 +67,7 @@ public class Log extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.WEST, btnConnexion, 166, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, btnConnexion, -190, SpringLayout.SOUTH, getContentPane());
 		btnConnexion.addActionListener(this);
+		btnConnexion.addKeyListener(this);
 		this.getContentPane().add(btnConnexion);
 
 		// Ajout du bouton d'Inscription
@@ -73,12 +83,19 @@ public class Log extends JFrame implements ActionListener {
 
 		// Ajout du champ pour le mot de passe
 		passwordField = new JPasswordField("mot de passe");
+
 		springLayout.putConstraint(SpringLayout.WEST, passwordField, 166, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, passwordField, -219, SpringLayout.SOUTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, passwordField, -176, SpringLayout.EAST, getContentPane());
 		springLayout.putConstraint(SpringLayout.NORTH, btnInscription, 6, SpringLayout.SOUTH, passwordField);
 		springLayout.putConstraint(SpringLayout.EAST, btnInscription, 0, SpringLayout.EAST, passwordField);
-		passwordField.addActionListener(this);
+		passwordField.addKeyListener(this);
+		passwordField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				passwordField.setText("");
+			}
+		});
 		this.getContentPane().add(passwordField);
 
 		// Ajout du champ pour le nom d'utilisateur
@@ -87,6 +104,13 @@ public class Log extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.EAST, UserField, -176, SpringLayout.EAST, getContentPane());
 		springLayout.putConstraint(SpringLayout.NORTH, passwordField, 6, SpringLayout.SOUTH, UserField);
 		springLayout.putConstraint(SpringLayout.SOUTH, UserField, -248, SpringLayout.SOUTH, getContentPane());
+		UserField.addKeyListener(this);
+		UserField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				UserField.setText("");
+			}
+		});
 		this.getContentPane().add(UserField);
 
 		// Ajout de l'image ESCRIM
@@ -118,6 +142,7 @@ public class Log extends JFrame implements ActionListener {
 			Connection conn = Bdd.ConnectDB();
 			try {
 				boolean authenticated = Bdd.Authenticate(UserField.getText(), passwordField.getText(), conn);
+				Username = UserField.getText();
 				if (authenticated == true) {
 					this.dispose();
 					Menu m = new Menu();
@@ -132,10 +157,67 @@ public class Log extends JFrame implements ActionListener {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		}else if (source==btnInscription){
-			JOptionPane.showMessageDialog(this, "Pas d'action sur le bouton");
-		}else if (source==passwordField){
-			passwordField.setText("");
+		} else if (source == btnInscription) {
+			JPanel panel = new JPanel(new GridLayout(0, 1));
+			JTextField field1 = new JTextField("");
+			JTextField field2 = new JTextField("");
+			JTextField field3 = new JTextField("");
+			JTextField field4 = new JTextField("");
+			panel.add(new JLabel("Nom"));
+			panel.add(field1);
+			panel.add(new JLabel("Prénom"));
+			panel.add(field2);
+			panel.add(new JLabel("Username"));
+			panel.add(field3);
+			panel.add(new JLabel("Mot de passe"));
+			panel.add(field4);
+			int result = JOptionPane.showConfirmDialog(null, panel, "Test", JOptionPane.OK_CANCEL_OPTION,
+					JOptionPane.PLAIN_MESSAGE);
+			if (result == 0) {
+				Connection conn = Bdd.ConnectDB();
+				Bdd.Add_User(field3.getText(), field4.getText(), field1.getText(), field2.getText(), conn);
+				this.dispose();
+				Menu m = new Menu();
+			}
+
 		}
 	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			Connection conn = Bdd.ConnectDB();
+			boolean authenticated = false;
+			try {
+				authenticated = Bdd.Authenticate(UserField.getText(), passwordField.getText(), conn);
+			} catch (NoSuchAlgorithmException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			Username = UserField.getText();
+			if (authenticated == true) {
+				this.dispose();
+				Menu m = new Menu();
+			} else {
+				JOptionPane.showMessageDialog(this, "Le nom d'utilisateur ou le mot de passe ne sont pas valides");
+			}
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
