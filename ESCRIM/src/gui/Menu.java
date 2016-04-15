@@ -36,7 +36,7 @@ public class Menu extends JFrame {
 	private final int LARGEUR_FENETRE = 600, HAUTEUR_FENETRE = 600;
 	JFrame f = this;
 
-	public Menu() {
+	public Menu(String Username) {
 
 		// Empêcher agrandissement fenêtre
 		this.setResizable(false);

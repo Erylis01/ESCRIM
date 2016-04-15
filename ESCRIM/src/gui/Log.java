@@ -30,14 +30,13 @@ import java.awt.event.MouseEvent;
 public class Log extends JFrame implements ActionListener, KeyListener {
 
 	private final int LARGEUR_FENETRE = 600, HAUTEUR_FENETRE = 600;
-	private JButton btnConnexion, btnInscription;
+	private JButton btnConnexion;
 	private JPasswordField passwordField;
 	private JTextField UserField;
 	private String Username = null;
 
 	public Log() {
 
-		
 		// Enregistrement de l'option EXIT_ON_CLOSE lors de la fermeture de la
 		// fenêtre (arrêt du procéssus)
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -63,33 +62,22 @@ public class Log extends JFrame implements ActionListener, KeyListener {
 
 		// Ajout du bouton de Connexion
 		btnConnexion = new JButton("Connexion");
+		springLayout.putConstraint(SpringLayout.WEST, btnConnexion, 233, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, btnConnexion, -183, SpringLayout.SOUTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, btnConnexion, -240, SpringLayout.EAST, getContentPane());
 		btnConnexion.setForeground(Color.WHITE);
 		btnConnexion.setBackground(new Color(255, 0, 0));
-		springLayout.putConstraint(SpringLayout.WEST, btnConnexion, 166, SpringLayout.WEST, getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, btnConnexion, -190, SpringLayout.SOUTH, getContentPane());
 		btnConnexion.addActionListener(this);
 		btnConnexion.addKeyListener(this);
 		this.getContentPane().add(btnConnexion);
 
-		// Ajout du bouton d'Inscription
-		btnInscription = new JButton("Inscription");
-		btnInscription.setForeground(Color.WHITE);
-		btnInscription.setBackground(new Color(0, 51, 204));
-		springLayout.putConstraint(SpringLayout.NORTH, btnConnexion, 0, SpringLayout.NORTH, btnInscription);
-		springLayout.putConstraint(SpringLayout.EAST, btnConnexion, -6, SpringLayout.WEST, btnInscription);
-		springLayout.putConstraint(SpringLayout.WEST, btnInscription, 290, SpringLayout.WEST, getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, btnInscription, -190, SpringLayout.SOUTH, getContentPane());
-		btnInscription.addActionListener(this);
-		this.getContentPane().add(btnInscription);
-
 		// Ajout du champ pour le mot de passe
 		passwordField = new JPasswordField("mot de passe");
+		springLayout.putConstraint(SpringLayout.NORTH, btnConnexion, 6, SpringLayout.SOUTH, passwordField);
 
 		springLayout.putConstraint(SpringLayout.WEST, passwordField, 166, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, passwordField, -219, SpringLayout.SOUTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, passwordField, -176, SpringLayout.EAST, getContentPane());
-		springLayout.putConstraint(SpringLayout.NORTH, btnInscription, 6, SpringLayout.SOUTH, passwordField);
-		springLayout.putConstraint(SpringLayout.EAST, btnInscription, 0, SpringLayout.EAST, passwordField);
 		passwordField.addKeyListener(this);
 		passwordField.addMouseListener(new MouseAdapter() {
 			@Override
@@ -101,10 +89,11 @@ public class Log extends JFrame implements ActionListener, KeyListener {
 
 		// Ajout du champ pour le nom d'utilisateur
 		UserField = new JTextField("Utilisateur");
+		springLayout.putConstraint(SpringLayout.NORTH, UserField, 300, SpringLayout.NORTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, UserField, 166, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, UserField, -248, SpringLayout.SOUTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, UserField, -176, SpringLayout.EAST, getContentPane());
 		springLayout.putConstraint(SpringLayout.NORTH, passwordField, 6, SpringLayout.SOUTH, UserField);
-		springLayout.putConstraint(SpringLayout.SOUTH, UserField, -248, SpringLayout.SOUTH, getContentPane());
 		UserField.setFocusTraversalKeysEnabled(false);
 		UserField.addKeyListener(this);
 		UserField.addMouseListener(new MouseAdapter() {
@@ -117,9 +106,8 @@ public class Log extends JFrame implements ActionListener, KeyListener {
 
 		// Ajout de l'image ESCRIM
 		JLabel imgEscrim = new JLabel("");
-		springLayout.putConstraint(SpringLayout.SOUTH, imgEscrim, -277, SpringLayout.SOUTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, imgEscrim, -176, SpringLayout.EAST, getContentPane());
-		springLayout.putConstraint(SpringLayout.NORTH, UserField, 6, SpringLayout.SOUTH, imgEscrim);
+		springLayout.putConstraint(SpringLayout.WEST, imgEscrim, 179, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, imgEscrim, -6, SpringLayout.NORTH, UserField);
 		imgEscrim.setIcon(new ImageIcon(Log.class.getResource("/assets/icone.png")));
 		this.getContentPane().add(imgEscrim);
 
@@ -147,69 +135,39 @@ public class Log extends JFrame implements ActionListener, KeyListener {
 				Username = UserField.getText();
 				if (authenticated == true) {
 					this.dispose();
-					Menu m = new Menu();
+					Menu m = new Menu(Username);
 				} else {
 					JOptionPane.showMessageDialog(this, "Le nom d'utilisateur ou le mot de passe ne sont pas valides");
 				}
 
-			} catch (NoSuchAlgorithmException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (SQLException e1) {
+			} catch (NoSuchAlgorithmException | SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		} else if (source == btnInscription) {
-			JPanel panel = new JPanel(new GridLayout(0, 1));
-			JTextField field1 = new JTextField("");
-			JTextField field2 = new JTextField("");
-			JTextField field3 = new JTextField("");
-			JTextField field4 = new JTextField("");
-			panel.add(new JLabel("Nom"));
-			panel.add(field1);
-			panel.add(new JLabel("Prénom"));
-			panel.add(field2);
-			panel.add(new JLabel("Username"));
-			panel.add(field3);
-			panel.add(new JLabel("Mot de passe"));
-			panel.add(field4);
-			int result = JOptionPane.showConfirmDialog(null, panel, "Inscription", JOptionPane.OK_CANCEL_OPTION,
-					JOptionPane.PLAIN_MESSAGE);
-			if (result == 0) {
-				Connection conn = Bdd.ConnectDB();
-				Bdd.Add_User(field3.getText(), field4.getText(), field1.getText(), field2.getText(), conn);
-				this.dispose();
-				Menu m = new Menu();
-			}
-
 		}
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+
 		System.out.println(e.getKeyCode());
-		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			Connection conn = Bdd.ConnectDB();
 			boolean authenticated = false;
 			try {
 				authenticated = Bdd.Authenticate(UserField.getText(), passwordField.getText(), conn);
-			} catch (NoSuchAlgorithmException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (SQLException e1) {
+			} catch (NoSuchAlgorithmException | SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			Username = UserField.getText();
 			if (authenticated == true) {
 				this.dispose();
-				Menu m = new Menu();
+				Menu m = new Menu(Username);
 			} else {
 				JOptionPane.showMessageDialog(this, "Le nom d'utilisateur ou le mot de passe ne sont pas valides");
 			}
-		}else if (e.getKeyCode()==KeyEvent.VK_TAB){
+		} else if (e.getKeyCode() == KeyEvent.VK_TAB) {
 			passwordField.requestFocus();
 			passwordField.setText("");
 		}
