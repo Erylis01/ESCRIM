@@ -37,6 +37,7 @@ public class Log extends JFrame implements ActionListener, KeyListener {
 
 	public Log() {
 
+		
 		// Enregistrement de l'option EXIT_ON_CLOSE lors de la fermeture de la
 		// fenêtre (arrêt du procéssus)
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -104,6 +105,7 @@ public class Log extends JFrame implements ActionListener, KeyListener {
 		springLayout.putConstraint(SpringLayout.EAST, UserField, -176, SpringLayout.EAST, getContentPane());
 		springLayout.putConstraint(SpringLayout.NORTH, passwordField, 6, SpringLayout.SOUTH, UserField);
 		springLayout.putConstraint(SpringLayout.SOUTH, UserField, -248, SpringLayout.SOUTH, getContentPane());
+		UserField.setFocusTraversalKeysEnabled(false);
 		UserField.addKeyListener(this);
 		UserField.addMouseListener(new MouseAdapter() {
 			@Override
@@ -171,7 +173,7 @@ public class Log extends JFrame implements ActionListener, KeyListener {
 			panel.add(field3);
 			panel.add(new JLabel("Mot de passe"));
 			panel.add(field4);
-			int result = JOptionPane.showConfirmDialog(null, panel, "Test", JOptionPane.OK_CANCEL_OPTION,
+			int result = JOptionPane.showConfirmDialog(null, panel, "Inscription", JOptionPane.OK_CANCEL_OPTION,
 					JOptionPane.PLAIN_MESSAGE);
 			if (result == 0) {
 				Connection conn = Bdd.ConnectDB();
@@ -185,6 +187,8 @@ public class Log extends JFrame implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		
+		System.out.println(e.getKeyCode());
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			Connection conn = Bdd.ConnectDB();
@@ -205,6 +209,9 @@ public class Log extends JFrame implements ActionListener, KeyListener {
 			} else {
 				JOptionPane.showMessageDialog(this, "Le nom d'utilisateur ou le mot de passe ne sont pas valides");
 			}
+		}else if (e.getKeyCode()==KeyEvent.VK_TAB){
+			passwordField.requestFocus();
+			passwordField.setText("");
 		}
 	}
 
