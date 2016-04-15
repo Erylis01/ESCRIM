@@ -47,7 +47,7 @@ public class Bdd {
 	    	String ndc=rs.getString("Username");
 	    	String mdp=rs.getString("Password");
 	    	
-	    	if (ndc==username && mdp==password){
+	    	if (ndc.equals(username) && mdp.equals(password)){
 	    		authenticated=true;
 	    		break;
 	    	}
