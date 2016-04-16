@@ -2,7 +2,7 @@ package application;
 
 import controller.Bdd;
 import gui.Log;
-
+import gui.Menu;
 import model.User;
 
 public class Application {
@@ -15,9 +15,9 @@ public class Application {
 	}
 
 	private static void PierreTests() {
-		User u = new User();
-		Log l = new Log(u);
-
+		//User u = new User();
+		//Log l = new Log(u);
+		Menu m = new Menu();
 	}
 
 	private static void CharlieTests() {
