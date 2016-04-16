@@ -3,6 +3,7 @@ package controller;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Bdd {
 	
@@ -86,6 +87,121 @@ public class Bdd {
 		return Infos;
 	}
 	
+	public static ArrayList<String[]> RecupHisto(Connection conn){
+		ArrayList<String[]> Configs = new ArrayList<String[]>();
+		String[] config = new String[5];
+		Statement stmt=null;
+		try {
+			stmt=conn.createStatement();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		
+		String sql;
+		sql="SELECT Date, Pays, Id, Config, Avion FROM Historique";
+		
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(sql);
+			while (rs.next()){
+				Date date=rs.getDate("Date");
+				String Pays=rs.getString("Pays");
+				int id = rs.getInt("Id");
+				String Config = rs.getString("Config");
+				String Avion = rs.getString("Avion");
+				
+				config[0]=String.valueOf(date);
+				config[1]=Pays;
+				config[2]=String.valueOf(id);
+				config[3]=String.valueOf(Config);
+				config[4]=Avion;
+				Configs.add(config);
+				}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		
+		return Configs;
+	}
+	
+	public static ArrayList<String[]> RecupHisto(Date date, Connection conn){
+		ArrayList<String[]> Configs = new ArrayList<String[]>();
+		String[] config = new String[5];
+		Statement stmt=null;
+		try {
+			stmt=conn.createStatement();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		
+		String sql;
+		sql="SELECT Date, Pays, Id, Config, Avion FROM Historique WHERE Date="+date;
+		
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(sql);
+			while (rs.next()){
+				String Pays=rs.getString("Pays");
+				int id = rs.getInt("Id");
+				String Config = rs.getString("Config");
+				String Avion = rs.getString("Avion");
+				
+				config[0]=String.valueOf(date);
+				config[1]=Pays;
+				config[2]=String.valueOf(id);
+				config[3]=String.valueOf(Config);
+				config[4]=Avion;
+				Configs.add(config);
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
+		return Configs;
+	}
+	
+	public static ArrayList<String[]> RecupHisto(String Pays, Connection conn){
+		ArrayList<String[]> Configs = new ArrayList<String[]>();
+		String[] config = new String[5];
+		Statement stmt=null;
+		try {
+			stmt=conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String sql;
+		sql="SELECT Date, Pays, Id, Config, Avion FROM Historique WHERE Pays="+Pays;
+		
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(sql);
+			while (rs.next()){
+				Date date = rs.getDate("Date");
+				int id = rs.getInt("Id");
+				String Config = rs.getString("Config");
+				String Avion = rs.getString("Avion");
+				
+				config[0]=String.valueOf(date);
+				config[1]=Pays;
+				config[2]=String.valueOf(id);
+				config[3]=String.valueOf(Config);
+				config[4]=Avion;
+				Configs.add(config);
+				}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return Configs;
+	}
+	
 	public static void Add_User(String Username,String Password,String Nom, String Prenom, Connection conn){
 		Statement stmt=null;
 		try {
@@ -98,6 +214,27 @@ public class Bdd {
 		String sql;
 		Password=CryptMD5(Password);
 		sql="INSERT INTO Users (Username,Password,Nom,Prenom) VALUES ('"+Username+"','"+Password+"','"+Nom+"','"+Prenom+"')";
+		
+		try {
+			stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void Add_Histo(Date date,String pays,String config, String avion, Connection conn){
+		Statement stmt=null;
+		try {
+			stmt=conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String sql;
+		sql="INSERT INTO Users (Date,Pays,Config,Avion) VALUES ('"+date+"','"+pays+"','"+config+"','"+avion+"')";
 		
 		try {
 			stmt.executeUpdate(sql);
