@@ -5,6 +5,8 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 
+import model.Historique;
+
 public class Bdd {
 	
 	public static Connection ConnectDB(){
@@ -87,9 +89,8 @@ public class Bdd {
 		return Infos;
 	}
 	
-	public static ArrayList<String[]> RecupHisto(Connection conn){
-		ArrayList<String[]> Configs = new ArrayList<String[]>();
-		String[] config = new String[5];
+	public static ArrayList<Historique> RecupHisto(Connection conn){
+		ArrayList<Historique> Configs = new ArrayList<Historique>();
 		Statement stmt=null;
 		try {
 			stmt=conn.createStatement();
@@ -110,13 +111,8 @@ public class Bdd {
 				int id = rs.getInt("Id");
 				String Config = rs.getString("Config");
 				String Avion = rs.getString("Avion");
-				
-				config[0]=String.valueOf(date);
-				config[1]=Pays;
-				config[2]=String.valueOf(id);
-				config[3]=String.valueOf(Config);
-				config[4]=Avion;
-				Configs.add(config);
+				Historique h = new Historique(String.valueOf(id),String.valueOf(date),Pays,String.valueOf(Config),Avion);
+				Configs.add(h);
 				}
 		} catch (SQLException e) {
 
