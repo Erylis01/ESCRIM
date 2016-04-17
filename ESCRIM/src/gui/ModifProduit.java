@@ -2,172 +2,51 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
 import javax.swing.JPanel;
-import java.awt.GridBagConstraints;
-import javax.swing.border.LineBorder;
+
+import controller.ProduitController;
+import model.Product;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
-import javax.swing.SpringLayout;
+import javax.swing.WindowConstants;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.ImageIcon;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
+
 import java.awt.Font;
 import javax.swing.JTextField;
-import java.awt.Insets;
 import javax.swing.JButton;
 
 public class ModifProduit extends JFrame {
 
+	private ProduitController controller;
+	private Product modele;
+
+	private JPanel panel;
 	private final int LARGEUR_FENETRE = 600, HAUTEUR_FENETRE = 600;
-	private JTextField textFieldQuant;
-	private JTextField textFieldDCI;
-	private JTextField textFieldDosage;
-	private JTextField textFieldNCaisse;
-	private JTextField textFieldClasse;
-	private JTextField textFieldLot;
-	private JTextField textFieldDLU;
-	private JTextField textFieldCaisse;
-	private JTextField textFieldDotation;
+	private JTextField txtQuant;
+	private JTextField txtDCI;
+	private JTextField txtDLU;
+	private JTextField txtClasse;
+	private JTextField txtNcaisse;
+	private JTextField txtDosage;
+	private JTextField txtDotation;
+	private JTextField txtLot;
+	private JTextField txtCaisse;
+	private JTextField txtSeuil;
 
-	public ModifProduit() {
-		getContentPane().setEnabled(false);
-		getContentPane().setLayout(null);
-		
-		JLabel lblNomDuProduit = new JLabel("Nom du produit ");
-		lblNomDuProduit.setFont(new Font("AR ESSENCE", Font.BOLD, 25));
-		lblNomDuProduit.setBounds(10, 15, 210, 39);
-		getContentPane().add(lblNomDuProduit);
-		
-		JLabel lblQuant = new JLabel("Quantit\u00E9 :");
-		lblQuant.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblQuant.setBounds(358, 28, 61, 17);
-		getContentPane().add(lblQuant);
-		
-		textFieldQuant = new JTextField();
-		textFieldQuant.setBounds(430, 27, 86, 20);
-		getContentPane().add(textFieldQuant);
-		textFieldQuant.setColumns(10);
-		
-		JLabel imgVoyant = new JLabel("");
-		imgVoyant.setIcon(new ImageIcon(ModifProduit.class.getResource("/assets/voyant_vert.png")));
-		imgVoyant.setBounds(524, 11, 50, 50);
-		getContentPane().add(imgVoyant);
-		
-		JButton btnAjouter = new JButton("Ajouter");
-		btnAjouter.setForeground(new Color(255, 255, 255));
-		btnAjouter.setBackground(new Color(0, 0, 255));
-		btnAjouter.setBounds(144, 485, 89, 23);
-		getContentPane().add(btnAjouter);
-		
-		JButton btnModifier = new JButton("Modifier");
-		btnModifier.setBackground(new Color(255, 0, 0));
-		btnModifier.setForeground(new Color(255, 255, 255));
-		btnModifier.setBounds(339, 485, 89, 23);
-		getContentPane().add(btnModifier);
-		
-		JLabel lblDCI = new JLabel("DCI :");
-		lblDCI.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblDCI.setBounds(104, 140, 27, 15);
-		getContentPane().add(lblDCI);
-		
-		JLabel lblDosage = new JLabel("Dosage :");
-		lblDosage.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblDosage.setBounds(83, 219, 48, 15);
-		getContentPane().add(lblDosage);
-		
-		JLabel lblCaisse = new JLabel("Caisse :");
-		lblCaisse.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCaisse.setBounds(379, 299, 40, 15);
-		getContentPane().add(lblCaisse);
-		
-		JLabel lblNCaisse = new JLabel("N\u00B0 Caisse :");
-		lblNCaisse.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNCaisse.setBounds(73, 299, 58, 15);
-		getContentPane().add(lblNCaisse);
-		
-		JLabel lblNLot = new JLabel("N\u00B0 Lot :");
-		lblNLot.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNLot.setBounds(376, 140, 44, 15);
-		getContentPane().add(lblNLot);
-		
-		JLabel lblClasse = new JLabel("Classe th\u00E9rapeutique :");
-		lblClasse.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblClasse.setBounds(9, 379, 122, 15);
-		getContentPane().add(lblClasse);
-		
-		JLabel lblDotation = new JLabel("Dotation U7 :");
-		lblDotation.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblDotation.setBounds(345, 379, 74, 15);
-		getContentPane().add(lblDotation);
-		
-		JLabel lblDateLimiteDutilisation = new JLabel("Date limite d'utilisation :");
-		lblDateLimiteDutilisation.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblDateLimiteDutilisation.setBounds(289, 219, 130, 15);
-		getContentPane().add(lblDateLimiteDutilisation);
-		
-		textFieldDCI = new JTextField();
-		textFieldDCI.setBounds(134, 137, 109, 20);
-		getContentPane().add(textFieldDCI);
-		textFieldDCI.setColumns(10);
-		
-		textFieldDosage = new JTextField();
-		textFieldDosage.setBounds(134, 217, 109, 20);
-		getContentPane().add(textFieldDosage);
-		textFieldDosage.setColumns(10);
-		
-		textFieldNCaisse = new JTextField();
-		textFieldNCaisse.setBounds(134, 297, 109, 20);
-		getContentPane().add(textFieldNCaisse);
-		textFieldNCaisse.setColumns(10);
-		
-		textFieldClasse = new JTextField();
-		textFieldClasse.setText("");
-		textFieldClasse.setBounds(134, 377, 109, 20);
-		getContentPane().add(textFieldClasse);
-		textFieldClasse.setColumns(10);
-		
-		textFieldLot = new JTextField();
-		textFieldLot.setBounds(424, 137, 109, 20);
-		getContentPane().add(textFieldLot);
-		textFieldLot.setColumns(10);
-		
-		textFieldDLU = new JTextField();
-		textFieldDLU.setText("");
-		textFieldDLU.setBounds(424, 217, 109, 20);
-		getContentPane().add(textFieldDLU);
-		textFieldDLU.setColumns(10);
-		
-		textFieldCaisse = new JTextField();
-		textFieldCaisse.setBounds(424, 297, 109, 20);
-		getContentPane().add(textFieldCaisse);
-		textFieldCaisse.setColumns(10);
-		
-		textFieldDotation = new JTextField();
-		textFieldDotation.setBounds(424, 377, 109, 20);
-		getContentPane().add(textFieldDotation);
-		textFieldDotation.setColumns(10);
-		
-		JLabel imgFond = new JLabel("");
-		imgFond.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-		imgFond.setIcon(new ImageIcon(ModifProduit.class.getResource("/assets/fond_logpan.jpg")));
-		imgFond.setBounds(0, 0, 600, 600);
-		getContentPane().add(imgFond);
-		
+	public ModifProduit(Product modele) {
 
-
-		/*
-		 * // Efface le contenu de la Jframe f.getContentPane().removeAll();
-		 * f.getContentPane().repaint();
-		 */
+		this.modele = modele;
+		// controller = new ProduitController(this, modele);
 
 		// Centrage de la fenêtre et choix de la taille de la fenêtre
 		Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
@@ -176,26 +55,242 @@ public class ModifProduit extends JFrame {
 		int windowRightPostion = screenSize.height / 2 - this.HAUTEUR_FENETRE / 2;
 		this.setLocation(windowLeftPosition, windowRightPostion);
 
-		// Change l'icone de la fenêtre
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Menu.class.getResource("/assets/icone.png")));
+		// Empêche la fenêtre d'être redimensionnée
+		setResizable(false);
 
-		// Ajout d'un menu
+		// Choix du titre et de l'icone de la JFrame
+		this.setTitle("Modification produit");
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(Log.class.getResource("/assets/icone.png")));
+
+		// Enregistrement de l'option EXIT_ON_CLOSE lors de la fermeture de la
+		// fenêtre (arrêt du procéssus)
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
+
+		// Ajout d'un panel qui contiendra tout
+		panel = new JPanel();
+		panel.setBounds(0, 0, 594, 571);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+
+		// Ajout d'un voyant
+		JLabel lblvoyant = new JLabel("");
+		lblvoyant.setIcon(new ImageIcon(ModifProduit.class.getResource("/assets/voyant_vert.png")));
+		lblvoyant.setBounds(534, 11, 50, 50);
+		panel.add(lblvoyant);
+
+		// Ajout d'un champ pour la quantité
+		txtQuant = new JTextField();
+		txtQuant.setBounds(441, 11, 86, 20);
+		panel.add(txtQuant);
+		txtQuant.setColumns(10);
+
+		// Ajout du label "quantité"
+		JLabel lblQuant = new JLabel("Quantité :");
+		lblQuant.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblQuant.setBounds(375, 11, 62, 15);
+		panel.add(lblQuant);
+
+		// Ajout du label "Nom du produit"
+		JLabel lblNom = new JLabel(modele.getName());
+		lblNom.setFont(new Font("AR ESSENCE", Font.BOLD, 30));
+		lblNom.setBounds(10, 11, 201, 39);
+		panel.add(lblNom);
+
+		// Ajout du label "DCI"
+		JLabel lblDCI = new JLabel("DCI :");
+		lblDCI.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblDCI.setBounds(117, 140, 30, 15);
+		panel.add(lblDCI);
+
+		// Ajout du label "Forme de dosage"
+		JLabel lblDosage = new JLabel("Forme dosage :");
+		lblDosage.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblDosage.setBounds(311, 140, 93, 15);
+		panel.add(lblDosage);
+
+		// Ajout du label "DLU"
+		JLabel lblDLU = new JLabel("DLU :");
+		lblDLU.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblDLU.setBounds(115, 220, 32, 15);
+		panel.add(lblDLU);
+
+		// Ajout du label "Lot"
+		JLabel lblLot = new JLabel("Lot :");
+		lblLot.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblLot.setBounds(375, 300, 29, 15);
+		panel.add(lblLot);
+
+		// Ajout du label "Classe Therapeutique"
+		JLabel lblClasse = new JLabel("Classe Therapeutique :");
+		lblClasse.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblClasse.setBounds(9, 300, 138, 15);
+		panel.add(lblClasse);
+
+		// Ajout du label "N° Caisse"
+		JLabel lblNCaisse = new JLabel("N\u00B0 Caisse :");
+		lblNCaisse.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNCaisse.setBounds(84, 380, 63, 15);
+		panel.add(lblNCaisse);
+
+		// Ajout du label "Caisse"
+		JLabel lblCaisse = new JLabel("Caisse :");
+		lblCaisse.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblCaisse.setBounds(358, 380, 46, 14);
+		panel.add(lblCaisse);
+
+		// Ajout du label "Dotation"
+		JLabel lblDotation = new JLabel("Dotation U7 :");
+		lblDotation.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblDotation.setBounds(321, 220, 83, 15);
+		panel.add(lblDotation);
+
+		// Ajout du boutton "Ajouter"
+		JButton btnAjouter = new JButton("Ajouter");
+		btnAjouter.setForeground(Color.WHITE);
+		btnAjouter.setBackground(Color.BLUE);
+		btnAjouter.setBounds(166, 449, 89, 23);
+		btnAjouter.setName("btnAjouter");
+		btnAjouter.addActionListener(controller);
+		panel.add(btnAjouter);
+
+		// Ajout du boutton "Modifier"
+		JButton btnModifier = new JButton("Modifier");
+		btnModifier.setForeground(Color.WHITE);
+		btnModifier.setBackground(Color.RED);
+		btnModifier.setBounds(330, 449, 89, 23);
+		btnModifier.setName("btnModifier");
+		btnModifier.addActionListener(controller);
+		panel.add(btnModifier);
+
+		// Ajout du champ de texte "DCI"
+		txtDCI = new JTextField(modele.getDCI());
+		txtDCI.setBounds(149, 138, 141, 20);
+		panel.add(txtDCI);
+		txtDCI.setColumns(10);
+
+		// Ajout du champ de texte "DLU"
+		DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+		txtDLU = new JTextField(df.format(modele.getDLU()));
+		txtDLU.setBounds(150, 218, 140, 20);
+		panel.add(txtDLU);
+		txtDLU.setColumns(10);
+
+		// Ajout du champ de texte "Classe"
+		txtClasse = new JTextField(modele.getClasse());
+		txtClasse.setBounds(149, 298, 140, 20);
+		panel.add(txtClasse);
+		txtClasse.setColumns(10);
+
+		// Ajout du champ de texte "N° Caisse"
+		txtNcaisse = new JTextField(modele.getNcaisse());
+		txtNcaisse.setBounds(149, 378, 140, 20);
+		panel.add(txtNcaisse);
+		txtNcaisse.setColumns(10);
+
+		// Ajout du champ de texte "Dosage"
+		txtDosage = new JTextField(modele.getDosage());
+		txtDosage.setBounds(409, 138, 141, 20);
+		panel.add(txtDosage);
+		txtDosage.setColumns(10);
+
+		// Ajout du champ de texte "Dotation"
+		txtDotation = new JTextField(modele.getDotation());
+		txtDotation.setBounds(409, 218, 141, 20);
+		panel.add(txtDotation);
+		txtDotation.setColumns(10);
+
+		// Ajout du champ de texte "Lot"
+		txtLot = new JTextField(modele.getLot());
+		txtLot.setBounds(409, 298, 141, 20);
+		panel.add(txtLot);
+		txtLot.setColumns(10);
+
+		// Ajout du champ de texte "Caisse"
+		txtCaisse = new JTextField(modele.getCaisse());
+		txtCaisse.setBounds(409, 378, 141, 20);
+		panel.add(txtCaisse);
+		txtCaisse.setColumns(10);
+
+		//Ajout du champ de texte "Seuil Critique"
+		txtSeuil = new JTextField(modele.getCritical_threshold());
+		txtSeuil.setBounds(441, 41, 86, 20);
+		panel.add(txtSeuil);
+		txtSeuil.setColumns(10);
+
+		JLabel lblSeuil = new JLabel("Seuil Critique :");
+		lblSeuil.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblSeuil.setBounds(348, 44, 89, 15);
+		panel.add(lblSeuil);
+
+		// Ajout d'un fond
+		JLabel lblFond = new JLabel("");
+		lblFond.setIcon(new ImageIcon(ModifProduit.class.getResource("/assets/fond_logpan.jpg")));
+		lblFond.setBounds(0, 0, 600, 600);
+		panel.add(lblFond);
+
+		// Ajout de la barre menu
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
-		JMenu mnHelp = new JMenu("Help");
-		menuBar.add(mnHelp);
+		// Ajout du menu utilisateur
+		JMenu mnUtilisateur = new JMenu("Utilisateur");
+		menuBar.add(mnUtilisateur);
+		JMenuItem mntmInscription = new JMenuItem("Inscription");
+		mnUtilisateur.add(mntmInscription);
 
+		// Ajout du menu Aide
+		JMenu mnAide = new JMenu("Aide");
+		menuBar.add(mnAide);
 		JMenuItem mntmGuide = new JMenuItem("Guide");
-		mnHelp.add(mntmGuide);
-
-		JMenuItem mntmAPropos = new JMenuItem("A Propos");
-		mnHelp.add(mntmAPropos);
+		mnAide.add(mntmGuide);
+		JMenuItem mntmAPropos = new JMenuItem("A propos");
+		mnAide.add(mntmAPropos);
 
 		// Packing et affichage de la JFrame
 		this.pack();
 		this.setVisible(true);
-		
-		
+	}
+
+	public int getquant() {
+		return Integer.parseInt(txtQuant.getText());
+	}
+
+	public int getSeuil() {
+		return Integer.parseInt(txtSeuil.getText());
+	}
+
+	public String getDCI() {
+		return txtDCI.getText();
+	}
+
+	public Date getDLU() throws ParseException {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+		return formatter.parse(txtDLU.getText());
+
+	}
+
+	public String getCaisse() {
+		return txtCaisse.getText();
+	}
+
+	public int getNcaisse() {
+		return Integer.parseInt(txtNcaisse.getText());
+	}
+
+	public String getDosage() {
+		return txtDosage.getText();
+	}
+
+	public String getDotation() {
+		return txtDotation.getText();
+	}
+
+	public int getLot() {
+		return Integer.parseInt(txtLot.getText());
+	}
+
+	public String getClasse() {
+		return txtClasse.getText();
 	}
 }

@@ -2,17 +2,23 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import model.User;
 import gui.Log;
+import gui.Menu;
 
-public class LogController implements ActionListener {
+public class LogController implements ActionListener,MouseListener,KeyListener{
 
 	private Log vue;
 	private User modele;
@@ -35,7 +41,7 @@ public class LogController implements ActionListener {
 				Boolean authenticated=Bdd.Authenticate(modele.getUsername(), vue.getPwd(), conn);
 				if (authenticated==true){
 					vue.dispose();
-					//Menu m = new Menu(Username);
+					Menu m = new Menu(modele.getUsername());
 				}else{
 					JOptionPane.showMessageDialog(vue, "Le nom d'utilisateur ou le mot de passe ne sont pas valides");
 				}
@@ -44,5 +50,65 @@ public class LogController implements ActionListener {
 				e1.printStackTrace();
 			}
 		}}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		String source = ((JTextField)e.getSource()).getName();
+		
+		if (source=="pwd"){
+			vue.deletepwd();
+		}else if(source=="txtUsername"){
+			vue.deleteUsername();
+		}
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+		int key = e.getKeyCode();
+		
+		if (key==KeyEvent.VK_TAB){
+			vue.deletepwd();
+			vue.addfocus("pwd");
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
