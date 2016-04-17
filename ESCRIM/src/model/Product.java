@@ -218,4 +218,8 @@ public class Product {
 	public void setDotation(String dotation) {
 		this.dotation = dotation;
 	}
+	
+	public void affichage(){
+		System.out.println(name+" "+DCI+" "+dosage+" "+DLU+" "+quantity+" "+lot+" "+classe+" "+Ncaisse+" "+caisse+" "+dotation);
+	}
 }

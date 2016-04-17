@@ -44,7 +44,7 @@ public class ModifProduit extends JFrame {
 	private JTextField txtCaisse;
 	private JTextField txtSeuil;
 
-	public ModifProduit(Product modele, String Username) {
+	public ModifProduit(Product modele) {
 
 		this.modele = modele;
 		controller = new ProduitController(this, modele);
@@ -272,7 +272,7 @@ public class ModifProduit extends JFrame {
 		lblUser.setIcon(new ImageIcon(Menu.class.getResource("/assets/utilisateur.png")));
 
 		// Ajout du label username
-		JLabel lblUsername = new JLabel(Username);
+		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setBounds(60, 11, 48, 14);
 		panel_user.add(lblUsername);
 
