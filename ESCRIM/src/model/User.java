@@ -13,6 +13,11 @@ public class User {
 	/**
 	 * Constructeur de User
 	 */
+	
+	public User(){
+		
+	}
+	
 	public User(String Username, String Password, String Nom, String Prenom) {
 		this.Username=Username;
 		this.Password=Password;
