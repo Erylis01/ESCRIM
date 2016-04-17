@@ -17,6 +17,9 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JList;
 import javax.swing.UIManager;
+import javax.swing.AbstractListModel;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class GestionStock extends JFrame {
 	public GestionStock() {
@@ -51,11 +54,13 @@ public class GestionStock extends JFrame {
 		label_2.setBounds(60, 36, 49, 14);
 		panel_user.add(label_2);
 		
-		JList list = new JList();
-		list.setSelectedIndex(0);
-		list.setBorder(new LineBorder(Color.BLACK, 2));
-		list.setBounds(311, 60, 106, -19);
-		panel.add(list);
+		JComboBox comboBox = new JComboBox();
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		comboBox.setMaximumRowCount(60);
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"-1"}));
+		comboBox.setSelectedIndex(0);
+		comboBox.setBounds(298, 37, 123, 20);
+		panel.add(comboBox);
 		
 		JLabel lblNDeStockage = new JLabel("N\u00B0 de stockage :");
 		lblNDeStockage.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -65,7 +70,7 @@ public class GestionStock extends JFrame {
 		
 		JLabel lblFond = new JLabel("New label");
 		lblFond.setIcon(new ImageIcon(GestionStock.class.getResource("/assets/fond_logpan.jpg")));
-		lblFond.setBounds(0, 0, 600, 600);
+		lblFond.setBounds(0, 0, 600, 561);
 		panel.add(lblFond);
 		
 		JMenuBar menuBar = new JMenuBar();
