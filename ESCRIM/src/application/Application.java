@@ -1,8 +1,12 @@
 package application;
 
 import controller.Bdd;
+import gui.ChoisirConfig;
 import gui.Log;
 import gui.Menu;
+import gui.ModifProduit;
+import model.Config;
+import model.Historique;
 import model.User;
 
 public class Application {
@@ -17,7 +21,7 @@ public class Application {
 	private static void PierreTests() {
 		//User u = new User();
 		//Log l = new Log(u);
-		Menu m = new Menu();
+		ChoisirConfig cc = new ChoisirConfig("");
 	}
 
 	private static void CharlieTests() {
