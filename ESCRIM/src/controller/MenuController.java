@@ -10,11 +10,16 @@ import javax.swing.JOptionPane;
 
 
 import gui.Menu;
+import gui.ModifProduit;
+import model.Product;
+import model.User;
 
 public class MenuController implements MouseListener {
 
 	private Menu vue;
 	private Connection conn;
+	private Product p;
+	private User u;
 
 	public MenuController(Menu vue) {
 		this.vue = vue;
@@ -27,18 +32,16 @@ public class MenuController implements MouseListener {
 			
 			
 		}else if(source=="lblProduit"){
-			JOptionPane jop = new JOptionPane();
+			 JOptionPane jop = new JOptionPane();
 			 String Lot = JOptionPane.showInputDialog(null, "N° de lot", JOptionPane.QUESTION_MESSAGE);
 			 conn=Bdd.ConnectDB();
-			 String[] Infos = new String[9];
 			 try {
-				Infos=Bdd.RecupInfoProduit(Integer.parseInt(Lot), conn);
+				p = Bdd.RecupInfoProduit(Integer.parseInt(Lot), conn);
 			} catch (NumberFormatException | SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			 Product p = new Product();
-			 ModifProduit mp = new ModifProduit(p);
+			 ModifProduit mp = new ModifProduit(p,u.getUsername());
 		}else if(source=="lblStock"){
 			
 		}

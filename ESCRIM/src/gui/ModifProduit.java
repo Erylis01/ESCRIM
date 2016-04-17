@@ -44,10 +44,10 @@ public class ModifProduit extends JFrame {
 	private JTextField txtCaisse;
 	private JTextField txtSeuil;
 
-	public ModifProduit(Product modele,String Username) {
+	public ModifProduit(Product modele, String Username) {
 
 		this.modele = modele;
-		// controller = new ProduitController(this, modele);
+		controller = new ProduitController(this, modele);
 
 		// Centrage de la fenêtre et choix de la taille de la fenêtre
 		Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
@@ -93,7 +93,12 @@ public class ModifProduit extends JFrame {
 		panel.add(lblQuant);
 
 		// Ajout du label "Nom du produit"
-		JLabel lblNom = new JLabel(modele.getName());
+		JLabel lblNom = new JLabel();
+		if (modele.getName() != null) {
+			lblNom.setText(modele.getName());
+		} else {
+			lblNom.setText("Nom du produit");
+		}
 		lblNom.setFont(new Font("AR ESSENCE", Font.BOLD, 30));
 		lblNom.setBounds(10, 11, 201, 39);
 		panel.add(lblNom);
@@ -145,7 +150,7 @@ public class ModifProduit extends JFrame {
 		lblDotation.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblDotation.setBounds(321, 220, 83, 15);
 		panel.add(lblDotation);
-		
+
 		// Ajout du label "Seuil Critique"
 		JLabel lblSeuil = new JLabel("Seuil Critique :");
 		lblSeuil.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -171,56 +176,83 @@ public class ModifProduit extends JFrame {
 		panel.add(btnModifier);
 
 		// Ajout du champ de texte "DCI"
-		txtDCI = new JTextField(modele.getDCI());
+		txtDCI = new JTextField();
+		if (modele.getDCI() != null) {
+			txtDCI.setText(modele.getDCI());
+		}
 		txtDCI.setBounds(149, 138, 141, 20);
 		panel.add(txtDCI);
 		txtDCI.setColumns(10);
 
 		// Ajout du champ de texte "DLU"
 		DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-		txtDLU = new JTextField(df.format(modele.getDLU()));
+		txtDLU = new JTextField();
+		if (modele.getDLU() != null) {
+			txtDLU.setText(df.format(modele.getDLU()));
+		} 
 		txtDLU.setBounds(150, 218, 140, 20);
 		panel.add(txtDLU);
 		txtDLU.setColumns(10);
 
 		// Ajout du champ de texte "Classe"
-		txtClasse = new JTextField(modele.getClasse());
+		txtClasse = new JTextField();
+		if (modele.getClasse()!=null){
+			txtClasse.setText(modele.getClasse());
+		}
 		txtClasse.setBounds(149, 298, 140, 20);
 		panel.add(txtClasse);
 		txtClasse.setColumns(10);
 
 		// Ajout du champ de texte "N° Caisse"
-		txtNcaisse = new JTextField(modele.getNcaisse());
+		txtNcaisse = new JTextField();
+		if (modele.getNcaisse()!=0){
+			txtNcaisse.setText(Integer.toString((modele.getNcaisse())));
+		}
 		txtNcaisse.setBounds(149, 378, 140, 20);
 		panel.add(txtNcaisse);
 		txtNcaisse.setColumns(10);
 
 		// Ajout du champ de texte "Dosage"
-		txtDosage = new JTextField(modele.getDosage());
+		txtDosage = new JTextField();
+		if(modele.getDosage()!=null){
+			txtDosage.setText(modele.getDosage());
+		}
 		txtDosage.setBounds(409, 138, 141, 20);
 		panel.add(txtDosage);
 		txtDosage.setColumns(10);
 
 		// Ajout du champ de texte "Dotation"
-		txtDotation = new JTextField(modele.getDotation());
+		txtDotation = new JTextField();
+		if (modele.getDotation()!=null){
+			txtDotation.setText(modele.getDotation());
+		}
 		txtDotation.setBounds(409, 218, 141, 20);
 		panel.add(txtDotation);
 		txtDotation.setColumns(10);
 
 		// Ajout du champ de texte "Lot"
-		txtLot = new JTextField(modele.getLot());
+		txtLot = new JTextField();
+		if(modele.getLot()!=null){
+			txtLot.setText(modele.getLot());
+		}
 		txtLot.setBounds(409, 298, 141, 20);
 		panel.add(txtLot);
 		txtLot.setColumns(10);
 
 		// Ajout du champ de texte "Caisse"
-		txtCaisse = new JTextField(modele.getCaisse());
+		txtCaisse = new JTextField();
+		if (modele.getCaisse()!=null){
+			txtCaisse.setText(modele.getCaisse());
+		}
 		txtCaisse.setBounds(409, 378, 141, 20);
 		panel.add(txtCaisse);
 		txtCaisse.setColumns(10);
 
 		// Ajout du champ de texte "Seuil Critique"
 		txtSeuil = new JTextField(modele.getCritical_threshold());
+		if (modele.getCritical_threshold()!=0){
+			txtSeuil.setText(Integer.toString(modele.getCritical_threshold()));
+		}
 		txtSeuil.setBounds(441, 41, 86, 20);
 		panel.add(txtSeuil);
 		txtSeuil.setColumns(10);
@@ -248,7 +280,7 @@ public class ModifProduit extends JFrame {
 		JLabel lblAdmininfo = new JLabel("AdminInfo");
 		lblAdmininfo.setBounds(60, 36, 49, 14);
 		panel_user.add(lblAdmininfo);
-		
+
 		// Ajout d'un fond
 		JLabel lblFond = new JLabel("");
 		lblFond.setIcon(new ImageIcon(ModifProduit.class.getResource("/assets/fond_logpan.jpg")));

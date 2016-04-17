@@ -8,9 +8,9 @@ import java.sql.Date;
 
 public class Product {
 
-	private Date DLU;
-	private int quantity, lot, critical_threshold,Ncaisse;
-	private String DCI, dosage, reference, name,classe,caisse,dotation;
+	private Date DLU=null;
+	private int quantity=0, critical_threshold=0,Ncaisse=0;
+	private String DCI=null, dosage=null, reference=null, name=null,classe=null,caisse=null,dotation=null,lot=null;
 
 	/**
 	 * Constructeur de la classe Product
@@ -25,7 +25,7 @@ public class Product {
 	 * @param name
 	 */
 
-	public Product(String name,String DCI,String dosage,Date DLU,int quantity,int lot,String classe, int Ncaisse,String caisse,String dotation,int threshold,String reference) {
+	public Product(String name,String DCI,String dosage,Date DLU,int quantity,String lot,String classe, int Ncaisse,String caisse,String dotation,int threshold,String reference) {
 		this.DLU = DLU;
 		this.quantity = quantity;
 		this.lot = lot;
@@ -73,7 +73,7 @@ public class Product {
 	/**
 	 * @return the lot
 	 */
-	public int getLot() {
+	public String getLot() {
 		return lot;
 	}
 
@@ -81,7 +81,7 @@ public class Product {
 	 * @param lot
 	 *            the lot to set
 	 */
-	public void setLot(int lot) {
+	public void setLot(String lot) {
 		this.lot = lot;
 	}
 

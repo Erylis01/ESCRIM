@@ -15,6 +15,10 @@ public class ProduitController implements ActionListener{
 	private Product modele;
 	private Connection conn;
 	
+	public ProduitController(ModifProduit vue,Product modele){
+		this.vue=vue;
+		this.modele=modele;
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
