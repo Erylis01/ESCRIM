@@ -228,7 +228,7 @@ public class Bdd {
 		
 	}
 	
-	public static void Add_Produit(String designation, Date dlu, String reference, int quantite, String dosage, int lot, String dci, int seuil_critique, String classe_therapeutique, int NumCaisse, String caisse, String dotation_U7, Connection conn){
+	public static void Add_Produit(String designation, Date dlu, String reference, int quantite, String dosage, String lot, String dci, int seuil_critique, String classe_therapeutique, int NumCaisse, String caisse, String dotation_U7, Connection conn){
 		Statement stmt=null;
 		try {
 			stmt=conn.createStatement();
