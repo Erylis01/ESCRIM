@@ -17,6 +17,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.WindowConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.ImageIcon;
@@ -43,7 +44,7 @@ public class ModifProduit extends JFrame {
 	private JTextField txtCaisse;
 	private JTextField txtSeuil;
 
-	public ModifProduit(Product modele) {
+	public ModifProduit(Product modele,String Username) {
 
 		this.modele = modele;
 		// controller = new ProduitController(this, modele);
@@ -144,6 +145,12 @@ public class ModifProduit extends JFrame {
 		lblDotation.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblDotation.setBounds(321, 220, 83, 15);
 		panel.add(lblDotation);
+		
+		// Ajout du label "Seuil Critique"
+		JLabel lblSeuil = new JLabel("Seuil Critique :");
+		lblSeuil.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblSeuil.setBounds(348, 44, 89, 15);
+		panel.add(lblSeuil);
 
 		// Ajout du boutton "Ajouter"
 		JButton btnAjouter = new JButton("Ajouter");
@@ -212,17 +219,36 @@ public class ModifProduit extends JFrame {
 		panel.add(txtCaisse);
 		txtCaisse.setColumns(10);
 
-		//Ajout du champ de texte "Seuil Critique"
+		// Ajout du champ de texte "Seuil Critique"
 		txtSeuil = new JTextField(modele.getCritical_threshold());
 		txtSeuil.setBounds(441, 41, 86, 20);
 		panel.add(txtSeuil);
 		txtSeuil.setColumns(10);
 
-		JLabel lblSeuil = new JLabel("Seuil Critique :");
-		lblSeuil.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblSeuil.setBounds(348, 44, 89, 15);
-		panel.add(lblSeuil);
+		// Ajout du panel contenant les infos utilisateur
+		JPanel panel_user = new JPanel();
+		panel_user.setForeground(Color.WHITE);
+		panel_user.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		panel_user.setBounds(0, 487, 161, 62);
+		panel.add(panel_user);
+		panel_user.setLayout(null);
 
+		// Ajout de l'image utilisateur
+		JLabel lblUser = new JLabel("");
+		lblUser.setBounds(0, 11, 50, 50);
+		panel_user.add(lblUser);
+		lblUser.setIcon(new ImageIcon(Menu.class.getResource("/assets/utilisateur.png")));
+
+		// Ajout du label username
+		JLabel lblUsername = new JLabel(Username);
+		lblUsername.setBounds(60, 11, 48, 14);
+		panel_user.add(lblUsername);
+
+		// Ajout du label avec information des droits
+		JLabel lblAdmininfo = new JLabel("AdminInfo");
+		lblAdmininfo.setBounds(60, 36, 49, 14);
+		panel_user.add(lblAdmininfo);
+		
 		// Ajout d'un fond
 		JLabel lblFond = new JLabel("");
 		lblFond.setIcon(new ImageIcon(ModifProduit.class.getResource("/assets/fond_logpan.jpg")));
