@@ -59,12 +59,12 @@ public class Bdd {
 	    }
 		return authenticated;
 	}
-	/**public static Product RecupInfoProduit(int Lot, Connection conn) throws SQLException{
+	public static Product RecupInfoProduit(int Lot, Connection conn) throws SQLException{
 		Statement stmt=null;
 		stmt=conn.createStatement();
 		
 		String sql;
-		sql="SELECT Id, designation, dlu, reference, quantite, dosage, lot, dci, seuil_critique FROM Produits WHERE lot="+Lot;
+		sql="SELECT Id, designation, dlu, reference, quantite, dosage, lot, dci, seuil_critique,Classe_Therapeutique,NumCaisse,Caisse,Dotation_U7 FROM Produits WHERE lot="+Lot;
 		
 		ResultSet rs = stmt.executeQuery(sql);
 		int id=rs.getInt("Id");
@@ -73,22 +73,17 @@ public class Bdd {
 		String reference=rs.getString("reference");
 		int quantite=rs.getInt("quantite");
 		String dosage=rs.getString("dosage");
-		Date dci=rs.getDate("dci");
+		String dci=rs.getString("dci");
 		int seuil_critique=rs.getInt("seuil_critique");
+		String Classe_Therapeutique = rs.getString("Classe_Therapeutique");
+		int NumCaisse=rs.getInt("NumCaisse");
+		String Caisse=rs.getString("Caisse");
+		String Dotation_U7=rs.getString("Dotation_U7");
 		
-		Product Infos = new Product(designation,dci,dosage,dlu,quantite,Lot,String classe, int Ncaisse,String caisse,String dotation,int threshold,String reference);
-		Infos[0]=String.valueOf(id);
-		Infos[1]=designation;
-		Infos[2]=String.valueOf(dlu);
-		Infos[3]=reference;
-		Infos[4]=String.valueOf(quantite);
-		Infos[5]=String.valueOf(dosage);
-		Infos[6]=String.valueOf(Lot);
-		Infos[7]=
-		Infos[8]=String.valueOf(seuil_critique);
+		Product Infos = new Product(designation,dci,dosage,dlu,quantite,Lot,Classe_Therapeutique, NumCaisse,Caisse,Dotation_U7,seuil_critique,reference);
 		
 		return Infos;
-	}*/
+	}
 	
 	public static ArrayList<Historique> RecupHisto(Connection conn){
 		ArrayList<Historique> Configs = new ArrayList<Historique>();
