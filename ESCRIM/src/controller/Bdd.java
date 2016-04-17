@@ -5,7 +5,8 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 
-import model.Historique;
+import model.*;
+
 
 public class Bdd {
 	
@@ -58,8 +59,7 @@ public class Bdd {
 	    }
 		return authenticated;
 	}
-	public static String[] RecupInfoProduit(int Lot, Connection conn) throws SQLException{
-		String[] Infos = new String[9];
+	/**public static Product RecupInfoProduit(int Lot, Connection conn) throws SQLException{
 		Statement stmt=null;
 		stmt=conn.createStatement();
 		
@@ -72,10 +72,11 @@ public class Bdd {
 		Date dlu=rs.getDate("dlu");
 		String reference=rs.getString("reference");
 		int quantite=rs.getInt("quantite");
-		int dosage=rs.getInt("dosage");
+		String dosage=rs.getString("dosage");
 		Date dci=rs.getDate("dci");
 		int seuil_critique=rs.getInt("seuil_critique");
 		
+		Product Infos = new Product(designation,dci,dosage,dlu,quantite,Lot,String classe, int Ncaisse,String caisse,String dotation,int threshold,String reference);
 		Infos[0]=String.valueOf(id);
 		Infos[1]=designation;
 		Infos[2]=String.valueOf(dlu);
@@ -83,11 +84,11 @@ public class Bdd {
 		Infos[4]=String.valueOf(quantite);
 		Infos[5]=String.valueOf(dosage);
 		Infos[6]=String.valueOf(Lot);
-		Infos[7]=String.valueOf(dci);
+		Infos[7]=
 		Infos[8]=String.valueOf(seuil_critique);
 		
 		return Infos;
-	}
+	}*/
 	
 	public static ArrayList<Historique> RecupHisto(Connection conn){
 		ArrayList<Historique> Configs = new ArrayList<Historique>();
@@ -122,9 +123,9 @@ public class Bdd {
 		return Configs;
 	}
 	
-	public static ArrayList<String[]> RecupHisto(Date date, Connection conn){
-		ArrayList<String[]> Configs = new ArrayList<String[]>();
-		String[] config = new String[5];
+	public static ArrayList<Historique> RecupHisto(Date date, Connection conn){
+		ArrayList<Historique> Configs = new ArrayList<Historique>();
+
 		Statement stmt=null;
 		try {
 			stmt=conn.createStatement();
@@ -144,13 +145,9 @@ public class Bdd {
 				int id = rs.getInt("Id");
 				String Config = rs.getString("Config");
 				String Avion = rs.getString("Avion");
+				Historique h = new Historique (String.valueOf(id), String.valueOf(date), Pays, Config, Avion);
 				
-				config[0]=String.valueOf(date);
-				config[1]=Pays;
-				config[2]=String.valueOf(id);
-				config[3]=String.valueOf(Config);
-				config[4]=Avion;
-				Configs.add(config);
+				Configs.add(h);
 				}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -159,9 +156,9 @@ public class Bdd {
 		return Configs;
 	}
 	
-	public static ArrayList<String[]> RecupHisto(String Pays, Connection conn){
-		ArrayList<String[]> Configs = new ArrayList<String[]>();
-		String[] config = new String[5];
+	public static ArrayList<Historique> RecupHisto(String Pays, Connection conn){
+		ArrayList<Historique> Configs = new ArrayList<Historique>();
+
 		Statement stmt=null;
 		try {
 			stmt=conn.createStatement();
@@ -181,13 +178,8 @@ public class Bdd {
 				int id = rs.getInt("Id");
 				String Config = rs.getString("Config");
 				String Avion = rs.getString("Avion");
-				
-				config[0]=String.valueOf(date);
-				config[1]=Pays;
-				config[2]=String.valueOf(id);
-				config[3]=String.valueOf(Config);
-				config[4]=Avion;
-				Configs.add(config);
+				Historique h=new Historique(String.valueOf(id), String.valueOf(date), Pays, Config, Avion);
+				Configs.add(h);
 				}
 			
 		} catch (SQLException e) {
@@ -230,7 +222,28 @@ public class Bdd {
 		}
 		
 		String sql;
-		sql="INSERT INTO Users (Date,Pays,Config,Avion) VALUES ('"+date+"','"+pays+"','"+config+"','"+avion+"')";
+		sql="INSERT INTO Historique (Date,Pays,Config,Avion) VALUES ('"+date+"','"+pays+"','"+config+"','"+avion+"')";
+		
+		try {
+			stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void Add_Produit(String designation, Date dlu, String reference, int quantite, String dosage, int lot, String dci, int seuil_critique, String classe_therapeutique, int NumCaisse, String caisse, String dotation_U7, Connection conn){
+		Statement stmt=null;
+		try {
+			stmt=conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String sql;
+		sql="INSERT INTO Produit (designation,dlu,reference,quantite,dosage,lot,dci,seuil_critique, Classe_Therapeutique,NumCaisse,Caisse,Dotation_U7) VALUES ('"+designation+"','"+dlu+"','"+reference+"','"+quantite+"','"+dosage+"','"+lot+"','"+dci+"','"+seuil_critique+"','"+classe_therapeutique+"','"+NumCaisse+"','"+caisse+"','"+dotation_U7+"')";
 		
 		try {
 			stmt.executeUpdate(sql);
