@@ -129,7 +129,7 @@ public class ModifProduit extends JFrame {
 		panel.add(lblClasse);
 
 		// Ajout du label "N° Caisse"
-		JLabel lblNCaisse = new JLabel("N\u00B0 Caisse :");
+		JLabel lblNCaisse = new JLabel("N° Caisse :");
 		lblNCaisse.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNCaisse.setBounds(84, 380, 63, 15);
 		panel.add(lblNCaisse);

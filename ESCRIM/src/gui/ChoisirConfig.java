@@ -32,7 +32,7 @@ import javax.swing.JComboBox;
 public class ChoisirConfig extends JFrame {
 
 	private ConfigController controller;
-	private Config modele;
+	private Historique modele;
 	private JPanel panel;
 	private JTextField txtDate;
 	private JTextField txtPays;
@@ -41,12 +41,15 @@ public class ChoisirConfig extends JFrame {
 
 	public ChoisirConfig(String Username) {
 
-		// this.modele = modele;
-		// controller = new ConfigController(this, modele);
+		this.modele = modele;
+		controller = new ConfigController(this, modele);
 
 		// Choix de la taille de la fenêtre
 		Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
-		this.setPreferredSize(new Dimension(screenSize.width, screenSize.height));
+		this.setPreferredSize(new Dimension(screenSize.width*4/5, screenSize.height*4/5));
+		int windowLeftPosition = screenSize.width / 2 - screenSize.width*2/5;
+		int windowRightPostion = screenSize.height / 2 - screenSize.height*2/5;
+		this.setLocation(windowLeftPosition, windowRightPostion);
 
 		// Empêche la fenêtre d'être redimensionnée
 		setResizable(false);
@@ -70,7 +73,7 @@ public class ChoisirConfig extends JFrame {
 		JPanel panel_user = new JPanel();
 		panel_user.setForeground(Color.WHITE);
 		panel_user.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		panel_user.setBounds(0, 654, 161, 62);
+		panel_user.setBounds(0, 501, 161, 62);
 		panel.add(panel_user);
 		panel_user.setLayout(null);
 
@@ -120,29 +123,31 @@ public class ChoisirConfig extends JFrame {
 		btnChoisir.setForeground(Color.WHITE);
 		btnChoisir.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnChoisir.setBounds(450, 70, 89, 23);
+		btnChoisir.setName("btnChoisir");
+		btnChoisir.addActionListener(controller);
 		panel.add(btnChoisir);
 		
 		// Ajout du label "Date"
-		JLabel lblDate = new JLabel("Date :");
+		JLabel lblDate = new JLabel("Date : (dd-MMM-yyyy)");
 		lblDate.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDate.setBounds(1229, 246, 37, 15);
+		lblDate.setBounds(811, 205, 37, 15);
 		panel.add(lblDate);
 		
 		// Ajout d'un champ de texte pour la date
 		txtDate = new JTextField();
-		txtDate.setBounds(1229, 265, 121, 20);
+		txtDate.setBounds(811, 228, 121, 20);
 		panel.add(txtDate);
 		txtDate.setColumns(10);
 		
 		// Ajout d'un label pour le pays
 		JLabel lblPays = new JLabel("Pays :");
 		lblPays.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblPays.setBounds(1229, 344, 46, 14);
+		lblPays.setBounds(811, 301, 46, 14);
 		panel.add(lblPays);
 		
 		// Ajout d'un champ de texte pour le pays
 		txtPays = new JTextField();
-		txtPays.setBounds(1229, 361, 121, 20);
+		txtPays.setBounds(811, 326, 121, 20);
 		panel.add(txtPays);
 		txtPays.setColumns(10);
 		
@@ -151,18 +156,18 @@ public class ChoisirConfig extends JFrame {
 		btnFiltrer.setBackground(Color.BLUE);
 		btnFiltrer.setForeground(Color.WHITE);
 		btnFiltrer.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnFiltrer.setBounds(1249, 425, 89, 23);
+		btnFiltrer.setBounds(828, 403, 89, 23);
 		btnFiltrer.setName("btnFiltrer");
+		btnFiltrer.addActionListener(controller);
 		panel.add(btnFiltrer);
 		
-		// Ajout du tableau d'historique
-		
+		// Ajout du tableau d'historique	
 		Historique h =new Historique ();
 		h.getList();
-		JTable table = new JTable();
+		JTable table = new JTable(h);
 		JScrollPane tableHistorique=new JScrollPane(table);
 		tableHistorique.setLocation(41, 185);
-		tableHistorique.setSize(600, 400);
+		tableHistorique.setSize(600, 241);
 		panel.add(tableHistorique);
 
 		// Ajout du fond
@@ -191,5 +196,18 @@ public class ChoisirConfig extends JFrame {
 		// Packing et affichage de la JFrame
 		this.pack();
 		this.setVisible(true);
+	}
+	
+	/**
+	 * Permet de récupérer la date rentrer par l'utilisateur
+	 * 
+	 * @return
+	 */
+	public String getdate(){
+		return txtDate.getText();
+	}
+	
+	public String getPays(){
+		return txtPays.getText();
 	}
 }

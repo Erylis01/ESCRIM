@@ -1,6 +1,9 @@
 package model;
 
 import java.sql.Connection;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
@@ -11,7 +14,7 @@ public class Historique extends AbstractTableModel {
 
 	private String id, date, pays, config, avion;
 	private String[][] configs;
-	 private final String[] entetes ={"ID","DATE","PAYS","CONFIGURATION","AVION"};
+	private final String[] entetes = { "ID", "DATE", "PAYS", "CONFIGURATION", "AVION" };
 
 	/**
 	 * Constructeur par default
@@ -38,7 +41,7 @@ public class Historique extends AbstractTableModel {
 	}
 
 	@Override
-	public int getColumnCount() {		
+	public int getColumnCount() {
 		return entetes.length;
 	}
 
@@ -46,12 +49,12 @@ public class Historique extends AbstractTableModel {
 	public int getRowCount() {
 		return configs.length;
 	}
-	
+
 	@Override
 	public String getColumnName(int columnIndex) {
-        return entetes[columnIndex];
-    }
-	
+		return entetes[columnIndex];
+	}
+
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		return configs[rowIndex][columnIndex];
@@ -66,6 +69,43 @@ public class Historique extends AbstractTableModel {
 	public String[][] getList() {
 		Connection conn = Bdd.ConnectDB();
 		ArrayList<Historique> liste_configs = Bdd.RecupHisto(conn);
+		configs = new String[liste_configs.size()][5];
+		for (int i = 0; i < liste_configs.size(); i++) {
+			configs[i][0] = liste_configs.get(i).getId();
+			configs[i][1] = liste_configs.get(i).getDate();
+			configs[i][2] = liste_configs.get(i).getPays();
+			configs[i][3] = liste_configs.get(i).getConfig();
+			configs[i][4] = liste_configs.get(i).getAvion();
+		}
+		return configs;
+	}
+
+	/**
+	 * Permet de récupérer la liste des configurations filtrer par date
+	 * 
+	 * @param Date
+	 * @return
+	 * @throws ParseException
+	 */
+	public String[][] getListDate(String Date) throws ParseException {
+		DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+		java.sql.Date datesql = new java.sql.Date(df.parse(Date).getTime());
+		Connection conn = Bdd.ConnectDB();
+		ArrayList<Historique> liste_configs = Bdd.RecupHisto(datesql, conn);
+		configs = new String[liste_configs.size()][5];
+		for (int i = 0; i < liste_configs.size(); i++) {
+			configs[i][0] = liste_configs.get(i).getId();
+			configs[i][1] = liste_configs.get(i).getDate();
+			configs[i][2] = liste_configs.get(i).getPays();
+			configs[i][3] = liste_configs.get(i).getConfig();
+			configs[i][4] = liste_configs.get(i).getAvion();
+		}
+		return configs;
+	}
+
+	public String[][] getListPays(String Pays){
+		Connection conn = Bdd.ConnectDB();
+		ArrayList<Historique> liste_configs =Bdd.RecupHisto(Pays, conn);
 		configs = new String[liste_configs.size()][5];
 		for (int i = 0; i < liste_configs.size(); i++) {
 			configs[i][0] = liste_configs.get(i).getId();
