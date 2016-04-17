@@ -85,6 +85,34 @@ public class Bdd {
 		return Infos;
 	}
 	
+	public static User RecupUser(String ndc, String password, Connection conn){
+		Statement stmt=null;
+		User user = null;
+		try {
+			stmt=conn.createStatement();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		String sql;
+		sql="SELECT Username, Password, Nom, Prenom FROM Users WHERE Username="+ndc+"AND Password="+password;
+		try {
+			ResultSet rs=stmt.executeQuery(sql);
+			rs.next();
+			String Nom = rs.getString("Nom");
+			String Prenom = rs.getString("Prenom");
+			
+			user = new User(ndc,password,Nom,Prenom);
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		
+		
+		return user;
+			
+	}
+	
 	public static ArrayList<Historique> RecupHisto(Connection conn){
 		ArrayList<Historique> Configs = new ArrayList<Historique>();
 		Statement stmt=null;
