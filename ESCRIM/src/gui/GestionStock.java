@@ -13,6 +13,10 @@ import javax.swing.JLabel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import javax.swing.JList;
+import javax.swing.UIManager;
 
 public class GestionStock extends JFrame {
 	public GestionStock() {
@@ -47,6 +51,18 @@ public class GestionStock extends JFrame {
 		label_2.setBounds(60, 36, 49, 14);
 		panel_user.add(label_2);
 		
+		JList list = new JList();
+		list.setSelectedIndex(0);
+		list.setBorder(new LineBorder(Color.BLACK, 2));
+		list.setBounds(311, 60, 106, -19);
+		panel.add(list);
+		
+		JLabel lblNDeStockage = new JLabel("N\u00B0 de stockage :");
+		lblNDeStockage.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNDeStockage.setBounds(165, 40, 106, 14);
+		panel.add(lblNDeStockage);
+		lblNDeStockage.setHorizontalAlignment(SwingConstants.CENTER);
+		
 		JLabel lblFond = new JLabel("New label");
 		lblFond.setIcon(new ImageIcon(GestionStock.class.getResource("/assets/fond_logpan.jpg")));
 		lblFond.setBounds(0, 0, 600, 600);
@@ -61,5 +77,4 @@ public class GestionStock extends JFrame {
 		JMenu mnAide = new JMenu("Aide");
 		menuBar.add(mnAide);
 	}
-
 }
