@@ -59,7 +59,7 @@ public class Bdd {
 	    }
 		return authenticated;
 	}
-	public static Product RecupInfoProduit(int Lot, Connection conn) throws SQLException{
+	public static Product RecupInfoProduit(String Lot, Connection conn) throws SQLException{
 		Statement stmt=null;
 		stmt=conn.createStatement();
 		

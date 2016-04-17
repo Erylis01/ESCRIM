@@ -36,7 +36,7 @@ public class MenuController implements MouseListener {
 			 String Lot = JOptionPane.showInputDialog(null, "N° de lot", JOptionPane.QUESTION_MESSAGE);
 			 conn=Bdd.ConnectDB();
 			 try {
-				p = Bdd.RecupInfoProduit(Integer.parseInt(Lot), conn);
+				p = Bdd.RecupInfoProduit(Lot, conn);
 			} catch (NumberFormatException | SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

@@ -19,9 +19,9 @@ public class Application {
 	}
 
 	private static void PierreTests() {
-		//User u = new User();
-		//Log l = new Log(u);
-		ChoisirConfig cc = new ChoisirConfig("");
+		User u = new User();
+		Log l = new Log(u);
+		
 	}
 
 	private static void CharlieTests() {
