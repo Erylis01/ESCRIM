@@ -67,7 +67,6 @@ public class Bdd {
 		sql="SELECT Id, designation, dlu, reference, quantite, dosage, lot, dci, seuil_critique,Classe_Therapeutique,NumCaisse,Caisse,Dotation_U7 FROM Produits WHERE lot="+Lot;
 		
 		ResultSet rs = stmt.executeQuery(sql);
-		int id=rs.getInt("Id");
 		String designation=rs.getString("designation");
 		Date dlu=rs.getDate("dlu");
 		String reference=rs.getString("reference");
