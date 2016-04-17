@@ -197,7 +197,7 @@ public class Bdd {
 		}
 		
 		String sql;
-		sql="SELECT Id FROM Stockage";
+		sql="SELECT numero FROM Stockage";
 		
 		ResultSet rs;
 		try {
