@@ -62,10 +62,4 @@ public class GestionStock extends JFrame {
 		menuBar.add(mnAide);
 	}
 
-	public String getPreferredSize() {
-		return getTitle();
-	}
-	public void setPreferredSize(String title) {
-		setTitle(title);
-	}
 }
