@@ -184,6 +184,36 @@ public class Bdd {
 		return Configs;
 	}
 	
+	public static ArrayList<String> RecupNStockage(Connection conn){
+		ArrayList<String> listStockage = new ArrayList<String>();
+
+		Statement stmt=null;
+		try {
+			stmt=conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String sql;
+		sql="SELECT Id FROM Stockage";
+		
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(sql);
+			while (rs.next()){
+				String id = ""+rs.getInt("Id");
+				listStockage.add(id);
+				}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return listStockage;
+	}
+	
 	public static void Add_User(String Username,String Password,String Nom, String Prenom, Connection conn){
 		Statement stmt=null;
 		try {

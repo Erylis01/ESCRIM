@@ -26,7 +26,10 @@ import java.awt.TextField;
 import javax.swing.JButton;
 
 public class GestionStock extends JFrame {
-	private JTable table;
+	
+	private JTable tabProduit;
+	private String [] choix_stockage = {};
+	
 	public GestionStock() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GestionStock.class.getResource("/assets/icone.png")));
 		setVisible(true);
@@ -66,7 +69,7 @@ public class GestionStock extends JFrame {
 		JLabel lblQuantit = new JLabel("Quantit\u00E9 :");
 		lblQuantit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblQuantit.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblQuantit.setBounds(26, 428, 77, 14);
+		lblQuantit.setBounds(26, 430, 77, 14);
 		panel.add(lblQuantit);
 		
 		JLabel lblNDeLot = new JLabel("N\u00B0 de lot :");
@@ -75,25 +78,26 @@ public class GestionStock extends JFrame {
 		lblNDeLot.setBounds(26, 405, 77, 14);
 		panel.add(lblNDeLot);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(109, 403, 138, 20);
-		panel.add(comboBox_1);
+		JComboBox cBoxNLot = new JComboBox();
+		cBoxNLot.setModel(new DefaultComboBoxModel(new String[] {"-1"}));
+		cBoxNLot.setBounds(109, 403, 138, 20);
+		panel.add(cBoxNLot);
 		
-		table = new JTable();
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setToolTipText("");
-		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		table.setBorder(new LineBorder(new Color(0, 0, 0)));
-		table.setBounds(26, 373, 529, -279);
-		panel.add(table);
+		tabProduit = new JTable();
+		tabProduit.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabProduit.setToolTipText("");
+		tabProduit.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		tabProduit.setBorder(new LineBorder(new Color(0, 0, 0)));
+		tabProduit.setBounds(26, 373, 529, -279);
+		panel.add(tabProduit);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		comboBox.setMaximumRowCount(60);
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"-1"}));
-		comboBox.setSelectedIndex(0);
-		comboBox.setBounds(304, 37, 123, 20);
-		panel.add(comboBox);
+		JComboBox cBoxNStockage = new JComboBox();
+		cBoxNStockage.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cBoxNStockage.setMaximumRowCount(60);
+		cBoxNStockage.setModel(new DefaultComboBoxModel(new String[] {"-1"}));
+		cBoxNStockage.setSelectedIndex(0);
+		cBoxNStockage.setBounds(304, 37, 123, 20);
+		panel.add(cBoxNStockage);
 		
 		JLabel lblNDeStockage = new JLabel("N\u00B0 de stockage :");
 		lblNDeStockage.setFont(new Font("Tahoma", Font.BOLD, 12));
