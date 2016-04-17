@@ -93,7 +93,7 @@ public class GestionStock extends JFrame {
 		tabProduit.setToolTipText("");
 		tabProduit.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		tabProduit.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tabProduit.setBounds(26, 373, 529, -279);
+		tabProduit.setBounds(26, 373, 529, -265);
 		panel.add(tabProduit);
 		
 		JComboBox cBoxNStockage = new JComboBox();
@@ -112,6 +112,10 @@ public class GestionStock extends JFrame {
 		TextField quantiteAAjouter = new TextField();
 		quantiteAAjouter.setBounds(109, 428, 138, 22);
 		panel.add(quantiteAAjouter);
+		
+		JButton btnAfficher = new JButton("Afficher");
+		btnAfficher.setBounds(304, 68, 123, 23);
+		panel.add(btnAfficher);
 		
 		JButton delSelect = new JButton("Supprimer");
 		delSelect.setBounds(354, 459, 123, 23);
