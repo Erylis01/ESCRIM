@@ -8,10 +8,15 @@ import javax.swing.JTextPane;
 import javax.swing.JMenu;
 import javax.swing.JSeparator;
 import javax.swing.border.LineBorder;
+
+import controller.Bdd;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -28,7 +33,7 @@ import javax.swing.JButton;
 public class GestionStock extends JFrame {
 	
 	private JTable tabProduit;
-	private String [] choix_stockage = {};
+	private String [] choix_stockage = Bdd.RecupNStockage(Bdd.ConnectDB());
 	
 	public GestionStock() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GestionStock.class.getResource("/assets/icone.png")));
@@ -79,7 +84,7 @@ public class GestionStock extends JFrame {
 		panel.add(lblNDeLot);
 		
 		JComboBox cBoxNLot = new JComboBox();
-		cBoxNLot.setModel(new DefaultComboBoxModel(new String[] {"-1"}));
+		cBoxNLot.setModel(new DefaultComboBoxModel(choix_stockage));
 		cBoxNLot.setBounds(109, 403, 138, 20);
 		panel.add(cBoxNLot);
 		
@@ -94,7 +99,6 @@ public class GestionStock extends JFrame {
 		JComboBox cBoxNStockage = new JComboBox();
 		cBoxNStockage.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		cBoxNStockage.setMaximumRowCount(60);
-		cBoxNStockage.setModel(new DefaultComboBoxModel(new String[] {"-1"}));
 		cBoxNStockage.setSelectedIndex(0);
 		cBoxNStockage.setBounds(304, 37, 123, 20);
 		panel.add(cBoxNStockage);

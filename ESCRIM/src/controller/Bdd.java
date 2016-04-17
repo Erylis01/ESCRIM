@@ -185,7 +185,7 @@ public class Bdd {
 		return Configs;
 	}
 	
-	public static ArrayList<String> RecupNStockage(Connection conn){
+	public static String [] RecupNStockage(Connection conn){
 		ArrayList<String> listStockage = new ArrayList<String>();
 
 		Statement stmt=null;
@@ -203,7 +203,7 @@ public class Bdd {
 		try {
 			rs = stmt.executeQuery(sql);
 			while (rs.next()){
-				String id = ""+rs.getInt("Id");
+				String id = ""+rs.getInt("numero");
 				listStockage.add(id);
 				}
 			
@@ -212,7 +212,12 @@ public class Bdd {
 			e.printStackTrace();
 		}
 		
-		return listStockage;
+		String [] listeStockage = new String[listStockage.size()-1];
+		for(int i = 0;i<listStockage.size();i++){
+			listeStockage[i]=""+listStockage.get(i);
+		}
+		
+		return listeStockage;
 	}
 	
 	public static void Add_User(String Username,String Password,String Nom, String Prenom, Connection conn){
