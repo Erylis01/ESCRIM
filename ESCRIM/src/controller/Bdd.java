@@ -106,9 +106,11 @@ public class Bdd {
 
 			e.printStackTrace();
 		}
+		password=CryptMD5(password);
 		String sql;
-		sql = "SELECT Username, Password, Nom, Prenom, admin FROM Users WHERE Username=" + ndc + "AND Password="
-				+ password;
+		sql = "SELECT Username, Password, Nom, Prenom, admin FROM Users WHERE Username='" + ndc + "' AND Password='"
+				+ password+"'";
+
 		try {
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
