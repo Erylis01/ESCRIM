@@ -29,7 +29,7 @@ public class Menu extends JFrame {
 	public Menu(User u) {
 		
 		this.modele=u;
-		controller = new MenuController(this);
+		controller = new MenuController(this,u);
 
 		// Centrage de la fenêtre et choix de la taille de la fenêtre
 		Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());

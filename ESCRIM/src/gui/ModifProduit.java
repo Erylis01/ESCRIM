@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import controller.ProduitController;
 import model.Product;
+import model.User;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -46,10 +47,10 @@ public class ModifProduit extends JFrame {
 	private JTextField txtRef;
 	private JLabel lblNom;
 
-	public ModifProduit(Product modele) {
+	public ModifProduit(Product modele,User u) {
 
 		this.modele = modele;
-		controller = new ProduitController(this, modele);
+		controller = new ProduitController(this, modele,u);
 
 		// Centrage de la fenêtre et choix de la taille de la fenêtre
 		Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
@@ -79,9 +80,9 @@ public class ModifProduit extends JFrame {
 		// Ajout d'un voyant
 		JLabel lblvoyant = new JLabel("");
 		if (modele.getQuantity()<modele.getCritical_threshold()){
-			lblvoyant.setIcon(new ImageIcon(ModifProduit.class.getResource("/assets/rouget.png")));
-		}else if (modele.getQuantity()>1.5*modele.getCritical_threshold()){
-			lblvoyant.setIcon(new ImageIcon(ModifProduit.class.getResource("/assets/orange.png")));
+			lblvoyant.setIcon(new ImageIcon(ModifProduit.class.getResource("/assets/voyant_rouge.png")));
+		}else if (modele.getQuantity()<1.5*modele.getCritical_threshold()){
+			lblvoyant.setIcon(new ImageIcon(ModifProduit.class.getResource("/assets/voyant_orange.png")));
 		}else{
 			lblvoyant.setIcon(new ImageIcon(ModifProduit.class.getResource("/assets/voyant_vert.png")));
 		}
@@ -91,6 +92,9 @@ public class ModifProduit extends JFrame {
 
 		// Ajout d'un champ pour la quantité
 		txtQuant = new JTextField();
+		if (modele.getQuantity()!=0){
+			txtQuant.setText(Integer.toString(modele.getQuantity()));
+		}
 		txtQuant.setBounds(441, 11, 86, 20);
 		panel.add(txtQuant);
 		txtQuant.setColumns(10);
@@ -265,6 +269,26 @@ public class ModifProduit extends JFrame {
 		txtSeuil.setBounds(441, 41, 86, 20);
 		panel.add(txtSeuil);
 		txtSeuil.setColumns(10);
+		
+		// Ajout du label "Référence"
+		JLabel lblRfrence = new JLabel("Référence :");
+		lblRfrence.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblRfrence.setBounds(79, 362, 69, 15);
+		panel.add(lblRfrence);
+		
+		// Ajout du champ de texte "Référence"
+		txtRef = new JTextField();
+		txtRef.setBounds(153, 360, 138, 20);
+		panel.add(txtRef);
+		txtRef.setColumns(10);
+		
+		// Ajout d'un bouton Menu
+		JLabel lblMenu = new JLabel("");
+		lblMenu.setIcon(new ImageIcon(ModifProduit.class.getResource("/assets/menu.png")));
+		lblMenu.setBounds(534, 487, 50, 50);
+		lblMenu.setName("lblMenu");
+		lblMenu.addMouseListener(controller);
+		panel.add(lblMenu);
 
 		// Ajout du panel contenant les infos utilisateur
 		JPanel panel_user = new JPanel();
@@ -281,29 +305,22 @@ public class ModifProduit extends JFrame {
 		lblUser.setIcon(new ImageIcon(Menu.class.getResource("/assets/utilisateur.png")));
 
 		// Ajout du label username
-		JLabel lblUsername = new JLabel("Username");
-		lblUsername.setBounds(60, 11, 48, 14);
+		JLabel lblUsername = new JLabel(u.getUsername());
+		lblUsername.setBounds(60, 11, 91, 14);
 		panel_user.add(lblUsername);
 
 		// Ajout du label avec information des droits
-		JLabel lblAdmininfo = new JLabel("AdminInfo");
-		lblAdmininfo.setBounds(60, 36, 49, 14);
+		JLabel lblAdmininfo = new JLabel();
+		if (u.isAdmin()==true){
+			lblAdmininfo.setText("Administrateur");
+		}else{
+			lblAdmininfo.setText("Utilisateur");
+		}
+		lblAdmininfo.setBounds(60, 36, 91, 15);
 		panel_user.add(lblAdmininfo);
-		
-		// Ajout du label "Référence"
-		JLabel lblRfrence = new JLabel("Référence :");
-		lblRfrence.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblRfrence.setBounds(79, 362, 69, 15);
-		panel.add(lblRfrence);
-		
-		// Ajout du champ de texte "Référence"
-		txtRef = new JTextField();
 		if(modele.getReference()!=null){
 			txtRef.setText(modele.getReference());
 		}
-		txtRef.setBounds(153, 360, 138, 20);
-		panel.add(txtRef);
-		txtRef.setColumns(10);
 
 		// Ajout d'un fond
 		JLabel lblFond = new JLabel("");
@@ -383,8 +400,10 @@ public class ModifProduit extends JFrame {
 		return txtRef.getText();
 	}
 	
+	public String getNom(){
+		return lblNom.getText();
+	}
 	public void setName(String nom){
 		lblNom.setText(nom);
-		this.repaint();
 	}
 }
