@@ -251,7 +251,7 @@ public class Bdd {
 		return listeStockage;
 	}
 	
-	public static void Add_User(String Username,String Password,String Nom, String Prenom, Connection conn){
+	public static void Add_User(String Username,String Password,String Nom, String Prenom,boolean admin, Connection conn){
 		Statement stmt=null;
 		try {
 			stmt=conn.createStatement();
@@ -262,7 +262,7 @@ public class Bdd {
 		
 		String sql;
 		Password=CryptMD5(Password);
-		sql="INSERT INTO Users (Username,Password,Nom,Prenom) VALUES ('"+Username+"','"+Password+"','"+Nom+"','"+Prenom+"')";
+		sql="INSERT INTO Users (Username,Password,Nom,Prenom,admin) VALUES ('"+Username+"','"+Password+"','"+Nom+"','"+Prenom+"','"+admin+"')";
 		
 		try {
 			stmt.executeUpdate(sql);
