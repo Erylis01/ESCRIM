@@ -9,6 +9,7 @@ import controller.Bdd;
 public class User {
 
 	private String Username, Password, Nom, Prenom;
+	private boolean admin;
 
 	/**
 	 * Constructeur de User
@@ -18,11 +19,12 @@ public class User {
 		
 	}
 	
-	public User(String Username, String Password, String Nom, String Prenom) {
+	public User(String Username, String Password, String Nom, String Prenom, boolean admin) {
 		this.Username=Username;
 		this.Password=Password;
 		this.Nom=Nom;
 		this.Prenom=Prenom;
+		this.admin=admin;
 	}
 
 	/**

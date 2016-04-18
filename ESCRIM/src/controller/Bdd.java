@@ -72,6 +72,11 @@ public class Bdd {
 		Statement stmt = null;
 		stmt = conn.createStatement();
 		Product Infos = null;
+	public static Product RecupInfoProduit(String Lot, Connection conn) throws SQLException{
+		Statement stmt=null;
+		stmt=conn.createStatement();
+		Product Infos = null;
+		
 		String sql;
 		sql = "SELECT Id, designation, dlu, reference, quantite, dosage, lot, dci, seuil_critique,Classe_Therapeutique,NumCaisse,Caisse,Dotation_U7 FROM Produits WHERE lot="
 				+ Lot;
@@ -91,6 +96,21 @@ public class Bdd {
 			String Dotation_U7 = rs.getString("Dotation_U7");
 			Infos = new Product(designation, dci, dosage, dlu, quantite, Lot, Classe_Therapeutique, NumCaisse, Caisse,
 					Dotation_U7, seuil_critique, reference);
+		while(rs.next()){
+		String designation=rs.getString("designation");
+		Date dlu=rs.getDate("dlu");
+		String reference=rs.getString("reference");
+		int quantite=rs.getInt("quantite");
+		String dosage=rs.getString("dosage");
+		String dci=rs.getString("dci");
+		int seuil_critique=rs.getInt("seuil_critique");
+		String Classe_Therapeutique = rs.getString("Classe_Therapeutique");
+		int NumCaisse=rs.getInt("NumCaisse");
+		String Caisse=rs.getString("Caisse");
+		String Dotation_U7=rs.getString("Dotation_U7");
+		
+		Infos = new Product(designation,dci,dosage,dlu,quantite,Lot,Classe_Therapeutique, NumCaisse,Caisse,Dotation_U7,seuil_critique,reference);
+		}
 		return Infos;
 	}
 
@@ -105,13 +125,18 @@ public class Bdd {
 		}
 		String sql;
 		sql = "SELECT Username, Password, Nom, Prenom FROM Users WHERE Username=" + ndc + "AND Password=" + password;
+		sql="SELECT Username, Password, Nom, Prenom, admin FROM Users WHERE Username="+ndc+"AND Password="+password;
 		try {
 			ResultSet rs = stmt.executeQuery(sql);
-			rs.next();
+			while(rs.next()){
 			String Nom = rs.getString("Nom");
 			String Prenom = rs.getString("Prenom");
+			boolean admin=rs.getBoolean("admin");
 
 			user = new User(ndc, password, Nom, Prenom);
+			
+			user = new User(ndc,password,Nom,Prenom,admin);
+			}
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -259,6 +284,9 @@ public class Bdd {
 
 	public static void Add_User(String Username, String Password, String Nom, String Prenom, Connection conn) {
 		Statement stmt = null;
+	
+	public static void Add_User(String Username,String Password,String Nom, String Prenom,boolean admin, Connection conn){
+		Statement stmt=null;
 		try {
 			stmt = conn.createStatement();
 		} catch (SQLException e) {
@@ -271,6 +299,9 @@ public class Bdd {
 		sql = "INSERT INTO Users (Username,Password,Nom,Prenom) VALUES ('" + Username + "','" + Password + "','" + Nom
 				+ "','" + Prenom + "')";
 
+		Password=CryptMD5(Password);
+		sql="INSERT INTO Users (Username,Password,Nom,Prenom,admin) VALUES ('"+Username+"','"+Password+"','"+Nom+"','"+Prenom+"','"+admin+"')";
+		
 		try {
 			stmt.executeUpdate(sql);
 		} catch (SQLException e) {
