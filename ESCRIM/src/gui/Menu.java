@@ -17,16 +17,18 @@ import javax.swing.JMenuItem;
 import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.Font;
 
 
 public class Menu extends JFrame {
 
 	private MenuController controller;
-	private User u;
+	private User modele;
 	private final int LARGEUR_FENETRE = 600, HAUTEUR_FENETRE = 600;
 
 	public Menu(User u) {
-
+		
+		this.modele=u;
 		controller = new MenuController(this);
 
 		// Centrage de la fenêtre et choix de la taille de la fenêtre
@@ -82,7 +84,7 @@ public class Menu extends JFrame {
 		JPanel panel_user = new JPanel();
 		panel_user.setForeground(Color.WHITE);
 		panel_user.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		panel_user.setBounds(0, 487, 161, 62);
+		panel_user.setBounds(0, 480, 170, 69);
 		panel.add(panel_user);
 		panel_user.setLayout(null);
 		
@@ -92,20 +94,23 @@ public class Menu extends JFrame {
 		panel_user.add(lblUser);
 		lblUser.setIcon(new ImageIcon(Menu.class.getResource("/assets/utilisateur.png")));
 		
-		//Ajout du label username
-		JLabel lblUsername = new JLabel(u.getUsername());
-		lblUsername.setBounds(60, 11, 48, 14);
-		panel_user.add(lblUsername);
-		
 		// Ajout du label avec information des droits
 		JLabel lblAdmininfo = new JLabel();
-		if (u.isAdmin()==true){
+		lblAdmininfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblAdmininfo.setBounds(60, 11, 91, 29);
+		if (modele.isAdmin()==true){
 			lblAdmininfo.setText("Administrateur");
 		}else{
 			lblAdmininfo.setText("Utilisateur");
 		}
-		lblAdmininfo.setBounds(60, 36, 49, 14);
 		panel_user.add(lblAdmininfo);
+		
+		//Ajout du label username
+		JLabel lblUsername = new JLabel(modele.getUsername());
+		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblUsername.setBounds(60, 32, 91, 29);
+		panel_user.add(lblUsername);
+		
 		
 		// Ajout du fond
 		JLabel lblFond = new JLabel("");

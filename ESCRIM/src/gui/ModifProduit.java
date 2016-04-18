@@ -2,10 +2,10 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -43,6 +43,8 @@ public class ModifProduit extends JFrame {
 	private JTextField txtLot;
 	private JTextField txtCaisse;
 	private JTextField txtSeuil;
+	private JTextField txtRef;
+	private JLabel lblNom;
 
 	public ModifProduit(Product modele) {
 
@@ -100,7 +102,7 @@ public class ModifProduit extends JFrame {
 		panel.add(lblQuant);
 
 		// Ajout du label "Nom du produit"
-		JLabel lblNom = new JLabel();
+		lblNom = new JLabel();
 		if (modele.getName() != null) {
 			lblNom.setText(modele.getName());
 		} else {
@@ -115,49 +117,49 @@ public class ModifProduit extends JFrame {
 		// Ajout du label "DCI"
 		JLabel lblDCI = new JLabel("DCI :");
 		lblDCI.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDCI.setBounds(117, 140, 30, 15);
+		lblDCI.setBounds(118, 101, 30, 15);
 		panel.add(lblDCI);
 
 		// Ajout du label "Forme de dosage"
 		JLabel lblDosage = new JLabel("Forme dosage :");
 		lblDosage.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDosage.setBounds(311, 140, 93, 15);
+		lblDosage.setBounds(312, 101, 93, 15);
 		panel.add(lblDosage);
 
 		// Ajout du label "DLU"
-		JLabel lblDLU = new JLabel("DLU :");
+		JLabel lblDLU = new JLabel("DLU (yyyy-mm-dd) :");
 		lblDLU.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDLU.setBounds(115, 220, 32, 15);
+		lblDLU.setBounds(15, 167, 133, 15);
 		panel.add(lblDLU);
 
 		// Ajout du label "Lot"
 		JLabel lblLot = new JLabel("Lot :");
 		lblLot.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblLot.setBounds(375, 300, 29, 15);
+		lblLot.setBounds(376, 233, 29, 15);
 		panel.add(lblLot);
 
 		// Ajout du label "Classe Therapeutique"
 		JLabel lblClasse = new JLabel("Classe Therapeutique :");
 		lblClasse.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblClasse.setBounds(9, 300, 138, 15);
+		lblClasse.setBounds(10, 233, 138, 15);
 		panel.add(lblClasse);
 
 		// Ajout du label "N° Caisse"
 		JLabel lblNCaisse = new JLabel("N° Caisse :");
 		lblNCaisse.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNCaisse.setBounds(84, 380, 63, 15);
+		lblNCaisse.setBounds(85, 295, 63, 15);
 		panel.add(lblNCaisse);
 
 		// Ajout du label "Caisse"
 		JLabel lblCaisse = new JLabel("Caisse :");
 		lblCaisse.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblCaisse.setBounds(358, 380, 46, 14);
+		lblCaisse.setBounds(359, 295, 46, 14);
 		panel.add(lblCaisse);
 
 		// Ajout du label "Dotation"
 		JLabel lblDotation = new JLabel("Dotation U7 :");
 		lblDotation.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDotation.setBounds(321, 220, 83, 15);
+		lblDotation.setBounds(322, 167, 83, 15);
 		panel.add(lblDotation);
 
 		// Ajout du label "Seuil Critique"
@@ -189,17 +191,17 @@ public class ModifProduit extends JFrame {
 		if (modele.getDCI() != null) {
 			txtDCI.setText(modele.getDCI());
 		}
-		txtDCI.setBounds(149, 138, 141, 20);
+		txtDCI.setBounds(150, 99, 141, 20);
 		panel.add(txtDCI);
 		txtDCI.setColumns(10);
 
 		// Ajout du champ de texte "DLU"
-		DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
 		txtDLU = new JTextField();
 		if (modele.getDLU() != null) {
 			txtDLU.setText(df.format(modele.getDLU()));
-		} 
-		txtDLU.setBounds(150, 218, 140, 20);
+		}
+		txtDLU.setBounds(151, 165, 140, 20);
 		panel.add(txtDLU);
 		txtDLU.setColumns(10);
 
@@ -208,7 +210,7 @@ public class ModifProduit extends JFrame {
 		if (modele.getClasse()!=null){
 			txtClasse.setText(modele.getClasse());
 		}
-		txtClasse.setBounds(149, 298, 140, 20);
+		txtClasse.setBounds(150, 231, 140, 20);
 		panel.add(txtClasse);
 		txtClasse.setColumns(10);
 
@@ -217,7 +219,7 @@ public class ModifProduit extends JFrame {
 		if (modele.getNcaisse()!=0){
 			txtNcaisse.setText(Integer.toString((modele.getNcaisse())));
 		}
-		txtNcaisse.setBounds(149, 378, 140, 20);
+		txtNcaisse.setBounds(150, 293, 140, 20);
 		panel.add(txtNcaisse);
 		txtNcaisse.setColumns(10);
 
@@ -226,7 +228,7 @@ public class ModifProduit extends JFrame {
 		if(modele.getDosage()!=null){
 			txtDosage.setText(modele.getDosage());
 		}
-		txtDosage.setBounds(409, 138, 141, 20);
+		txtDosage.setBounds(410, 99, 141, 20);
 		panel.add(txtDosage);
 		txtDosage.setColumns(10);
 
@@ -235,14 +237,14 @@ public class ModifProduit extends JFrame {
 		if (modele.getDotation()!=null){
 			txtDotation.setText(modele.getDotation());
 		}
-		txtDotation.setBounds(409, 218, 141, 20);
+		txtDotation.setBounds(410, 165, 141, 20);
 		panel.add(txtDotation);
 		txtDotation.setColumns(10);
 
 		// Ajout du champ de texte "Lot"
 		txtLot = new JTextField(modele.getLot());
 		txtLot.setEditable(false);
-		txtLot.setBounds(409, 298, 141, 20);
+		txtLot.setBounds(410, 231, 141, 20);
 		panel.add(txtLot);
 		txtLot.setColumns(10);
 
@@ -251,7 +253,7 @@ public class ModifProduit extends JFrame {
 		if (modele.getCaisse()!=null){
 			txtCaisse.setText(modele.getCaisse());
 		}
-		txtCaisse.setBounds(409, 378, 141, 20);
+		txtCaisse.setBounds(410, 293, 141, 20);
 		panel.add(txtCaisse);
 		txtCaisse.setColumns(10);
 
@@ -287,6 +289,21 @@ public class ModifProduit extends JFrame {
 		JLabel lblAdmininfo = new JLabel("AdminInfo");
 		lblAdmininfo.setBounds(60, 36, 49, 14);
 		panel_user.add(lblAdmininfo);
+		
+		// Ajout du label "Référence"
+		JLabel lblRfrence = new JLabel("Référence :");
+		lblRfrence.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblRfrence.setBounds(79, 362, 69, 15);
+		panel.add(lblRfrence);
+		
+		// Ajout du champ de texte "Référence"
+		txtRef = new JTextField();
+		if(modele.getReference()!=null){
+			txtRef.setText(modele.getReference());
+		}
+		txtRef.setBounds(153, 360, 138, 20);
+		panel.add(txtRef);
+		txtRef.setColumns(10);
 
 		// Ajout d'un fond
 		JLabel lblFond = new JLabel("");
@@ -330,8 +347,11 @@ public class ModifProduit extends JFrame {
 	}
 
 	public Date getDLU() throws ParseException {
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-		return formatter.parse(txtDLU.getText());
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+		java.util.Date  date =formatter.parse(txtDLU.getText());
+		java.sql.Date sqlDate = new Date(date.getTime()); 
+		System.out.println(sqlDate);
+		return sqlDate;
 
 	}
 
@@ -351,11 +371,20 @@ public class ModifProduit extends JFrame {
 		return txtDotation.getText();
 	}
 
-	public int getLot() {
-		return Integer.parseInt(txtLot.getText());
+	public String getLot() {
+		return txtLot.getText();
 	}
 
 	public String getClasse() {
 		return txtClasse.getText();
+	}
+	
+	public String getref(){
+		return txtRef.getText();
+	}
+	
+	public void setName(String nom){
+		lblNom.setText(nom);
+		this.repaint();
 	}
 }
