@@ -96,14 +96,15 @@ public class Bdd {
 			e.printStackTrace();
 		}
 		String sql;
-		sql="SELECT Username, Password, Nom, Prenom FROM Users WHERE Username="+ndc+"AND Password="+password;
+		sql="SELECT Username, Password, Nom, Prenom, admin FROM Users WHERE Username="+ndc+"AND Password="+password;
 		try {
 			ResultSet rs=stmt.executeQuery(sql);
 			while(rs.next()){
 			String Nom = rs.getString("Nom");
 			String Prenom = rs.getString("Prenom");
+			boolean admin=rs.getBoolean("admin");
 			
-			user = new User(ndc,password,Nom,Prenom);
+			user = new User(ndc,password,Nom,Prenom,admin);
 			}
 		} catch (SQLException e) {
 
