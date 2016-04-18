@@ -115,7 +115,7 @@ public class Bdd {
 				String Nom = rs.getString("Nom");
 				String Prenom = rs.getString("Prenom");
 				boolean admin = rs.getBoolean("admin");
-
+				
 				user = new User(ndc, password, Nom, Prenom, admin);
 			}
 		} catch (SQLException e) {
@@ -274,13 +274,12 @@ public class Bdd {
 		}
 
 		String sql;
-		Password = CryptMD5(Password);
-		sql = "INSERT INTO Users (Username,Password,Nom,Prenom) VALUES ('" + Username + "','" + Password + "','" + Nom
-				+ "','" + Prenom + "')";
+		int i;
+		if (admin==true){i=1;}else{i=0;}
 
 		Password = CryptMD5(Password);
 		sql = "INSERT INTO Users (Username,Password,Nom,Prenom,admin) VALUES ('" + Username + "','" + Password + "','"
-				+ Nom + "','" + Prenom + "','" + admin + "')";
+				+ Nom + "','" + Prenom + "','" + i + "')";
 
 		try {
 			stmt.executeUpdate(sql);
