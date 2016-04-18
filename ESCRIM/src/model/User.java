@@ -39,6 +39,10 @@ public class User {
 		Connection conn = Bdd.ConnectDB();
 		Bdd.Add_User(Username, Password, Nom, Prenom, admin, conn);
 	}
+	
+	public void affichage(){
+		System.out.println(Nom+" "+Prenom+" "+Username+" "+ Password);
+	}
 
 	/*
 	 * public void removeUser(String Username,String Password){ Connection

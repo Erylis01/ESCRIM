@@ -11,18 +11,22 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 
+import gui.Menu;
 import gui.ModifProduit;
 import model.Product;
+import model.User;
 
 public class ProduitController implements ActionListener,MouseListener{
 
 	private ModifProduit vue;
 	private Product modele;
 	private Connection conn;
+	private User u;
 	
-	public ProduitController(ModifProduit vue,Product modele){
+	public ProduitController(ModifProduit vue,Product modele,User info){
 		this.vue=vue;
 		this.modele=modele;
+		this.u=info;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -32,13 +36,23 @@ public class ProduitController implements ActionListener,MouseListener{
 		if (source=="btnAjouter"){
 			conn=Bdd.ConnectDB();
 			try {
-				Bdd.Add_Produit(vue.getName(), vue.getDLU(), vue.getref(), vue.getquant(), vue.getDosage(), vue.getLot(), vue.getDCI(), vue.getSeuil(), vue.getClasse(), vue.getNcaisse(),vue.getCaisse(), vue.getDotation(), conn);
+				Bdd.Add_Produit(vue.getNom(), vue.getDLU(), vue.getref(), vue.getquant(), vue.getDosage(), vue.getLot(), vue.getDCI(), vue.getSeuil(), vue.getClasse(), vue.getNcaisse(),vue.getCaisse(), vue.getDotation(), conn);
+				Menu m = new Menu(u);
+				vue.dispose();
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}else if (source=="btnModifier"){
-			
+			conn=Bdd.ConnectDB();
+			try {
+				Bdd.Modif_produit(vue.getLot(), vue.getNom(), vue.getDLU(), vue.getref(), vue.getquant(), vue.getDosage(), vue.getDCI(), vue.getSeuil(), vue.getClasse(),vue.getNcaisse(),vue.getCaisse(), vue.getDotation(), conn);
+				Menu m = new Menu(u);
+				vue.dispose();
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 	}
@@ -50,6 +64,9 @@ public class ProduitController implements ActionListener,MouseListener{
 			String Nom = JOptionPane.showInputDialog(null, "Nom du produit", JOptionPane.QUESTION_MESSAGE);
 			modele.setName(Nom);
 			vue.setName(Nom);
+		}else if (source=="lblMenu"){
+			Menu m = new Menu(u);
+			vue.dispose();
 		}
 		
 	}

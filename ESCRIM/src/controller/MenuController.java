@@ -21,8 +21,9 @@ public class MenuController implements MouseListener {
 	private Product p;
 	private User u;
 
-	public MenuController(Menu vue) {
+	public MenuController(Menu vue,User info) {
 		this.vue = vue;
+		this.u=info;
 	}
 
 	@Override
@@ -42,7 +43,8 @@ public class MenuController implements MouseListener {
 				e1.printStackTrace();
 			}
 			 vue.dispose();
-			 ModifProduit mp = new ModifProduit(p);
+			 u.affichage();
+			 ModifProduit mp = new ModifProduit(p,u);
 		}else if(source=="lblStock"){
 			
 		}
