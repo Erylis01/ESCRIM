@@ -4,14 +4,29 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.Date;
+import java.util.ArrayList;
 
-public class Product {
+import javax.swing.table.AbstractTableModel;
+
+import controller.Bdd;
+
+public class Product extends AbstractTableModel {
 
 	private Date DLU=null;
 	private int quantity=0, critical_threshold=0,Ncaisse=0;
+	private String[][] Produits;
 	private String DCI=null, dosage=null, reference=null, name=null,classe=null,caisse=null,dotation=null,lot=null;
 
+	
+	/**
+	 * Constructeur par default
+	 */
+	public Product() {
+
+	}
+	
 	/**
 	 * Constructeur de la classe Product
 	 * 
@@ -39,7 +54,18 @@ public class Product {
 		this.Ncaisse=Ncaisse;
 		this.dotation=dotation;
 	}
-
+	
+	public String[][] getList(int nStockage) {
+		Connection conn = Bdd.ConnectDB();
+		ArrayList<Product> liste_Produits = Bdd.RecupProduits(nStockage,conn);
+		Produits = new String[liste_Produits.size()][3];
+		for (int i = 0; i < liste_Produits.size(); i++) {
+			Produits[i][0] = liste_Produits.get(i).getName();
+			Produits[i][1] = ""+liste_Produits.get(i).getQuantity();
+			Produits[i][2] = ""+liste_Produits.get(i).getDLU();
+		}
+		return Produits;
+	}
 	/**
 	 * @return the DLU
 	 */
@@ -221,5 +247,23 @@ public class Product {
 	
 	public void affichage(){
 		System.out.println(name+" "+DCI+" "+dosage+" "+DLU+" "+quantity+" "+lot+" "+classe+" "+Ncaisse+" "+caisse+" "+dotation);
+	}
+
+	@Override
+	public int getRowCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getColumnCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -10,6 +10,7 @@ import javax.swing.table.AbstractTableModel;
 
 import controller.Bdd;
 
+@SuppressWarnings("serial")
 public class Historique extends AbstractTableModel {
 
 	private String id, date, pays, config, avion;
