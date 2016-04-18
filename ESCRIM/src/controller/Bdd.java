@@ -429,7 +429,7 @@ public class Bdd {
 		String sql;
 		sql="UPDATE Produits SET designation='"+ designation +"',dlu='"+ dlu +"',reference='"+ reference +"',quantite='"+ 
 		quantite +"',dosage='"+dosage+"',dci='"+dci+"',seuil_critique='"+seuil_critique+"',Classe_Therapeutique='"+classe_therapeutique+
-		"',NumCaisse='"+NumCaisse+"',Caisse='"+caisse+"',Dotation_U7='"+dotation_U7+" WHERE Lot="+lot;
+		"',NumCaisse='"+NumCaisse+"',Caisse='"+caisse+"',Dotation_U7='"+dotation_U7+"' WHERE Lot="+lot;
 		
 		try {
 			stmt.executeUpdate(sql);
