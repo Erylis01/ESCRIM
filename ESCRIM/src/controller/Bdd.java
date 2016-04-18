@@ -264,6 +264,41 @@ public class Bdd {
 
 		return listeStockage;
 	}
+	
+	public static String[] RecupNLot(Connection conn) {
+		ArrayList<String> listLot = new ArrayList<String>();
+
+		Statement stmt = null;
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		String sql;
+		sql = "SELECT lot FROM Produits";
+
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String id = "" + rs.getInt("lot");
+				listLot.add(id);
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		String[] listeLot = new String[listLot.size()];
+		for (int i = 0; i < listLot.size(); i++) {
+			listeLot[i] = "" + listLot.get(i);
+		}
+
+		return listeLot;
+	}
 
 	public static void Add_User(String Username, String Password, String Nom, String Prenom, boolean admin,
 			Connection conn) {

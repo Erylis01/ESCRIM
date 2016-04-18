@@ -29,11 +29,13 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import java.awt.TextField;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 
 public class GestionStock extends JFrame {
 	
 	private JTable tabProduit;
 	private String [] choix_stockage = Bdd.RecupNStockage(Bdd.ConnectDB());
+	private String [] choix_lot = Bdd.RecupNLot(Bdd.ConnectDB());
 	
 	public GestionStock() {
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(GestionStock.class.getResource("/assets/icone.png")));
@@ -83,7 +85,9 @@ public class GestionStock extends JFrame {
 		lblNDeLot.setBounds(26, 405, 77, 14);
 		panel.add(lblNDeLot);
 		
-		JComboBox cBoxNLot = new JComboBox();
+		JComboBox cBoxNLot = new JComboBox(choix_lot);
+		cBoxNLot.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cBoxNLot.setMaximumRowCount(60);
 		cBoxNLot.setBounds(109, 403, 138, 20);
 		panel.add(cBoxNLot);
 		
@@ -116,8 +120,18 @@ public class GestionStock extends JFrame {
 		panel.add(btnAfficher);
 		
 		JButton delSelect = new JButton("Supprimer");
-		delSelect.setBounds(354, 459, 123, 23);
+		delSelect.setBounds(388, 459, 123, 23);
 		panel.add(delSelect);
+		
+		JLabel labelNDeLot2 = new JLabel("N\u00B0 de lot :");
+		labelNDeLot2.setHorizontalAlignment(SwingConstants.CENTER);
+		labelNDeLot2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		labelNDeLot2.setBounds(304, 431, 77, 14);
+		panel.add(labelNDeLot2);
+		
+		TextField nLotASupprimer = new TextField();
+		nLotASupprimer.setBounds(390, 430, 121, 22);
+		panel.add(nLotASupprimer);
 		
 		JLabel lblFond = new JLabel("New label");
 		lblFond.setIcon(new ImageIcon(GestionStock.class.getResource("/assets/fond_logpan.jpg")));
