@@ -268,6 +268,56 @@ public class Bdd {
 
 		return Configs;
 	}
+	
+	public static ArrayList<Plane> RecupAvion(Connection conn){
+		ArrayList<Plane> Avions = new ArrayList<Plane>();
+		ArrayList<Container> Containers = new ArrayList<Container>();
+		Statement stmt=null;
+		
+		try {
+			stmt=conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String sql;
+		sql="SELECT Id, type, charge_max FROM Avions";
+		
+		ResultSet rs;
+		ResultSet rs2;
+		ResultSet rs3;
+		try {
+			rs=stmt.executeQuery(sql);
+			while (rs.next()){
+				String type=rs.getString("type");
+				int charge_max=rs.getInt("charge_max");
+				String sql2;
+				sql2="SELECT ID_contenair FROM Contenance_avion WHERE type="+type;
+				rs2=stmt.executeQuery(sql2);
+				while (rs2.next()){
+					int ID_contenair=rs2.getInt("ID_contenair");
+					String sql3;
+					sql3="SELECT ID_contenair,volume,hauteur,profondeur,largeur FROM Container WHERE ID_Contenair="+ID_contenair;
+					rs3=stmt.executeQuery(sql3);
+					while (rs3.next()){
+						int volume=rs.getInt("volume");
+						int hauteur=rs.getInt("hauteur");
+						int profondeur=rs.getInt("profondeur");
+						int largeur=rs.getInt("largeur");
+						Container container=new Container(volume, profondeur, largeur, hauteur);
+						Containers.add(container);
+					}
+				}
+				Plane Avion=new Plane(type, charge_max, Containers);
+				Avions.add(Avion);
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return Avions;
+	}
 
 	public static String[] RecupNStockage(Connection conn) {
 		ArrayList<String> listStockage = new ArrayList<String>();

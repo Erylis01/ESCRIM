@@ -12,7 +12,7 @@ public class Container {
 	 * @param width
 	 * @param height
 	 */
-	public Container(int ID_contenair, int volume, int depth, int width, int height){ 
+	public Container(int volume, int depth, int width, int height){ 
 		this.volume = volume;
 		this.depth = depth;
 		this.width = width;
