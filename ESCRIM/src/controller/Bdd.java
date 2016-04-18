@@ -62,12 +62,13 @@ public class Bdd {
 	public static Product RecupInfoProduit(String Lot, Connection conn) throws SQLException{
 		Statement stmt=null;
 		stmt=conn.createStatement();
+		Product Infos = null;
 		
 		String sql;
 		sql="SELECT Id, designation, dlu, reference, quantite, dosage, lot, dci, seuil_critique,Classe_Therapeutique,NumCaisse,Caisse,Dotation_U7 FROM Produits WHERE lot="+Lot;
 		
 		ResultSet rs = stmt.executeQuery(sql);
-		rs.next();
+		while(rs.next()){
 		String designation=rs.getString("designation");
 		Date dlu=rs.getDate("dlu");
 		String reference=rs.getString("reference");
@@ -80,8 +81,8 @@ public class Bdd {
 		String Caisse=rs.getString("Caisse");
 		String Dotation_U7=rs.getString("Dotation_U7");
 		
-		Product Infos = new Product(designation,dci,dosage,dlu,quantite,Lot,Classe_Therapeutique, NumCaisse,Caisse,Dotation_U7,seuil_critique,reference);
-		
+		Infos = new Product(designation,dci,dosage,dlu,quantite,Lot,Classe_Therapeutique, NumCaisse,Caisse,Dotation_U7,seuil_critique,reference);
+		}
 		return Infos;
 	}
 	
@@ -98,11 +99,12 @@ public class Bdd {
 		sql="SELECT Username, Password, Nom, Prenom FROM Users WHERE Username="+ndc+"AND Password="+password;
 		try {
 			ResultSet rs=stmt.executeQuery(sql);
-			rs.next();
+			while(rs.next()){
 			String Nom = rs.getString("Nom");
 			String Prenom = rs.getString("Prenom");
 			
 			user = new User(ndc,password,Nom,Prenom);
+			}
 		} catch (SQLException e) {
 
 			e.printStackTrace();
