@@ -10,6 +10,7 @@ import javax.swing.JSeparator;
 import javax.swing.border.LineBorder;
 
 import controller.Bdd;
+import controller.StockController;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -33,20 +34,23 @@ import javax.swing.JTextField;
 
 public class GestionStock extends JFrame {
 	
-	private JTable tabProduit;
-	private String [] choix_stockage = Bdd.RecupNStockage(Bdd.ConnectDB());
+	private static String [] choix_stockage = Bdd.RecupNStockage(Bdd.ConnectDB());
 	private String [] choix_lot = Bdd.RecupNLot(Bdd.ConnectDB());
+	private StockController ecouteur = new StockController();
+	private static JComboBox cBoxNStockage = new JComboBox(choix_stockage);
+	private static JTable tabProduit = new JTable();
+	private static JFrame gestionStock = new JFrame("Gestion Stock");
 	
 	public GestionStock() {
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage(GestionStock.class.getResource("/assets/icone.png")));
+		gestionStock.setIconImage(Toolkit.getDefaultToolkit().getImage(GestionStock.class.getResource("/assets/icone.png")));
 		
-		this.setPreferredSize(new Dimension(600, 600));
-		this.setResizable(false);
-		this.setTitle("Gestion des stocks");
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		gestionStock.setPreferredSize(new Dimension(600, 600));
+		gestionStock.setResizable(false);
+		gestionStock.setTitle("Gestion des stocks");
+		gestionStock.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
-		getContentPane().add(panel, BorderLayout.CENTER);
+		gestionStock.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
 		JPanel panel_user = new JPanel();
@@ -91,7 +95,7 @@ public class GestionStock extends JFrame {
 		cBoxNLot.setBounds(109, 403, 138, 20);
 		panel.add(cBoxNLot);
 		
-		tabProduit = new JTable();
+		//Passé en variable pour l'écouteur
 		tabProduit.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tabProduit.setToolTipText("");
 		tabProduit.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -99,7 +103,7 @@ public class GestionStock extends JFrame {
 		tabProduit.setBounds(26, 373, 529, -265);
 		panel.add(tabProduit);
 		
-		JComboBox cBoxNStockage = new JComboBox(choix_stockage);
+		//ComboBox passé en variable pour l'écouteur
 		cBoxNStockage.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		cBoxNStockage.setMaximumRowCount(60);
 		cBoxNStockage.setBounds(304, 37, 123, 20);
@@ -114,8 +118,9 @@ public class GestionStock extends JFrame {
 		TextField quantiteAAjouter = new TextField();
 		quantiteAAjouter.setBounds(109, 428, 138, 22);
 		panel.add(quantiteAAjouter);
-		
+	
 		JButton btnAfficher = new JButton("Afficher");
+		btnAfficher.addActionListener(ecouteur);
 		btnAfficher.setBounds(304, 68, 123, 23);
 		panel.add(btnAfficher);
 		
@@ -139,7 +144,7 @@ public class GestionStock extends JFrame {
 		panel.add(lblFond);
 		
 		JMenuBar menuBar = new JMenuBar();
-		getContentPane().add(menuBar, BorderLayout.NORTH);
+		gestionStock.getContentPane().add(menuBar, BorderLayout.NORTH);
 		
 		JMenu mnUtilisateur = new JMenu("Utilisateur");
 		menuBar.add(mnUtilisateur);
@@ -147,7 +152,34 @@ public class GestionStock extends JFrame {
 		JMenu mnAide = new JMenu("Aide");
 		menuBar.add(mnAide);
 		
-		this.pack();
-		this.setVisible(true);
+		gestionStock.pack();
+		gestionStock.setVisible(true);
 	}
+
+	public static JComboBox getcBoxNStockage() {
+		return cBoxNStockage;
+	}
+
+	public static void setcBoxNStockage(JComboBox cBoxNStockage) {
+		GestionStock.cBoxNStockage = cBoxNStockage;
+	}
+
+	public static JTable getTabProduit() {
+		return tabProduit;
+	}
+
+	public static void setTabProduit(JTable tabProduit) {
+		GestionStock.tabProduit = tabProduit;
+	}
+
+	public static JFrame getGestionStock() {
+		return gestionStock;
+	}
+
+	public static void setGestionStock(JFrame gestionStock) {
+		GestionStock.gestionStock = gestionStock;
+	}
+	
+	
+	
 }

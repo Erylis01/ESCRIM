@@ -162,7 +162,46 @@ public class Bdd {
 
 		return Configs;
 	}
+	
+	public static ArrayList<Product> RecupProduits(int nStockage, Connection conn){
+		ArrayList<Product> Produits = new ArrayList<Product>();
+		
+		Statement stmt = null;
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
 
+			e.printStackTrace();
+		}
+		
+		String sql;
+		sql = "SELECT * FROM Produits WHERE NumCaisse=" + nStockage;
+		
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String designation = rs.getString("designation");
+				Date dlu = rs.getDate("dlu");
+				String reference = rs.getString("reference");
+				int quantite = rs.getInt("quantite");
+				String dosage = rs.getString("dosage");
+				String lot = rs.getString("lot");
+				String dci = rs.getString("dci");
+				int seuil_critique = rs.getInt("seuil_critique");
+				String Classe_Therapeutique = rs.getString("Classe_Therapeutique");
+				String Caisse = rs.getString("Caisse");
+				Product p = new Product(designation,dci,dosage,dlu,quantite,lot,Classe_Therapeutique,nStockage,Caisse,"",seuil_critique,reference);
+
+				Produits.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return Produits;
+	}
+	
 	public static ArrayList<Historique> RecupHisto(Date date, Connection conn) {
 		ArrayList<Historique> Configs = new ArrayList<Historique>();
 

@@ -29,6 +29,7 @@ import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
 
+@SuppressWarnings("serial")
 public class ChoisirConfig extends JFrame {
 
 	private ConfigController controller;
