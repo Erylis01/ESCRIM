@@ -400,7 +400,7 @@ public class Bdd {
 		}
 
 		String sql;
-		sql = "INSERT INTO Produit (designation,dlu,reference,quantite,dosage,lot,dci,seuil_critique, Classe_Therapeutique,NumCaisse,Caisse,Dotation_U7) VALUES ('"
+		sql = "INSERT INTO Produits (designation,dlu,reference,quantite,dosage,lot,dci,seuil_critique, Classe_Therapeutique,NumCaisse,Caisse,Dotation_U7) VALUES ('"
 				+ designation + "','" + dlu + "','" + reference + "','" + quantite + "','" + dosage + "','" + lot
 				+ "','" + dci + "','" + seuil_critique + "','" + classe_therapeutique + "','" + NumCaisse + "','"
 				+ caisse + "','" + dotation_U7 + "')";
