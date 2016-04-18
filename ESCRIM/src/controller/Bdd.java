@@ -374,6 +374,32 @@ public class Bdd {
 		}
 
 	}
+	
+	public static void Modif_produit(String lot, String designation, Date dlu, String reference, int quantite, String dosage,
+			 String dci, int seuil_critique, String classe_therapeutique, int NumCaisse, String caisse,
+			String dotation_U7, Connection conn){
+		Statement stmt=null;
+
+		try {
+			stmt=conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String sql;
+		sql="UPDATE Produits SET designation='"+ designation +"',dlu='"+ dlu +"',reference='"+ reference +"',quantite='"+ 
+		quantite +"',dosage='"+dosage+"',dci='"+dci+"',seuil_critique='"+seuil_critique+"',Classe_Therapeutique='"+classe_therapeutique+
+		"',NumCaisse='"+NumCaisse+"',Caisse='"+caisse+"',Dotation_U7='"+dotation_U7+" WHERE Lot="+lot;
+		
+		try {
+			stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 	public static String CryptMD5(String password) {
 		MessageDigest Digest = null;
