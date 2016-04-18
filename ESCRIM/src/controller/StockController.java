@@ -23,7 +23,6 @@ public class StockController implements ActionListener {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
 			String source=((JButton) e.getSource()).getText();
 			
 			if(source.equals("Afficher")){
@@ -36,8 +35,9 @@ public class StockController implements ActionListener {
 				remp.setBorder(new LineBorder(new Color(0, 0, 0)));
 				remp.setBounds(26, 373, 529, -265);
 				GestionStock.setTabProduit(remp);
-				GestionStock.getGestionStock().revalidate();
 				GestionStock.getGestionStock().repaint();
+				GestionStock.getGestionStock().revalidate();
+				GestionStock.getGestionStock().pack();
 			}
 		}
 
