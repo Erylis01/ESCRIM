@@ -41,7 +41,6 @@ public class MenuController implements MouseListener {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			 p.affichage();
 			 vue.dispose();
 			 ModifProduit mp = new ModifProduit(p);
 		}else if(source=="lblStock"){

@@ -39,10 +39,10 @@ public class ChoisirConfig extends JFrame {
 	private JTable tableHistorique;
 	private String [] choix_config =  {"Base chaud","Base froid","Complet chaud","Complet froid"};
 
-	public ChoisirConfig(String Username) {
+	public ChoisirConfig() {
 
-		this.modele = modele;
-		controller = new ConfigController(this, modele);
+		//this.modele = modele;
+		//controller = new ConfigController(this, modele);
 
 		// Choix de la taille de la fenêtre
 		Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
@@ -84,7 +84,7 @@ public class ChoisirConfig extends JFrame {
 		lblUser.setIcon(new ImageIcon(Menu.class.getResource("/assets/utilisateur.png")));
 
 		// Ajout du label username
-		JLabel lblUsername = new JLabel(Username);
+		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setBounds(60, 11, 48, 14);
 		panel_user.add(lblUsername);
 
