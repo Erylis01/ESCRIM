@@ -76,7 +76,14 @@ public class ModifProduit extends JFrame {
 
 		// Ajout d'un voyant
 		JLabel lblvoyant = new JLabel("");
-		lblvoyant.setIcon(new ImageIcon(ModifProduit.class.getResource("/assets/voyant_vert.png")));
+		if (modele.getQuantity()<modele.getCritical_threshold()){
+			lblvoyant.setIcon(new ImageIcon(ModifProduit.class.getResource("/assets/rouget.png")));
+		}else if (modele.getQuantity()>1.5*modele.getCritical_threshold()){
+			lblvoyant.setIcon(new ImageIcon(ModifProduit.class.getResource("/assets/orange.png")));
+		}else{
+			lblvoyant.setIcon(new ImageIcon(ModifProduit.class.getResource("/assets/voyant_vert.png")));
+		}
+
 		lblvoyant.setBounds(534, 11, 50, 50);
 		panel.add(lblvoyant);
 
@@ -101,6 +108,8 @@ public class ModifProduit extends JFrame {
 		}
 		lblNom.setFont(new Font("AR ESSENCE", Font.BOLD, 30));
 		lblNom.setBounds(10, 11, 201, 39);
+		lblNom.setName("lblNom");
+		lblNom.addMouseListener(controller);
 		panel.add(lblNom);
 
 		// Ajout du label "DCI"
@@ -231,10 +240,8 @@ public class ModifProduit extends JFrame {
 		txtDotation.setColumns(10);
 
 		// Ajout du champ de texte "Lot"
-		txtLot = new JTextField();
-		if(modele.getLot()!=null){
-			txtLot.setText(modele.getLot());
-		}
+		txtLot = new JTextField(modele.getLot());
+		txtLot.setEditable(false);
 		txtLot.setBounds(409, 298, 141, 20);
 		panel.add(txtLot);
 		txtLot.setColumns(10);
