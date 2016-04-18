@@ -36,12 +36,12 @@ public class LogController implements ActionListener,MouseListener,KeyListener{
 		System.out.println(source);
 		if (source == "btnConnection") {
 			conn=Bdd.ConnectDB();
-			modele.setUsername(vue.getUsername());
 			try {
-				Boolean authenticated=Bdd.Authenticate(modele.getUsername(), vue.getPwd(), conn);
+				Boolean authenticated=Bdd.Authenticate(vue.getUsername(), vue.getPwd(), conn);
 				if (authenticated==true){
+					modele=Bdd.RecupUser(vue.getUsername(), vue.getPwd(), conn);
 					vue.dispose();
-					Menu m = new Menu(modele.getUsername());
+					Menu m = new Menu(modele);
 				}else{
 					JOptionPane.showMessageDialog(vue, "Le nom d'utilisateur ou le mot de passe ne sont pas valides");
 				}

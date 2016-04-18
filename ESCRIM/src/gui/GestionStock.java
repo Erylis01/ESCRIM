@@ -36,12 +36,12 @@ public class GestionStock extends JFrame {
 	private String [] choix_stockage = Bdd.RecupNStockage(Bdd.ConnectDB());
 	
 	public GestionStock() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(GestionStock.class.getResource("/assets/icone.png")));
-		setVisible(true);
-		setPreferredSize(new Dimension(600, 600));
-		setResizable(false);
-		setTitle("Gestion des stocks");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(GestionStock.class.getResource("/assets/icone.png")));
+		
+		this.setPreferredSize(new Dimension(600, 600));
+		this.setResizable(false);
+		this.setTitle("Gestion des stocks");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
@@ -84,7 +84,6 @@ public class GestionStock extends JFrame {
 		panel.add(lblNDeLot);
 		
 		JComboBox cBoxNLot = new JComboBox();
-		cBoxNLot.setModel(new DefaultComboBoxModel(choix_stockage));
 		cBoxNLot.setBounds(109, 403, 138, 20);
 		panel.add(cBoxNLot);
 		
@@ -96,10 +95,9 @@ public class GestionStock extends JFrame {
 		tabProduit.setBounds(26, 373, 529, -265);
 		panel.add(tabProduit);
 		
-		JComboBox cBoxNStockage = new JComboBox();
+		JComboBox cBoxNStockage = new JComboBox(choix_stockage);
 		cBoxNStockage.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		cBoxNStockage.setMaximumRowCount(60);
-		cBoxNStockage.setSelectedIndex(0);
 		cBoxNStockage.setBounds(304, 37, 123, 20);
 		panel.add(cBoxNStockage);
 		
@@ -134,5 +132,8 @@ public class GestionStock extends JFrame {
 		
 		JMenu mnAide = new JMenu("Aide");
 		menuBar.add(mnAide);
+		
+		this.pack();
+		this.setVisible(true);
 	}
 }

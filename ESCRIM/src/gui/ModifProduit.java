@@ -249,7 +249,7 @@ public class ModifProduit extends JFrame {
 		txtCaisse.setColumns(10);
 
 		// Ajout du champ de texte "Seuil Critique"
-		txtSeuil = new JTextField(modele.getCritical_threshold());
+		txtSeuil = new JTextField();
 		if (modele.getCritical_threshold()!=0){
 			txtSeuil.setText(Integer.toString(modele.getCritical_threshold()));
 		}

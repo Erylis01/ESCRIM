@@ -25,7 +25,7 @@ public class Menu extends JFrame {
 	private User u;
 	private final int LARGEUR_FENETRE = 600, HAUTEUR_FENETRE = 600;
 
-	public Menu(String Username) {
+	public Menu(User u) {
 
 		controller = new MenuController(this);
 
@@ -93,12 +93,17 @@ public class Menu extends JFrame {
 		lblUser.setIcon(new ImageIcon(Menu.class.getResource("/assets/utilisateur.png")));
 		
 		//Ajout du label username
-		JLabel lblUsername = new JLabel(Username);
+		JLabel lblUsername = new JLabel(u.getUsername());
 		lblUsername.setBounds(60, 11, 48, 14);
 		panel_user.add(lblUsername);
 		
 		// Ajout du label avec information des droits
-		JLabel lblAdmininfo = new JLabel("AdminInfo");
+		JLabel lblAdmininfo = new JLabel();
+		if (u.isAdmin()==true){
+			lblAdmininfo.setText("Administrateur");
+		}else{
+			lblAdmininfo.setText("Utilisateur");
+		}
 		lblAdmininfo.setBounds(60, 36, 49, 14);
 		panel_user.add(lblAdmininfo);
 		

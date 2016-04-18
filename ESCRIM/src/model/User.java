@@ -35,9 +35,9 @@ public class User {
 	 * @param Password
 	 * @param Username
 	 */
-	public void AddUser(String Nom, String Prenom, String Password, String Username) {
+	public void AddUser(String Nom, String Prenom, String Password, String Username,boolean admin) {
 		Connection conn = Bdd.ConnectDB();
-		Bdd.Add_User(Username, Password, Nom, Prenom, conn);
+		Bdd.Add_User(Username, Password, Nom, Prenom, admin, conn);
 	}
 
 	/*
@@ -75,5 +75,19 @@ public class User {
 
 	public void setPrenom(String prenom) {
 		Prenom = prenom;
+	}
+
+	/**
+	 * @return the admin
+	 */
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	/**
+	 * @param admin the admin to set
+	 */
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 }

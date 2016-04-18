@@ -2,6 +2,7 @@ package application;
 
 import controller.Bdd;
 import gui.ChoisirConfig;
+import gui.GestionStock;
 import gui.Log;
 import gui.Menu;
 import gui.ModifProduit;
@@ -21,6 +22,8 @@ public class Application {
 	private static void PierreTests() {
 		User u = new User();
 		Log l = new Log(u);
+		//ChoisirConfig cc= new ChoisirConfig();
+		//GestionStock gs = new GestionStock();
 	}
 
 	private static void CharlieTests() {
