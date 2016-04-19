@@ -33,6 +33,8 @@ public class MenuController implements MouseListener {
 		String source = ((JLabel) e.getSource()).getName();
 		if (source=="lblConfig"){
 			vue.dispose();
+			h=new Historique();
+			h.getList();
 			ChoisirConfig cc = new ChoisirConfig(h,u);
 			}else if(source=="lblProduit"){
 			 JOptionPane jop = new JOptionPane();

@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -168,9 +171,7 @@ public class ChoisirConfig extends JFrame {
 		panel.add(btnFiltrer);
 		
 		// Ajout du tableau d'historique	
-		Historique h =new Historique ();
-		h.getList();
-		JTable table = new JTable(h);
+		JTable table = new JTable(modele);
 		JScrollPane tableHistorique=new JScrollPane(table);
 		tableHistorique.setLocation(41, 185);
 		tableHistorique.setSize(600, 241);
@@ -216,9 +217,14 @@ public class ChoisirConfig extends JFrame {
 	 * Permet de récupérer la date rentrer par l'utilisateur
 	 * 
 	 * @return
+	 * @throws ParseException 
 	 */
-	public String getdate(){
-		return txtDate.getText();
+	public Date getdate() throws ParseException{
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+		java.util.Date  date =formatter.parse(txtDate.getText());
+		java.sql.Date sqlDate = new Date(date.getTime()); 
+		System.out.println(sqlDate);
+		return sqlDate;
 	}
 	
 	public String getPays(){

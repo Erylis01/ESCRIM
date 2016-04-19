@@ -27,7 +27,6 @@ public class ConfigController implements ActionListener,MouseListener {
 	public ConfigController(ChoisirConfig vue,Historique modele,User user){
 		this.vue=vue;	
 		this.modele=modele;
-		this.plane=plane;
 		this.user=user;
 	}
 	
@@ -37,16 +36,21 @@ public class ConfigController implements ActionListener,MouseListener {
 		String source=((JButton) e.getSource()).getName();
 		
 		if(source=="btnFiltrer"){
-			if(vue.getdate()!=""){
-				try {
-					modele.getListDate(vue.getdate());
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-			}else if(vue.getPays()!=""){
+			try {
+				if(vue.getdate()!=null){
+					try {
+						modele.getListDate(vue.getdate());
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				}else if(vue.getPays()!=""){
 
+				}
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		}else if (source=="btnChoisir"){
 			JOptionPane.showMessageDialog(vue,"L'action de ce bouton n'est pas implémentée");

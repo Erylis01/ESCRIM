@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -88,11 +89,9 @@ public class Historique extends AbstractTableModel {
 	 * @return
 	 * @throws ParseException
 	 */
-	public String[][] getListDate(String Date) throws ParseException {
-		DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-		java.sql.Date datesql = new java.sql.Date(df.parse(Date).getTime());
+	public String[][] getListDate(Date date) throws ParseException {
 		Connection conn = Bdd.ConnectDB();
-		ArrayList<Historique> liste_configs = Bdd.RecupHisto(datesql, conn);
+		ArrayList<Historique> liste_configs = Bdd.RecupHisto(date, conn);
 		configs = new String[liste_configs.size()][5];
 		for (int i = 0; i < liste_configs.size(); i++) {
 			configs[i][0] = liste_configs.get(i).getId();
