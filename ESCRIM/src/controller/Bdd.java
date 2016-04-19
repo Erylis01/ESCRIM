@@ -273,9 +273,13 @@ public class Bdd {
 		ArrayList<Plane> Avions = new ArrayList<Plane>();
 		ArrayList<Container> Containers = new ArrayList<Container>();
 		Statement stmt=null;
+		Statement stmt2=null;
+		Statement stmt3=null;
 		
 		try {
 			stmt=conn.createStatement();
+			stmt2=conn.createStatement();
+			stmt3=conn.createStatement();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -293,13 +297,13 @@ public class Bdd {
 				String type=rs.getString("type");
 				int charge_max=rs.getInt("charge_max");
 				String sql2;
-				sql2="SELECT ID_contenair FROM Contenance_avion WHERE type="+type;
-				rs2=stmt.executeQuery(sql2);
+				sql2="SELECT ID_contenair FROM Contenance_avion WHERE type='"+type+"'";
+				rs2=stmt2.executeQuery(sql2);
 				while (rs2.next()){
 					int ID_contenair=rs2.getInt("ID_contenair");
 					String sql3;
 					sql3="SELECT ID_contenair,volume,hauteur,profondeur,largeur FROM Container WHERE ID_Contenair="+ID_contenair;
-					rs3=stmt.executeQuery(sql3);
+					rs3=stmt3.executeQuery(sql3);
 					while (rs3.next()){
 						int volume=rs.getInt("volume");
 						int hauteur=rs.getInt("hauteur");
