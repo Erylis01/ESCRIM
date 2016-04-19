@@ -46,7 +46,7 @@ public class ConfigController implements ActionListener,MouseListener {
 					}
 					
 				}else if(vue.getPays()!=""){
-
+					modele.getListPays(vue.getPays());
 				}
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block

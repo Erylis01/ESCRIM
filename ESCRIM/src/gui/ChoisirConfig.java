@@ -43,18 +43,18 @@ public class ChoisirConfig extends JFrame {
 	private JTextField txtDate;
 	private JTextField txtPays;
 	private JTable tableHistorique;
-	private String [] choix_config =  {"Base chaud","Base froid","Complet chaud","Complet froid"};
+	private String[] choix_config = { "Base chaud", "Base froid", "Complet chaud", "Complet froid" };
 
-	public ChoisirConfig(Historique modele,User user) {
+	public ChoisirConfig(Historique modele, User user) {
 
 		this.modele = modele;
-		controller = new ConfigController(this, modele,user);
+		controller = new ConfigController(this, modele, user);
 
 		// Choix de la taille de la fenêtre
 		Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
-		this.setPreferredSize(new Dimension(screenSize.width*4/5, screenSize.height*4/5));
-		int windowLeftPosition = screenSize.width / 2 - screenSize.width*2/5;
-		int windowRightPostion = screenSize.height / 2 - screenSize.height*2/5;
+		this.setPreferredSize(new Dimension(screenSize.width * 4 / 5, screenSize.height * 4 / 5));
+		int windowLeftPosition = screenSize.width / 2 - screenSize.width * 2 / 5;
+		int windowRightPostion = screenSize.height / 2 - screenSize.height * 2 / 5;
 		this.setLocation(windowLeftPosition, windowRightPostion);
 
 		// Empêche la fenêtre d'être redimensionnée
@@ -91,25 +91,25 @@ public class ChoisirConfig extends JFrame {
 
 		// Ajout du label username
 		JLabel lblUsername = new JLabel(user.getUsername());
-		lblUsername.setBounds(60, 11, 48, 14);
+		lblUsername.setBounds(60, 11, 91, 14);
 		panel_user.add(lblUsername);
 
 		// Ajout du label avec information des droits
 		JLabel lblAdmininfo = new JLabel();
-		if (user.isAdmin()==true){
+		if (user.isAdmin() == true) {
 			lblAdmininfo.setText("Administrateur");
-		}else{
+		} else {
 			lblAdmininfo.setText("Utilisateur");
 		}
-		lblAdmininfo.setBounds(60, 36, 49, 14);
+		lblAdmininfo.setBounds(60, 36, 91, 14);
 		panel_user.add(lblAdmininfo);
-		
+
 		// Ajout du label "Choisir Avion"
 		JLabel lblAvion = new JLabel("Choisir Avion :");
 		lblAvion.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblAvion.setBounds(114, 45, 88, 15);
 		panel.add(lblAvion);
-		
+
 		// Ajout d'une liste de choix d'avions
 		Plane p = new Plane();
 		p.getList();
@@ -118,19 +118,19 @@ public class ChoisirConfig extends JFrame {
 		listAvion.setBackground(Color.WHITE);
 		listAvion.setBounds(212, 45, 121, 20);
 		panel.add(listAvion);
-		
+
 		// Ajout du label "Choisir Configuration"
 		JLabel lblConfiguration = new JLabel("Choisir Configuration :");
 		lblConfiguration.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblConfiguration.setBounds(64, 105, 138, 15);
 		panel.add(lblConfiguration);
-		
+
 		// Ajout d'une liste de choix de configuration
 		JComboBox listConfig = new JComboBox(choix_config);
 		listConfig.setBackground(Color.WHITE);
 		listConfig.setBounds(213, 105, 120, 20);
 		panel.add(listConfig);
-		
+
 		// Ajout du bouton Choisir
 		JButton btnChoisir = new JButton("Choisir");
 		btnChoisir.setBackground(Color.RED);
@@ -140,31 +140,31 @@ public class ChoisirConfig extends JFrame {
 		btnChoisir.setName("btnChoisir");
 		btnChoisir.addActionListener(controller);
 		panel.add(btnChoisir);
-		
+
 		// Ajout du label "Date"
 		JLabel lblDate = new JLabel("Date (yyyy-mm-dd) :");
 		lblDate.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblDate.setBounds(811, 205, 127, 15);
 		panel.add(lblDate);
-		
+
 		// Ajout d'un champ de texte pour la date
 		txtDate = new JTextField();
 		txtDate.setBounds(811, 228, 121, 20);
 		panel.add(txtDate);
 		txtDate.setColumns(10);
-		
+
 		// Ajout d'un label pour le pays
 		JLabel lblPays = new JLabel("Pays :");
 		lblPays.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblPays.setBounds(811, 301, 46, 14);
 		panel.add(lblPays);
-		
+
 		// Ajout d'un champ de texte pour le pays
 		txtPays = new JTextField();
 		txtPays.setBounds(811, 326, 121, 20);
 		panel.add(txtPays);
 		txtPays.setColumns(10);
-		
+
 		// Ajout du bouton filtrer
 		JButton btnFiltrer = new JButton("Filtrer");
 		btnFiltrer.setBackground(Color.BLUE);
@@ -174,15 +174,15 @@ public class ChoisirConfig extends JFrame {
 		btnFiltrer.setName("btnFiltrer");
 		btnFiltrer.addActionListener(controller);
 		panel.add(btnFiltrer);
-		
-		// Ajout du tableau d'historique	
+
+		// Ajout du tableau d'historique
 		JTable table = new JTable(modele);
-		JScrollPane tableHistorique=new JScrollPane(table);
+		JScrollPane tableHistorique = new JScrollPane(table);
 		tableHistorique.setLocation(41, 185);
 		tableHistorique.setSize(600, 241);
 		panel.add(tableHistorique);
-		
-		//Ajout du bouton Menu
+
+		// Ajout du bouton Menu
 		JLabel lblMenu = new JLabel("");
 		lblMenu.setIcon(new ImageIcon(ChoisirConfig.class.getResource("/assets/menu.png")));
 		lblMenu.setBounds(171, 502, 50, 50);
@@ -217,22 +217,27 @@ public class ChoisirConfig extends JFrame {
 		this.pack();
 		this.setVisible(true);
 	}
-	
+
 	/**
 	 * Permet de récupérer la date rentrer par l'utilisateur
 	 * 
 	 * @return
-	 * @throws ParseException 
+	 * @throws ParseException
 	 */
-	public Date getdate() throws ParseException{
+	public Date getdate() throws ParseException {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-		java.util.Date  date =formatter.parse(txtDate.getText());
-		java.sql.Date sqlDate = new Date(date.getTime()); 
-		System.out.println(sqlDate);
+		java.sql.Date sqlDate;
+		System.out.println(txtDate.getText());
+		if (txtDate.getText() != "") {
+			java.util.Date date = formatter.parse(txtDate.getText());
+			sqlDate = new Date(date.getTime());
+		} else {
+			sqlDate = null;
+		}
 		return sqlDate;
 	}
-	
-	public String getPays(){
+
+	public String getPays() {
 		return txtPays.getText();
 	}
 }
