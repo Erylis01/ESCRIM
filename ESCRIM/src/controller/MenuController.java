@@ -8,9 +8,10 @@ import java.sql.SQLException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-
+import gui.ChoisirConfig;
 import gui.Menu;
 import gui.ModifProduit;
+import model.Historique;
 import model.Product;
 import model.User;
 
@@ -20,6 +21,7 @@ public class MenuController implements MouseListener {
 	private Connection conn;
 	private Product p;
 	private User u;
+	private Historique h;
 
 	public MenuController(Menu vue,User info) {
 		this.vue = vue;
@@ -30,9 +32,9 @@ public class MenuController implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		String source = ((JLabel) e.getSource()).getName();
 		if (source=="lblConfig"){
-			
-			
-		}else if(source=="lblProduit"){
+			vue.dispose();
+			ChoisirConfig cc = new ChoisirConfig(h,u);
+			}else if(source=="lblProduit"){
 			 JOptionPane jop = new JOptionPane();
 			 String Lot = JOptionPane.showInputDialog(null, "N° de lot", JOptionPane.QUESTION_MESSAGE);
 			 conn=Bdd.ConnectDB();

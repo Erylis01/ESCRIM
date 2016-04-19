@@ -21,6 +21,8 @@ import controller.ConfigController;
 import controller.LogController;
 import model.Config;
 import model.Historique;
+import model.Plane;
+import model.User;
 
 import javax.swing.JTextField;
 import java.awt.Font;
@@ -40,10 +42,10 @@ public class ChoisirConfig extends JFrame {
 	private JTable tableHistorique;
 	private String [] choix_config =  {"Base chaud","Base froid","Complet chaud","Complet froid"};
 
-	public ChoisirConfig() {
+	public ChoisirConfig(Historique modele,User user) {
 
-		//this.modele = modele;
-		//controller = new ConfigController(this, modele);
+		this.modele = modele;
+		controller = new ConfigController(this, modele,user);
 
 		// Choix de la taille de la fenêtre
 		Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
@@ -101,7 +103,10 @@ public class ChoisirConfig extends JFrame {
 		panel.add(lblAvion);
 		
 		// Ajout d'une liste de choix d'avions
-		JComboBox listAvion = new JComboBox();
+		Plane p = new Plane();
+		p.getList();
+		p.affichage();
+		JComboBox listAvion = new JComboBox(p.getListType());
 		listAvion.setBackground(Color.WHITE);
 		listAvion.setBounds(212, 45, 121, 20);
 		panel.add(listAvion);
@@ -129,9 +134,9 @@ public class ChoisirConfig extends JFrame {
 		panel.add(btnChoisir);
 		
 		// Ajout du label "Date"
-		JLabel lblDate = new JLabel("Date : (dd-MMM-yyyy)");
+		JLabel lblDate = new JLabel("Date (yyyy-mm-dd) :");
 		lblDate.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDate.setBounds(811, 205, 37, 15);
+		lblDate.setBounds(811, 205, 127, 15);
 		panel.add(lblDate);
 		
 		// Ajout d'un champ de texte pour la date
@@ -170,6 +175,14 @@ public class ChoisirConfig extends JFrame {
 		tableHistorique.setLocation(41, 185);
 		tableHistorique.setSize(600, 241);
 		panel.add(tableHistorique);
+		
+		//Ajout du bouton Menu
+		JLabel lblMenu = new JLabel("");
+		lblMenu.setIcon(new ImageIcon(ChoisirConfig.class.getResource("/assets/menu.png")));
+		lblMenu.setBounds(171, 502, 50, 50);
+		lblMenu.setName("lblMenu");
+		lblMenu.addMouseListener(controller);
+		panel.add(lblMenu);
 
 		// Ajout du fond
 		JLabel lblFond = new JLabel("");
