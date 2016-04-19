@@ -20,10 +20,10 @@ public class Application {
 	}
 
 	private static void PierreTests() {
-		//User u = new User();
-		//Log l = new Log(u);
+		User u = new User();
+		Log l = new Log(u);
 		//ChoisirConfig cc= new ChoisirConfig();
-		GestionStock gs = new GestionStock();
+
 	}
 
 	private static void CharlieTests() {
