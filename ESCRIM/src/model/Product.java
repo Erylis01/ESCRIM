@@ -12,7 +12,7 @@ import javax.swing.table.AbstractTableModel;
 
 import controller.Bdd;
 
-public class Product extends AbstractTableModel {
+public class Product{
 
 	private Date DLU=null;
 	private int quantity=0, critical_threshold=0,Ncaisse=0;
@@ -247,23 +247,5 @@ public class Product extends AbstractTableModel {
 	
 	public void affichage(){
 		System.out.println(name+" "+DCI+" "+dosage+" "+DLU+" "+quantity+" "+lot+" "+classe+" "+Ncaisse+" "+caisse+" "+dotation);
-	}
-
-	@Override
-	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

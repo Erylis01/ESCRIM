@@ -27,8 +27,8 @@ public class StockController implements ActionListener {
 			
 			if(source.equals("Afficher")){
 				Product p =new Product();
-				p.getList(Integer.parseInt(GestionStock.getcBoxNStockage().getSelectedItem().toString()));
-				JTable remp = new JTable(p);
+				String[][] pTab = p.getList(Integer.parseInt(GestionStock.getcBoxNStockage().getSelectedItem().toString()));
+				JTable remp = new JTable(pTab,new String[]{"Nom","Quantité","DLU"});
 				remp.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				remp.setToolTipText("");
 				remp.setFont(new Font("Tahoma", Font.PLAIN, 12));

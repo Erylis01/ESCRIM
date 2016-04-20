@@ -8,6 +8,7 @@ import javax.swing.JTextPane;
 import javax.swing.JMenu;
 import javax.swing.JSeparator;
 import javax.swing.border.LineBorder;
+import javax.swing.table.TableModel;
 
 import controller.Bdd;
 import controller.StockController;
@@ -31,6 +32,11 @@ import javax.swing.ListSelectionModel;
 import java.awt.TextField;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import java.awt.Point;
+import java.awt.Rectangle;
+import javax.swing.JScrollPane;
+import java.awt.Component;
+import javax.swing.table.DefaultTableModel;
 
 public class GestionStock extends JFrame {
 	
@@ -38,7 +44,7 @@ public class GestionStock extends JFrame {
 	private String [] choix_lot = Bdd.RecupNLot(Bdd.ConnectDB());
 	private StockController ecouteur = new StockController();
 	private static JComboBox cBoxNStockage = new JComboBox(choix_stockage);
-	private static JTable tabProduit = new JTable();
+	private static JTable tabProduit = new JTable(new String[][]{{"-","-","-"}},new String[]{"Nom","Quantité","DLU"});
 	private static JFrame gestionStock = new JFrame("Gestion Stock");
 	
 	public GestionStock() {
@@ -72,36 +78,55 @@ public class GestionStock extends JFrame {
 		JLabel label_2 = new JLabel("AdminInfo");
 		label_2.setBounds(60, 36, 49, 14);
 		panel_user.add(label_2);
+		tabProduit.setSize(new Dimension(230, 250));
+		tabProduit.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"-", "-", "-"},
+			},
+			new String[] {
+				"Nom", "Quantit\u00E9", "DLU"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, Object.class, Object.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		tabProduit.getColumnModel().getColumn(0).setMinWidth(75);
+		tabProduit.getColumnModel().getColumn(1).setResizable(false);
+		tabProduit.getColumnModel().getColumn(1).setMinWidth(75);
+		tabProduit.getColumnModel().getColumn(2).setMinWidth(75);
+		tabProduit.setMinimumSize(new Dimension(0, 0));
+		tabProduit.setMaximumSize(new Dimension(0, 0));
+		tabProduit.setPreferredSize(new Dimension(230, 250));
+		tabProduit.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabProduit.setToolTipText("");
+		tabProduit.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		tabProduit.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		tabProduit.setBounds(24, 375, 546, -269);
+		tabProduit.repaint();
+		
+		JScrollPane scrollTab = new JScrollPane(tabProduit);
+		scrollTab.setBounds(24, 398, 546, -297);
+		panel.add(scrollTab);
 		
 		JButton btnAdd = new JButton("Ajouter");
 		btnAdd.setBounds(108, 459, 139, 23);
 		panel.add(btnAdd);
 		
-		JLabel lblQuantit = new JLabel("Quantit\u00E9 :");
-		lblQuantit.setHorizontalAlignment(SwingConstants.CENTER);
-		lblQuantit.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblQuantit.setBounds(26, 430, 77, 14);
-		panel.add(lblQuantit);
-		
 		JLabel lblNDeLot = new JLabel("N\u00B0 de lot :");
 		lblNDeLot.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNDeLot.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNDeLot.setBounds(26, 405, 77, 14);
+		lblNDeLot.setBounds(26, 431, 77, 14);
 		panel.add(lblNDeLot);
 		
 		JComboBox cBoxNLot = new JComboBox(choix_lot);
 		cBoxNLot.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		cBoxNLot.setMaximumRowCount(60);
-		cBoxNLot.setBounds(109, 403, 138, 20);
+		cBoxNLot.setBounds(108, 428, 138, 20);
 		panel.add(cBoxNLot);
-		
-		//Passé en variable pour l'écouteur
-		tabProduit.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tabProduit.setToolTipText("");
-		tabProduit.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		tabProduit.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tabProduit.setBounds(26, 373, 529, -265);
-		panel.add(tabProduit);
 		
 		//ComboBox passé en variable pour l'écouteur
 		cBoxNStockage.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -114,10 +139,6 @@ public class GestionStock extends JFrame {
 		lblNDeStockage.setBounds(171, 40, 106, 14);
 		panel.add(lblNDeStockage);
 		lblNDeStockage.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		TextField quantiteAAjouter = new TextField();
-		quantiteAAjouter.setBounds(109, 428, 138, 22);
-		panel.add(quantiteAAjouter);
 	
 		JButton btnAfficher = new JButton("Afficher");
 		btnAfficher.addActionListener(ecouteur);
@@ -179,7 +200,4 @@ public class GestionStock extends JFrame {
 	public static void setGestionStock(JFrame gestionStock) {
 		GestionStock.gestionStock = gestionStock;
 	}
-	
-	
-	
 }
