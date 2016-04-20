@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JTextPane;
 import javax.swing.JMenu;
 import javax.swing.JSeparator;
@@ -11,7 +12,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.TableModel;
 
 import controller.Bdd;
+import controller.ConfigController;
 import controller.StockController;
+import model.User;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -41,14 +44,19 @@ import javax.swing.table.DefaultTableModel;
 public class GestionStock extends JFrame {
 	
 	private static String [] choix_stockage = Bdd.RecupNStockage(Bdd.ConnectDB());
-	private String [] choix_lot = Bdd.RecupNLot(Bdd.ConnectDB());
-	private StockController ecouteur = new StockController();
+	private static String [] choix_lot = Bdd.RecupNLot(Bdd.ConnectDB());
+	
 	private static JComboBox cBoxNStockage = new JComboBox(choix_stockage);
 	private static JTable tabProduit = new JTable(new String[][]{{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""}},new String[]{"Nom","Quantité","DLU","Lot"});
 	private static JFrame gestionStock = new JFrame("Gestion Stock");
 	private static JScrollPane scrollTab = new JScrollPane(tabProduit);
+	private static JComboBox cBoxNLot = new JComboBox(choix_lot);
+	private static TextField nLotASupprimer = new TextField();
 	
-	public GestionStock() {
+	public GestionStock(User user) {
+		
+		StockController ecouteur = new StockController(this, user);
+		
 		gestionStock.setIconImage(Toolkit.getDefaultToolkit().getImage(GestionStock.class.getResource("/assets/icone.png")));
 		
 		gestionStock.setPreferredSize(new Dimension(600, 600));
@@ -112,7 +120,7 @@ public class GestionStock extends JFrame {
 		lblNDeLot.setBounds(26, 431, 77, 14);
 		panel.add(lblNDeLot);
 		
-		JComboBox cBoxNLot = new JComboBox(choix_lot);
+		//ComboVBox passé en variable pour l'écouteur
 		cBoxNLot.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		cBoxNLot.setMaximumRowCount(60);
 		cBoxNLot.setBounds(108, 428, 138, 20);
@@ -145,9 +153,18 @@ public class GestionStock extends JFrame {
 		labelNDeLot2.setBounds(304, 431, 77, 14);
 		panel.add(labelNDeLot2);
 		
-		TextField nLotASupprimer = new TextField();
+		//TextField passé en variable pour écouteur
 		nLotASupprimer.setBounds(390, 430, 121, 22);
 		panel.add(nLotASupprimer);
+		
+		
+		// Ajout du bouton Menu
+		JLabel lblMenu = new JLabel("");
+		lblMenu.setIcon(new ImageIcon(ChoisirConfig.class.getResource("/assets/menu.png")));
+		lblMenu.setBounds(171, 502, 50, 50);
+		lblMenu.setName("lblMenu");
+		//lblMenu.addMouseListener(controller);
+		panel.add(lblMenu);
 		
 		JLabel lblFond = new JLabel("New label");
 		lblFond.setIcon(new ImageIcon(GestionStock.class.getResource("/assets/fond_logpan.jpg")));
@@ -159,9 +176,16 @@ public class GestionStock extends JFrame {
 		
 		JMenu mnUtilisateur = new JMenu("Utilisateur");
 		menuBar.add(mnUtilisateur);
+		JMenuItem mntmInscription = new JMenuItem("Inscription");
+		mnUtilisateur.add(mntmInscription);
+
 		
 		JMenu mnAide = new JMenu("Aide");
 		menuBar.add(mnAide);
+		JMenuItem mntmGuide = new JMenuItem("Guide");
+		mnAide.add(mntmGuide);
+		JMenuItem mntmAPropos = new JMenuItem("A propos");
+		mnAide.add(mntmAPropos);
 		
 		gestionStock.pack();
 		gestionStock.setVisible(true);
@@ -197,6 +221,22 @@ public class GestionStock extends JFrame {
 
 	public static void setScrollTab(JScrollPane scrollTab) {
 		GestionStock.scrollTab = scrollTab;
+	}
+
+	public static JComboBox getcBoxNLot() {
+		return cBoxNLot;
+	}
+
+	public static void setcBoxNLot(JComboBox cBoxNLot) {
+		GestionStock.cBoxNLot = cBoxNLot;
+	}
+
+	public static TextField getnLotASupprimer() {
+		return nLotASupprimer;
+	}
+
+	public static void setnLotASupprimer(TextField nLotASupprimer) {
+		GestionStock.nLotASupprimer = nLotASupprimer;
 	}
 	
 	

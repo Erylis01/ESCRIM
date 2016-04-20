@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import gui.ChoisirConfig;
+import gui.GestionStock;
 import gui.Menu;
 import gui.ModifProduit;
 import model.Historique;
@@ -50,7 +51,8 @@ public class MenuController implements MouseListener {
 			 u.affichage();
 			 ModifProduit mp = new ModifProduit(p,u);
 		}else if(source=="lblStock"){
-			
+			vue.dispose();
+			GestionStock gs = new GestionStock(u);
 		}
 	}
 

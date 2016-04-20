@@ -4,22 +4,34 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.text.ParseException;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableModel;
 
+import gui.ChoisirConfig;
 import gui.GestionStock;
+import gui.Menu;
+import model.Historique;
 import model.Product;
+import model.User;
 
-public class StockController implements ActionListener {
+public class StockController implements ActionListener, MouseListener {
 
-
-
+		private GestionStock vue;
+		private User user;
+		
+		public StockController(GestionStock vue,User user){
+			this.vue=vue;	
+			this.user=user;
+		}
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -50,11 +62,61 @@ public class StockController implements ActionListener {
 			}
 			
 			if(source.equals("Ajouter")){
-				
+				String lot = GestionStock.getcBoxNLot().getSelectedItem().toString();
+				int caisse = Integer.parseInt(GestionStock.getcBoxNStockage().getSelectedItem().toString());
+				Bdd.deplacerProduit(lot, caisse);	
+			}
+			
+			if(source.equals("Supprimer")){
+				String lot = GestionStock.getnLotASupprimer().getText().toString();
+				Bdd.deplacerProduit(lot, 0);
 			}
 		}
+		
+	
 
-	}
+		public void mouseClicked(MouseEvent e) {
+				String source = ((JLabel)e.getSource()).getName();
+				if (source=="lblMenu"){
+					Menu m = new Menu(user);
+					vue.dispose();
+				}
+	
+			}
+
+
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+}
 
 	
 
