@@ -44,8 +44,9 @@ public class GestionStock extends JFrame {
 	private String [] choix_lot = Bdd.RecupNLot(Bdd.ConnectDB());
 	private StockController ecouteur = new StockController();
 	private static JComboBox cBoxNStockage = new JComboBox(choix_stockage);
-	private static JTable tabProduit = new JTable(new String[][]{{"-","-","-"}},new String[]{"Nom","Quantité","DLU"});
+	private static JTable tabProduit = new JTable(new String[][]{{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""}},new String[]{"Nom","Quantité","DLU","Lot"});
 	private static JFrame gestionStock = new JFrame("Gestion Stock");
+	private static JScrollPane scrollTab = new JScrollPane(tabProduit);
 	
 	public GestionStock() {
 		gestionStock.setIconImage(Toolkit.getDefaultToolkit().getImage(GestionStock.class.getResource("/assets/icone.png")));
@@ -78,38 +79,27 @@ public class GestionStock extends JFrame {
 		JLabel label_2 = new JLabel("AdminInfo");
 		label_2.setBounds(60, 36, 49, 14);
 		panel_user.add(label_2);
-		tabProduit.setSize(new Dimension(230, 250));
-		tabProduit.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"-", "-", "-"},
-			},
-			new String[] {
-				"Nom", "Quantit\u00E9", "DLU"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, Object.class, Object.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		tabProduit.getColumnModel().getColumn(0).setMinWidth(75);
-		tabProduit.getColumnModel().getColumn(1).setResizable(false);
-		tabProduit.getColumnModel().getColumn(1).setMinWidth(75);
-		tabProduit.getColumnModel().getColumn(2).setMinWidth(75);
-		tabProduit.setMinimumSize(new Dimension(0, 0));
-		tabProduit.setMaximumSize(new Dimension(0, 0));
-		tabProduit.setPreferredSize(new Dimension(230, 250));
-		tabProduit.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tabProduit.setToolTipText("");
-		tabProduit.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		tabProduit.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		tabProduit.setBounds(24, 375, 546, -269);
-		tabProduit.repaint();
 		
-		JScrollPane scrollTab = new JScrollPane(tabProduit);
-		scrollTab.setBounds(24, 398, 546, -297);
+//		tabProduit.setModel(new DefaultTableModel(
+//			new Object[][] {
+//				{"-", "-", "-"},
+//			},
+//			new String[] {
+//				"Nom", "Quantit\u00E9", "DLU"
+//			}
+//		) {
+//			Class[] columnTypes = new Class[] {
+//				String.class, Object.class, Object.class
+//			};
+//			public Class getColumnClass(int columnIndex) {
+//				return columnTypes[columnIndex];
+//			}
+//		});
+		
+		tabProduit.setLocation(41,185);
+		
+		scrollTab.setSize(511, 297);
+		scrollTab.setLocation(41,120);
 		panel.add(scrollTab);
 		
 		JButton btnAdd = new JButton("Ajouter");
@@ -200,4 +190,14 @@ public class GestionStock extends JFrame {
 	public static void setGestionStock(JFrame gestionStock) {
 		GestionStock.gestionStock = gestionStock;
 	}
+
+	public static JScrollPane getScrollTab() {
+		return scrollTab;
+	}
+
+	public static void setScrollTab(JScrollPane scrollTab) {
+		GestionStock.scrollTab = scrollTab;
+	}
+	
+	
 }

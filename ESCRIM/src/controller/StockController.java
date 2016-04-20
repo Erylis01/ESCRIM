@@ -28,16 +28,29 @@ public class StockController implements ActionListener {
 			if(source.equals("Afficher")){
 				Product p =new Product();
 				String[][] pTab = p.getList(Integer.parseInt(GestionStock.getcBoxNStockage().getSelectedItem().toString()));
-				JTable remp = new JTable(pTab,new String[]{"Nom","Quantité","DLU"});
-				remp.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				remp.setToolTipText("");
-				remp.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				remp.setBorder(new LineBorder(new Color(0, 0, 0)));
-				remp.setBounds(26, 373, 529, -265);
-				GestionStock.setTabProduit(remp);
-				GestionStock.getGestionStock().repaint();
-				GestionStock.getGestionStock().revalidate();
-				GestionStock.getGestionStock().pack();
+				//JTable remp = new JTable(pTab,new String[]{"Nom","Quantité","DLU"});
+				//remp.setLocation(41,185);
+				//GestionStock.getScrollTab().remove(0);
+				//GestionStock.getScrollTab().add(remp);
+				for(int i = 0;i<GestionStock.getTabProduit().getRowCount()-1;i++){
+					GestionStock.getTabProduit().getModel().setValueAt("", i, 0);
+					GestionStock.getTabProduit().getModel().setValueAt("", i, 1);
+					GestionStock.getTabProduit().getModel().setValueAt("", i, 2);
+					GestionStock.getTabProduit().getModel().setValueAt("", i, 3);
+				}
+				for(int i =0;i<pTab.length;i++){
+					GestionStock.getTabProduit().getModel().setValueAt(pTab[i][0], i, 0);
+					GestionStock.getTabProduit().getModel().setValueAt(pTab[i][1], i, 1);
+					GestionStock.getTabProduit().getModel().setValueAt(pTab[i][2], i, 2);
+					GestionStock.getTabProduit().getModel().setValueAt(pTab[i][3], i, 3);
+				}
+				GestionStock.getGestionStock().getContentPane().repaint();
+				GestionStock.getGestionStock().getContentPane().revalidate();
+				
+			}
+			
+			if(source.equals("Ajouter")){
+				
 			}
 		}
 

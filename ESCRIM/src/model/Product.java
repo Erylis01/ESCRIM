@@ -58,11 +58,12 @@ public class Product{
 	public String[][] getList(int nStockage) {
 		Connection conn = Bdd.ConnectDB();
 		ArrayList<Product> liste_Produits = Bdd.RecupProduits(nStockage,conn);
-		Produits = new String[liste_Produits.size()][3];
+		Produits = new String[liste_Produits.size()][4];
 		for (int i = 0; i < liste_Produits.size(); i++) {
 			Produits[i][0] = liste_Produits.get(i).getName();
 			Produits[i][1] = ""+liste_Produits.get(i).getQuantity();
 			Produits[i][2] = ""+liste_Produits.get(i).getDLU();
+			Produits[i][3] = ""+liste_Produits.get(i).getLot();
 		}
 		return Produits;
 	}

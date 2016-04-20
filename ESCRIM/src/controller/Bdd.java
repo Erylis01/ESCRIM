@@ -202,6 +202,8 @@ public class Bdd {
 		return Produits;
 	}
 	
+	
+	
 	public static ArrayList<Historique> RecupHisto(Date date, Connection conn) {
 		ArrayList<Historique> Configs = new ArrayList<Historique>();
 
