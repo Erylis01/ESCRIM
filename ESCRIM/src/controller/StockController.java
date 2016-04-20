@@ -74,9 +74,11 @@ public class StockController implements ActionListener, MouseListener {
 		}
 		
 	
-
+		@Override
 		public void mouseClicked(MouseEvent e) {
-				String source = ((JLabel)e.getSource()).getName();
+				
+				String source = ((JLabel)e.getSource()).getName().toString();
+				System.out.println(source);
 				if (source=="lblMenu"){
 					Menu m = new Menu(user);
 					vue.dispose();

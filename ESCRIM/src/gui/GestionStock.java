@@ -27,6 +27,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JList;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 import javax.swing.AbstractListModel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -45,7 +46,6 @@ public class GestionStock extends JFrame {
 	
 	private static String [] choix_stockage = Bdd.RecupNStockage(Bdd.ConnectDB());
 	private static String [] choix_lot = Bdd.RecupNLot(Bdd.ConnectDB());
-	
 	private static JComboBox cBoxNStockage = new JComboBox(choix_stockage);
 	private static JTable tabProduit = new JTable(new String[][]{{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""}},new String[]{"Nom","Quantité","DLU","Lot"});
 	private static JFrame gestionStock = new JFrame("Gestion Stock");
@@ -62,7 +62,7 @@ public class GestionStock extends JFrame {
 		gestionStock.setPreferredSize(new Dimension(600, 600));
 		gestionStock.setResizable(false);
 		gestionStock.setTitle("Gestion des stocks");
-		gestionStock.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		gestionStock.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		gestionStock.getContentPane().add(panel, BorderLayout.CENTER);
@@ -163,7 +163,7 @@ public class GestionStock extends JFrame {
 		lblMenu.setIcon(new ImageIcon(ChoisirConfig.class.getResource("/assets/menu.png")));
 		lblMenu.setBounds(171, 502, 50, 50);
 		lblMenu.setName("lblMenu");
-		//lblMenu.addMouseListener(controller);
+		lblMenu.addMouseListener(ecouteur);
 		panel.add(lblMenu);
 		
 		JLabel lblFond = new JLabel("New label");
