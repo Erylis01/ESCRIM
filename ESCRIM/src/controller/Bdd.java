@@ -500,6 +500,26 @@ public class Bdd {
 		
 	}
 
+  public static void deplacerProduit(String lot, int NewNumCaisse, Connection conn){
+	  Statement stmt=null;
+	  try {
+			stmt=conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String sql;
+		sql="UPDATE Produits SET NumCaisse='"+NewNumCaisse+"'";
+		
+		try {
+			stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+  }	
+	
 	public static String CryptMD5(String password) {
 		MessageDigest Digest = null;
 
