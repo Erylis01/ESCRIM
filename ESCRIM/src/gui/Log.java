@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -16,12 +15,21 @@ import javax.swing.WindowConstants;
 
 import controller.LogController;
 import model.User;
-
+	
+/**
+ * Classe implémentant la fenêtre de login
+ * @author William
+ *
+ */
 public class Log extends JFrame {
 
+	/**
+	 * Attributs de la classe
+	 */
+	private static final long serialVersionUID = 1L;
 	private LogController controller;
+	@SuppressWarnings("unused")
 	private User modele;
-
 	private final int LARGEUR_FENETRE = 600, HAUTEUR_FENETRE = 600;
 	private JPanel panel;
 	private JPasswordField pwd;
@@ -104,9 +112,9 @@ public class Log extends JFrame {
 
 	/**
 	 * Permet de récupérer le contenu du champ mdp
-	 * 
-	 * @return Mot de passe
+	 * @return pass - String
 	 */
+	@SuppressWarnings("deprecation")
 	public String getPwd() {
 		String pass = pwd.getText();
 		return pass;
@@ -114,8 +122,7 @@ public class Log extends JFrame {
 
 	/**
 	 * Permet de récupérer le contenu du champ username
-	 * 
-	 * @return Username
+	 * @return user - String
 	 */
 	public String getUsername() {
 		String user = txtUsername.getText();
@@ -139,8 +146,7 @@ public class Log extends JFrame {
 
 	/**
 	 * Permet de rajouter le focus à un composant
-	 * 
-	 * @param nameitem
+	 * @param nameitem - String
 	 */
 	public void addfocus(String nameitem) {
 		

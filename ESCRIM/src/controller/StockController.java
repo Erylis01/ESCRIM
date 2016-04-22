@@ -37,6 +37,7 @@ public class StockController implements ActionListener, MouseListener {
 		
 		/**
 		 * Méthode de contrôle des boutons, filtrage sur l'origine de l'action
+		 * @param e - ActionEvent
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -79,6 +80,7 @@ public class StockController implements ActionListener, MouseListener {
 		
 		/**
 		 * Implémente l'action à la souris - Retour au menu par clique sur l'icône
+		 * @param e - MouseEvent
 		 */
 		@Override
 		public void mouseClicked(MouseEvent e) {

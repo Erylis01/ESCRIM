@@ -16,18 +16,36 @@ import gui.ModifProduit;
 import model.Product;
 import model.User;
 
+/**
+ * Contoleur dédié à la fenêtre de gestion de produit
+ * @author William
+ *
+ */
 public class ProduitController implements ActionListener,MouseListener{
-
+	
+	/**
+	 * Attributs de la classe
+	 */
 	private ModifProduit vue;
 	private Product modele;
 	private Connection conn;
 	private User u;
 	
+	/**
+	 * Constructeur de la classe 
+	 * @param vue - ModifProduit
+	 * @param modele - Product
+	 * @param info - User
+	 */
 	public ProduitController(ModifProduit vue,Product modele,User info){
 		this.vue=vue;
 		this.modele=modele;
 		this.u=info;
 	}
+	/**
+	 * Ecouteur des boutons de la fenêtre, permet les actions en référence
+	 * @param e - ActionEvent
+	 */
 	@SuppressWarnings("unused")
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -57,6 +75,10 @@ public class ProduitController implements ActionListener,MouseListener{
 		}
 		
 	}
+	/**
+	 * Ecouteur de la souris, permet la modification du nom de produti par clic sur ce dernier
+	 * @param e - MouseEvent
+	 */
 	@SuppressWarnings("unused")
 	@Override
 	public void mouseClicked(MouseEvent e) {

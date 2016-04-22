@@ -19,13 +19,25 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Font;
 
-
+/**
+ * Classe implémentant la fenêtre du menu principal
+ * @author William
+ *
+ */
 public class Menu extends JFrame {
 
+	/**
+	 * Attributs de la classe
+	 */
+	private static final long serialVersionUID = 1L;
 	private MenuController controller;
 	private User modele;
 	private final int LARGEUR_FENETRE = 600, HAUTEUR_FENETRE = 600;
-
+	
+	/**
+	 * Méthode de construction de la fenêtre
+	 * @param u - User
+	 */
 	public Menu(User u) {
 		
 		this.modele=u;

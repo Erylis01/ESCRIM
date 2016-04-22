@@ -2,13 +2,11 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,8 +19,6 @@ import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 
 import controller.ConfigController;
-import controller.LogController;
-import model.Config;
 import model.Historique;
 import model.Plane;
 import model.User;
@@ -30,21 +26,36 @@ import model.User;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
 
-@SuppressWarnings("serial")
+/**
+ * Classe d'implémentation de la fenêtre de choix de configuration
+ * @author William
+ *
+ */
 public class ChoisirConfig extends JFrame {
 
+	/**
+	 * Attributs de la classe
+	 */
+	private static final long serialVersionUID = 1L;
 	private ConfigController controller;
+	@SuppressWarnings("unused")
 	private Historique modele;
 	private JPanel panel;
 	private JTextField txtDate;
 	private JTextField txtPays;
+	@SuppressWarnings("unused")
 	private JTable tableHistorique;
 	private String[] choix_config = { "Base chaud", "Base froid", "Complet chaud", "Complet froid" };
-
+	
+	/**
+	 * Méthode principal construisant la fenêtre 
+	 * @param modele - Historique
+	 * @param user - User
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ChoisirConfig(Historique modele, User user) {
 
 		this.modele = modele;
@@ -220,8 +231,7 @@ public class ChoisirConfig extends JFrame {
 
 	/**
 	 * Permet de récupérer la date rentrer par l'utilisateur
-	 * 
-	 * @return
+	 * @return sqlDate - Date
 	 * @throws ParseException
 	 */
 	public Date getdate() throws ParseException {
@@ -236,7 +246,11 @@ public class ChoisirConfig extends JFrame {
 		}
 		return sqlDate;
 	}
-
+	
+	/**
+	 * Getters du text contenant le pays
+	 * @return txtPays - String
+	 */
 	public String getPays() {
 		return txtPays.getText();
 	}

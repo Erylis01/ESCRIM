@@ -27,11 +27,20 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+/**
+ * Classe implémentant la fenêtre de gestion de produit
+ * @author William
+ *
+ */
 public class ModifProduit extends JFrame {
 
+	/**
+	 * Attributs de la classe
+	 */
+	private static final long serialVersionUID = 1L;
 	private ProduitController controller;
+	@SuppressWarnings("unused")
 	private Product modele;
-
 	private JPanel panel;
 	private final int LARGEUR_FENETRE = 600, HAUTEUR_FENETRE = 600;
 	private JTextField txtQuant;
@@ -46,7 +55,11 @@ public class ModifProduit extends JFrame {
 	private JTextField txtSeuil;
 	private JTextField txtRef;
 	private JLabel lblNom;
-
+	
+	/**
+	 * Méthode de création de la fenêtre 
+	 * @param u - User
+	 */
 	public ModifProduit(Product modele,User u) {
 
 		this.modele = modele;
@@ -350,19 +363,36 @@ public class ModifProduit extends JFrame {
 		this.pack();
 		this.setVisible(true);
 	}
-
+	
+	/**
+	 * Permet de récupérer la quantité
+	 * @return quantite - int
+	 */
 	public int getquant() {
 		return Integer.parseInt(txtQuant.getText());
 	}
-
+	
+	/**
+	 * Permet de récupérer le seuil
+	 * @return seuil - int
+	 */
 	public int getSeuil() {
 		return Integer.parseInt(txtSeuil.getText());
 	}
-
+	
+	/**
+	 * Permet de récupérer la DCI
+	 * @return txtDCI - String
+	 */
 	public String getDCI() {
 		return txtDCI.getText();
 	}
 
+	/**
+	 * Permet de récupérer la DLU
+	 * @return dlu - Date
+	 * @throws ParseException
+	 */
 	public Date getDLU() throws ParseException {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
 		java.util.Date  date =formatter.parse(txtDLU.getText());
@@ -372,37 +402,74 @@ public class ModifProduit extends JFrame {
 
 	}
 
+	/**
+	 * Permet de récupérer la caisse
+	 * @return txtCaisse - String
+	 */
 	public String getCaisse() {
 		return txtCaisse.getText();
 	}
 
+	/**
+	 * Permet de récupérer le numéro de la caisse
+	 * @return nCaisse - int
+	 */
 	public int getNcaisse() {
 		return Integer.parseInt(txtNcaisse.getText());
 	}
-
+	
+	/**
+	 * Permet de récupérer le dosage
+	 * @return txtDosage - String
+	 */
 	public String getDosage() {
 		return txtDosage.getText();
 	}
 
+	/**
+	 * Permet de récupérer la dotation
+	 * @return txtDotation - String
+	 */
 	public String getDotation() {
 		return txtDotation.getText();
 	}
 
+	/**
+	 * Permet de récupérer le lot
+	 * @return txtLot - String
+	 */
 	public String getLot() {
 		return txtLot.getText();
 	}
 
+	/**
+	 * Permet de récupérer la classe thérapeutique
+	 * @return txtClasse - String
+	 */
 	public String getClasse() {
 		return txtClasse.getText();
 	}
 	
+	/**
+	 * Permet de récupérer la référence
+	 * @return txtRef - String
+	 */
 	public String getref(){
 		return txtRef.getText();
 	}
 	
+	/**
+	 * Permet de récupérer le nom
+	 * @return txtNom - String
+	 */
 	public String getNom(){
 		return lblNom.getText();
 	}
+	
+	/**
+	 * Permet de modifier le nom
+	 * @param nom - String
+	 */
 	public void setName(String nom){
 		lblNom.setText(nom);
 	}
