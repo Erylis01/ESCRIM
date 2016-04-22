@@ -81,7 +81,7 @@ public class StockController implements ActionListener, MouseListener {
 				System.out.println(source);
 				if (source=="lblMenu"){
 					Menu m = new Menu(user);
-					vue.dispose();
+					GestionStock.getGestionStock().dispose();
 				}
 	
 			}
