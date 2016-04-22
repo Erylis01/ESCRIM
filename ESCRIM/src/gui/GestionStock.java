@@ -111,6 +111,7 @@ public class GestionStock extends JFrame {
 		panel.add(scrollTab);
 		
 		JButton btnAdd = new JButton("Ajouter");
+		btnAdd.addActionListener(ecouteur);
 		btnAdd.setBounds(108, 459, 139, 23);
 		panel.add(btnAdd);
 		
@@ -144,6 +145,7 @@ public class GestionStock extends JFrame {
 		panel.add(btnAfficher);
 		
 		JButton delSelect = new JButton("Supprimer");
+		delSelect.addActionListener(ecouteur);
 		delSelect.setBounds(388, 459, 123, 23);
 		panel.add(delSelect);
 		

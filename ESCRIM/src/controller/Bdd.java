@@ -203,11 +203,6 @@ public class Bdd {
 	}
 	
 	
-	public static void deplacerProduit(String lot, int nCaisse){
-		// Méthode à coder par Charlie
-	}
-	
-	
 	public static ArrayList<Historique> RecupHisto(Date date, Connection conn) {
 		ArrayList<Historique> Configs = new ArrayList<Historique>();
 
@@ -510,7 +505,7 @@ public class Bdd {
 		}
 		
 		String sql;
-		sql="UPDATE Produits SET NumCaisse='"+NewNumCaisse+"'";
+		sql="UPDATE Produits SET NumCaisse='"+NewNumCaisse+"'"+"WHERE lot="+lot;
 		
 		try {
 			stmt.executeUpdate(sql);

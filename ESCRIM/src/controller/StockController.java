@@ -64,12 +64,12 @@ public class StockController implements ActionListener, MouseListener {
 			if(source.equals("Ajouter")){
 				String lot = GestionStock.getcBoxNLot().getSelectedItem().toString();
 				int caisse = Integer.parseInt(GestionStock.getcBoxNStockage().getSelectedItem().toString());
-				Bdd.deplacerProduit(lot, caisse);	
+				Bdd.deplacerProduit(lot, caisse, Bdd.ConnectDB());	
 			}
 			
 			if(source.equals("Supprimer")){
 				String lot = GestionStock.getnLotASupprimer().getText().toString();
-				Bdd.deplacerProduit(lot, 0);
+				Bdd.deplacerProduit(lot, 0, Bdd.ConnectDB());
 			}
 		}
 		
