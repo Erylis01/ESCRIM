@@ -6,9 +6,17 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import model.*;
-
+/**
+ * La classe Bdd se charge de toutes les interactions entre la base de données MySQL et l'application.
+ * @author Charlie
+ *
+ */
 public class Bdd {
 
+	/**
+	 * Connexion à la base de données, nécessaire avant de faire quoi que ce soit. Retourne Connection, nécessaire pour les autres méthodes.
+	 * @return Connection 
+	 */
 	public static Connection ConnectDB() {
 
 		Connection conn = null;
@@ -36,6 +44,16 @@ public class Bdd {
 		return conn;
 	}
 
+	/**
+	 * Méthode pour identifier un utilisateur. Utilise la méthode de cryptage MD5 commentée plus bas.
+	 * 
+	 * @param username
+	 * @param password
+	 * @param conn
+	 * @return Connection
+	 * @throws SQLException
+	 * @throws NoSuchAlgorithmException
+	 */
 	public static boolean Authenticate(String username, String password, Connection conn)
 			throws SQLException, NoSuchAlgorithmException {
 		boolean authenticated = false;
@@ -61,7 +79,7 @@ public class Bdd {
 	}
 
 	/**
-	 * Permet de récupérer les infos d'un produit
+	 * Permet de récupérer les informationss d'un produit en fonction de son "Lot".
 	 * 
 	 * @param Lot
 	 * @param conn
@@ -97,6 +115,13 @@ public class Bdd {
 		return Infos;
 	}
 
+	/**
+	 * Récupère les informations d'un utilisateur en fonction de son nom de compte et mot de passe.
+	 * @param ndc
+	 * @param password
+	 * @param conn
+	 * @return
+	 */
 	public static User RecupUser(String ndc, String password, Connection conn) {
 		Statement stmt = null;
 		User user = null;
@@ -129,6 +154,11 @@ public class Bdd {
 
 	}
 
+	/**
+	 * Récupère tout l'historique Pays-Config-Avion.
+	 * @param conn
+	 * @return
+	 */
 	public static ArrayList<Historique> RecupHisto(Connection conn) {
 		ArrayList<Historique> Configs = new ArrayList<Historique>();
 		Statement stmt = null;
@@ -163,6 +193,12 @@ public class Bdd {
 		return Configs;
 	}
 	
+	/**
+	 * Récupère les produits en fonction de leur numéro de caisse.
+	 * @param nStockage
+	 * @param conn
+	 * @return Produits
+	 */
 	public static ArrayList<Product> RecupProduits(int nStockage, Connection conn){
 		ArrayList<Product> Produits = new ArrayList<Product>();
 		
@@ -202,7 +238,12 @@ public class Bdd {
 		return Produits;
 	}
 	
-	
+	/**
+	 * Récupère l'historique en fonction de la date entrée, fonctionne comme un "filtre" d'historique.
+	 * @param date
+	 * @param conn
+	 * @return Historique
+	 */
 	public static ArrayList<Historique> RecupHisto(Date date, Connection conn) {
 		ArrayList<Historique> Configs = new ArrayList<Historique>();
 
@@ -236,6 +277,12 @@ public class Bdd {
 		return Configs;
 	}
 
+	/**
+	 * Récupère l'historique en fonction du Pays.
+	 * @param Pays
+	 * @param conn
+	 * @return Historique
+	 */
 	public static ArrayList<Historique> RecupHisto(String Pays, Connection conn) {
 		ArrayList<Historique> Configs = new ArrayList<Historique>();
 
@@ -269,6 +316,12 @@ public class Bdd {
 
 		return Configs;
 	}
+	
+	/**
+	 * Récupère toute la liste d'avions disponibles.
+	 * @param conn
+	 * @return Avions
+	 */
 	
 	public static ArrayList<Plane> RecupAvion(Connection conn){
 		ArrayList<Plane> Avions = new ArrayList<Plane>();
@@ -324,6 +377,12 @@ public class Bdd {
 		return Avions;
 	}
 
+	/**
+	 * Récupère tous les numéros de stockage.
+	 * @param conn
+	 * @return listStockage
+	 */
+	
 	public static String[] RecupNStockage(Connection conn) {
 		ArrayList<String> listStockage = new ArrayList<String>();
 
@@ -358,6 +417,12 @@ public class Bdd {
 
 		return listeStockage;
 	}
+	
+	/**
+	 * Récupère le "Lot" de tous les produits.
+	 * @param conn
+	 * @return
+	 */
 	
 	public static String[] RecupNLot(Connection conn) {
 		ArrayList<String> listLot = new ArrayList<String>();
@@ -394,6 +459,15 @@ public class Bdd {
 		return listeLot;
 	}
 
+	/**
+	 * Ajoute un utilisateur à la base de données.
+	 * @param Username
+	 * @param Password
+	 * @param Nom
+	 * @param Prenom
+	 * @param admin
+	 * @param conn
+	 */
 	public static void Add_User(String Username, String Password, String Nom, String Prenom, boolean admin,
 			Connection conn) {
 		Statement stmt = null;
@@ -421,6 +495,14 @@ public class Bdd {
 
 	}
 
+	/**
+	 * Ajoute une entrée dans l'historique.
+	 * @param date
+	 * @param pays
+	 * @param config
+	 * @param avion
+	 * @param conn
+	 */
 	public static void Add_Histo(Date date, String pays, String config, String avion, Connection conn) {
 		Statement stmt = null;
 		try {
@@ -443,6 +525,22 @@ public class Bdd {
 
 	}
 
+	/**
+	 * Ajoute un produit avec tous ses attributs.
+	 * @param designation
+	 * @param dlu
+	 * @param reference
+	 * @param quantite
+	 * @param dosage
+	 * @param lot
+	 * @param dci
+	 * @param seuil_critique
+	 * @param classe_therapeutique
+	 * @param NumCaisse
+	 * @param caisse
+	 * @param dotation_U7
+	 * @param conn
+	 */
 	public static void Add_Produit(String designation, Date dlu, String reference, int quantite, String dosage,
 			String lot, String dci, int seuil_critique, String classe_therapeutique, int NumCaisse, String caisse,
 			String dotation_U7, Connection conn) {
@@ -469,6 +567,22 @@ public class Bdd {
 
 	}
 	
+	/**
+	 * Modifie un produit en fonction de son "Lot".
+	 * @param lot
+	 * @param designation
+	 * @param dlu
+	 * @param reference
+	 * @param quantite
+	 * @param dosage
+	 * @param dci
+	 * @param seuil_critique
+	 * @param classe_therapeutique
+	 * @param NumCaisse
+	 * @param caisse
+	 * @param dotation_U7
+	 * @param conn
+	 */
 	public static void Modif_produit(String lot, String designation, Date dlu, String reference, int quantite, String dosage,
 			 String dci, int seuil_critique, String classe_therapeutique, int NumCaisse, String caisse,
 			String dotation_U7, Connection conn){
@@ -494,7 +608,12 @@ public class Bdd {
 		}
 		
 	}
-
+	/**
+	 * Assigne un nouveau stockage à un produit (identifié par son "Lot").
+	 * @param lot
+	 * @param NewNumCaisse
+	 * @param conn
+	 */
   public static void deplacerProduit(String lot, int NewNumCaisse, Connection conn){
 	  Statement stmt=null;
 	  try {
@@ -505,7 +624,7 @@ public class Bdd {
 		}
 		
 		String sql;
-		sql="UPDATE Produits SET NumCaisse='"+NewNumCaisse+"'"+"WHERE lot="+lot;
+		sql="UPDATE Produits SET NumCaisse='"+NewNumCaisse+"'";
 		
 		try {
 			stmt.executeUpdate(sql);
@@ -514,7 +633,13 @@ public class Bdd {
 			e.printStackTrace();
 		}
   }	
-	
+	/**
+	 * Méthode de cryptage des mots de passe utilisant l'algorithme MD5. Bien que non-optimal, celui-ci permet de ne pas stocker des 
+	 * mots de passe en clair dans la base de données, et reste efficace pour des mots de passe assez complexes (7+ caractères, chiffres, lettres
+	 * et ponctuation).
+	 * @param password
+	 * @return
+	 */
 	public static String CryptMD5(String password) {
 		MessageDigest Digest = null;
 
