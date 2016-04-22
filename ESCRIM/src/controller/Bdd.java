@@ -79,11 +79,11 @@ public class Bdd {
 	}
 
 	/**
-	 * Permet de récupérer les informationss d'un produit en fonction de son "Lot".
+	 * Permet de récupérer les informations d'un produit en fonction de son "Lot".
 	 * 
 	 * @param Lot
 	 * @param conn
-	 * @return
+	 * @return Produit
 	 * @throws SQLException
 	 */
 	public static Product RecupInfoProduit(String Lot, Connection conn) throws SQLException {
@@ -120,7 +120,7 @@ public class Bdd {
 	 * @param ndc
 	 * @param password
 	 * @param conn
-	 * @return
+	 * @return Utilisateur
 	 */
 	public static User RecupUser(String ndc, String password, Connection conn) {
 		Statement stmt = null;
@@ -157,7 +157,7 @@ public class Bdd {
 	/**
 	 * Récupère tout l'historique Pays-Config-Avion.
 	 * @param conn
-	 * @return
+	 * @return Historique
 	 */
 	public static ArrayList<Historique> RecupHisto(Connection conn) {
 		ArrayList<Historique> Configs = new ArrayList<Historique>();
@@ -421,7 +421,7 @@ public class Bdd {
 	/**
 	 * Récupère le "Lot" de tous les produits.
 	 * @param conn
-	 * @return
+	 * @return Lots
 	 */
 	
 	public static String[] RecupNLot(Connection conn) {
