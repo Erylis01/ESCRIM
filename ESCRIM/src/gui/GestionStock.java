@@ -10,7 +10,6 @@ import javax.swing.border.LineBorder;
 import controller.Bdd;
 import controller.StockController;
 import model.User;
-
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Dimension;
@@ -200,6 +199,8 @@ public class GestionStock extends JFrame {
 		//Concaténation de toutes les informations
 		gestionStock.pack();
 		gestionStock.setVisible(true);
+		gestionStock.getContentPane().repaint();
+		gestionStock.getContentPane().revalidate();
 	}
 	
 	/**

@@ -1,49 +1,50 @@
 package controller;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Connection;
-import java.text.ParseException;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.border.LineBorder;
-import javax.swing.table.TableModel;
-
-import gui.ChoisirConfig;
 import gui.GestionStock;
 import gui.Menu;
-import model.Historique;
 import model.Product;
 import model.User;
 
+/**
+ * Controleur lié aux actions de la fenêtre de gestion des stocks
+ * @author William
+ *
+ */
 public class StockController implements ActionListener, MouseListener {
-
+	
+		/**
+		 * Deux attributs uniquement nécessaire aux opéartions de contrôle
+		 */
+		@SuppressWarnings("unused")
 		private GestionStock vue;
 		private User user;
 		
+		/**
+		 * Constructeur de la classe, permet d'initialiser le controleur
+		 * @param vue - GestionStock
+		 * @param user - User
+		 */
 		public StockController(GestionStock vue,User user){
 			this.vue=vue;	
 			this.user=user;
 		}
 		
+		/**
+		 * Méthode de contrôle des boutons, filtrage sur l'origine de l'action
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String source=((JButton) e.getSource()).getText();
-			
+			//Remplir le tableau avec les produits contenu dans la caisse sélectionnée
 			if(source.equals("Afficher")){
 				Product p =new Product();
 				String[][] pTab = p.getList(Integer.parseInt(GestionStock.getcBoxNStockage().getSelectedItem().toString()));
-				//JTable remp = new JTable(pTab,new String[]{"Nom","Quantité","DLU"});
-				//remp.setLocation(41,185);
-				//GestionStock.getScrollTab().remove(0);
-				//GestionStock.getScrollTab().add(remp);
 				for(int i = 0;i<GestionStock.getTabProduit().getRowCount()-1;i++){
 					GestionStock.getTabProduit().getModel().setValueAt("", i, 0);
 					GestionStock.getTabProduit().getModel().setValueAt("", i, 1);
@@ -61,27 +62,35 @@ public class StockController implements ActionListener, MouseListener {
 				
 			}
 			
+			//Modifie le numéro de caisse du produit correspondant au numéro de lot sélectionné
 			if(source.equals("Ajouter")){
 				String lot = GestionStock.getcBoxNLot().getSelectedItem().toString();
 				int caisse = Integer.parseInt(GestionStock.getcBoxNStockage().getSelectedItem().toString());
 				Bdd.deplacerProduit(lot, caisse, Bdd.ConnectDB());	
 			}
 			
+			//Reset le numéro de caisse du produit correspondant au numéro de lot sélectionné
 			if(source.equals("Supprimer")){
 				String lot = GestionStock.getnLotASupprimer().getText().toString();
 				Bdd.deplacerProduit(lot, 0, Bdd.ConnectDB());
 			}
 		}
 		
-	
+		
+		/**
+		 * Implémente l'action à la souris - Retour au menu par clique sur l'icône
+		 */
 		@Override
 		public void mouseClicked(MouseEvent e) {
 				
 				String source = ((JLabel)e.getSource()).getName().toString();
 				System.out.println(source);
 				if (source=="lblMenu"){
+					@SuppressWarnings("unused")
 					Menu m = new Menu(user);
 					GestionStock.getGestionStock().dispose();
+					GestionStock.getGestionStock().repaint();
+					GestionStock.getGestionStock().revalidate();
 				}
 	
 			}
