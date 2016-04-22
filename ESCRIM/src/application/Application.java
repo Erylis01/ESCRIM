@@ -1,38 +1,26 @@
 package application;
 
-import controller.Bdd;
-import gui.ChoisirConfig;
-import gui.GestionStock;
+
 import gui.Log;
-import gui.Menu;
-import gui.ModifProduit;
-import model.Config;
-import model.Historique;
 import model.User;
 
+/**
+ * Classe principale de lancement de l'application, lance la fenetre de login.
+ * @author William
+ *
+ */
 public class Application {
-
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		PierreTests();
-		//CharlieTests();
-		//WilliamTests();
 	}
 
+	@SuppressWarnings("unused")
 	private static void PierreTests() {
 		User u = new User();
 		Log l = new Log(u);
-		//ChoisirConfig cc= new ChoisirConfig();
-		//GestionStock gs = new GestionStock(u);
-
 	}
 
-	private static void CharlieTests() {
-         Bdd.ConnectDB();
-         
-	}
-	
-	private static void WilliamTests() {
 
-	}
 }

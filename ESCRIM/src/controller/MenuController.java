@@ -16,19 +16,33 @@ import model.Historique;
 import model.Product;
 import model.User;
 
+/**
+ * Controleur dédié à la fenêtre de menu
+ */
 public class MenuController implements MouseListener {
-
+	
+	//Attributs de la classe
 	private Menu vue;
 	private Connection conn;
 	private Product p;
 	private User u;
 	private Historique h;
-
+	
+	/**
+	 * Constructeur de la classe 
+	 * @param vue - Menu
+	 * @param info - User
+	 */
 	public MenuController(Menu vue,User info) {
 		this.vue = vue;
 		this.u=info;
 	}
-
+	
+	/**
+	 * Méthode permettant de se déplacer dans les diverses fenêtre à l'aide des images
+	 * @param e - MouseEvent
+	 */
+	@SuppressWarnings("unused")
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		String source = ((JLabel) e.getSource()).getName();

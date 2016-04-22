@@ -28,6 +28,7 @@ public class ProduitController implements ActionListener,MouseListener{
 		this.modele=modele;
 		this.u=info;
 	}
+	@SuppressWarnings("unused")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -56,6 +57,7 @@ public class ProduitController implements ActionListener,MouseListener{
 		}
 		
 	}
+	@SuppressWarnings("unused")
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		

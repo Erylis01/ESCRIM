@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
-
-import javax.swing.table.AbstractTableModel;
-
 import controller.Bdd;
 
 public class Product{

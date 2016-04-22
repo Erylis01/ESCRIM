@@ -18,17 +18,34 @@ import model.User;
 import gui.Log;
 import gui.Menu;
 
+/**
+ * Controleur dédié à la fenêtre des logins
+ * @author William
+ *
+ */
 public class LogController implements ActionListener,MouseListener,KeyListener{
-
+	
+	/**
+	 * Attributs de la classe
+	 */
 	private Log vue;
 	private User modele;
 	private Connection conn;
-
+	
+	/**
+	 * Constructeur de la classe 
+	 * @param vue - Log
+	 * @param modele - User
+	 */
 	public LogController(Log vue, User modele) {
 		this.vue = vue;
 		this.modele = modele;
 	}
 
+	/**
+	 * Méthode d'action du bouton afficher, vérifie les accès à l'aide de la base de donnée
+	 */
+	@SuppressWarnings("unused")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -50,7 +67,10 @@ public class LogController implements ActionListener,MouseListener,KeyListener{
 				e1.printStackTrace();
 			}
 		}}
-
+	
+	/**
+	 * Méthode permettant d'effacer le contenu courant des champs lors du clic
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		String source = ((JTextField)e.getSource()).getName();
@@ -86,7 +106,10 @@ public class LogController implements ActionListener,MouseListener,KeyListener{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	/**
+	 * Méthode permettant de changer de champs avec shift
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
