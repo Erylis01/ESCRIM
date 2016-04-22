@@ -81,10 +81,15 @@ public class GestionStock extends JFrame {
 		panel_user.add(label);
 		
 		JLabel label_1 = new JLabel("<dynamic>");
+		if (user.isAdmin() == true) {
+			label_1.setText("Administrateur");
+		} else {
+			label_1.setText("Utilisateur");
+		}
 		label_1.setBounds(60, 11, 48, 14);
 		panel_user.add(label_1);
 		
-		JLabel label_2 = new JLabel("AdminInfo");
+		JLabel label_2 = new JLabel(user.getUsername());
 		label_2.setBounds(60, 36, 49, 14);
 		panel_user.add(label_2);
 		
