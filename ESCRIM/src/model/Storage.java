@@ -2,6 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * Classe permettant de mettre en place le modèle de l'objet stockage
+ * @author William
+ *
+ */
 public class Storage {
 	
 	private float number,width,height,depth;
@@ -10,14 +15,14 @@ public class Storage {
 	
 	/**
 	 * Constructeur de la classe storage
-	 * @param number
-	 * @param width
-	 * @param height
-	 * @param depth
-	 * @param type
-	 * @param localisation
-	 * @param state
-	 * @param list_product
+	 * @param number - float 
+	 * @param width - float
+	 * @param height - float
+	 * @param depth - float
+	 * @param type - String
+	 * @param localisation - String
+	 * @param state - String
+	 * @param list_product - ArrayList<Product>
 	 */
 	public Storage(float number,float width,float height,float depth,String type,String localisation,String state,ArrayList<Product> list_product ){
 		this.number = number;
@@ -31,97 +36,127 @@ public class Storage {
 	}	
 
 	/**
-	 * @return the number
+	 * Permet de récupérer le nombre
+	 * @return number - float
 	 */
 	public float getNumber() {
 		return number;
 	}
+	
 	/**
-	 * @param number the number to set
+	 * Permet de modifier le nombre
+	 * @param number - float
 	 */
 	public void setNumber(int number) {
 		this.number = number;
 	}
+	
 	/**
-	 * @return the width
+	 * Permet de récupérer la largeur
+	 * @return width - float
 	 */
 	public float getWidth() {
 		return width;
 	}
+	
 	/**
-	 * @param width the width to set
+	 * Permet de modifier la largeur
+	 * @param width - float
 	 */
 	public void setWidth(int width) {
 		this.width = width;
 	}
+	
 	/**
-	 * @return the height
+	 * Permet de modifier la hauteur
+	 * @return height - float
 	 */
 	public float getHeight() {
 		return height;
 	}
+	
 	/**
-	 * @param height the height to set
+	 * Permet de modifier la hauteur
+	 * @param height - float
 	 */
 	public void setHeight(int height) {
 		this.height = height;
 	}
+	
 	/**
-	 * @return the depth
+	 * Permet de récupérer la profondeur
+	 * @return depth - float
 	 */
 	public float getDepth() {
 		return depth;
 	}
+	
 	/**
-	 * @param depth the depth to set
+	 * Permet de modifier la pronfondeur
+	 * @param depth - float
 	 */
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
+	
 	/**
-	 * @return the type
+	 * Permet de récupérer le type
+	 * @return type - String
 	 */
 	public String getType() {
 		return type;
 	}
+	
 	/**
-	 * @param type the type to set
+	 * Permet de modifier le type
+	 * @param type - String
 	 */
 	public void setType(String type) {
 		this.type = type;
 	}
+	
 	/**
-	 * @return the localisation
+	 * Permet de récupérer la localisation
+	 * @return localisation - String
 	 */
 	public String getLocalisation() {
 		return localisation;
 	}
+	
 	/**
-	 * @param localisation the localisation to set
+	 * Permet de modifier la localisation
+	 * @param localisation - String
 	 */
 	public void setLocalisation(String localisation) {
 		this.localisation = localisation;
 	}
+	
 	/**
-	 * @return the state
+	 * Permet de modifier l'état
+	 * @return state - String
 	 */
 	public String getState() {
 		return state;
 	}
+	
 	/**
-	 * @param state the state to set
+	 * Permet de modifier l'état
+	 * @param state - String
 	 */
 	public void setState(String state) {
 		this.state = state;
 	}
+	
 	/**
-	 * @return the list_product
+	 * Permet de récupérer la liste de produit
+	 * @return list_product - ArrayList<Product>
 	 */
 	public ArrayList<Product> getList_product() {
 		return list_product;
 	}
 	/**
-	 * @param list_product the list_product to set
+	 * Permet de modifier la liste de produit
+	 * @param list_product - ArrayList<Product>
 	 */
 	public void setList_product(ArrayList<Product> list_product) {
 		this.list_product = list_product;

@@ -9,8 +9,15 @@ import java.sql.Date;
 import java.util.ArrayList;
 import controller.Bdd;
 
+/**
+ * Classe permettant de mettre en place le modèle d'un objet Produit
+ * @author William
+ *
+ */
 public class Product{
-
+	/**
+	 * Attributs de la classe
+	 */
 	private Date DLU=null;
 	private int quantity=0, critical_threshold=0,Ncaisse=0;
 	private String[][] Produits;
@@ -26,15 +33,14 @@ public class Product{
 	
 	/**
 	 * Constructeur de la classe Product
-	 * 
-	 * @param DLU
-	 * @param quantity
-	 * @param lot
-	 * @param critical_threshold
-	 * @param DCI
-	 * @param dosage
-	 * @param reference
-	 * @param name
+	 * @param DLU - Date
+	 * @param quantity - int
+	 * @param lot - String
+	 * @param critical_threshold - int
+	 * @param DCI - String
+	 * @param dosage - String
+	 * @param reference - String
+	 * @param name - String
 	 */
 
 	public Product(String name,String DCI,String dosage,Date DLU,int quantity,String lot,String classe, int Ncaisse,String caisse,String dotation,int threshold,String reference) {
@@ -52,6 +58,11 @@ public class Product{
 		this.dotation=dotation;
 	}
 	
+	/**
+	 * Permet de transformer l'arraylist des produits contenu dans un stockage en double tableaux de String pour affichage
+	 * @param nStockage - int
+	 * @return Produits - String[][]
+	 */
 	public String[][] getList(int nStockage) {
 		Connection conn = Bdd.ConnectDB();
 		ArrayList<Product> liste_Produits = Bdd.RecupProduits(nStockage,conn);
@@ -64,121 +75,130 @@ public class Product{
 		}
 		return Produits;
 	}
+	
 	/**
-	 * @return the DLU
+	 * Permet de récupérer la DLU
+	 * @return DLU - Date
 	 */
 	public Date getDLU() {
 		return DLU;
 	}
 
 	/**
-	 * @param DLU
-	 *            the DLU to set
+	 * Permet de modifier la DLU
+	 * @param DLU - Date
 	 */
 	public void setDLU(Date DLU) {
 		this.DLU = DLU;
 	}
 
 	/**
-	 * @return the quantity
+	 * Permet de récupérer la quantité
+	 * @return quantity - int
 	 */
 	public int getQuantity() {
 		return quantity;
 	}
 
 	/**
-	 * @param quantity
-	 *            the quantity to set
+	 * Permet de modifier la quantité
+	 * @param quantity - int
 	 */
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
 	/**
-	 * @return the lot
+	 * Permet de récupérer le lot
+	 * @return lot - String
 	 */
 	public String getLot() {
 		return lot;
 	}
 
 	/**
-	 * @param lot
-	 *            the lot to set
+	 * Permet de modifier le lot
+	 * @param lot - String
 	 */
 	public void setLot(String lot) {
 		this.lot = lot;
 	}
 
 	/**
-	 * @return the critical_threshold
+	 * Permet de récupérer le seuil critique
+	 * @return critical_threshold - int
 	 */
 	public int getCritical_threshold() {
 		return critical_threshold;
 	}
 
 	/**
-	 * @param critical_threshold
-	 *            the critical_threshold to set
+	 * Permet de modifier le seuil critique
+	 * @param critical_threshold - int
 	 */
 	public void setCritical_threshold(int critical_threshold) {
 		this.critical_threshold = critical_threshold;
 	}
 
 	/**
-	 * @return the DCI
+	 * Permet de récupérer le DCI
+	 * @return DCI - String
 	 */
 	public String getDCI() {
 		return DCI;
 	}
 
 	/**
-	 * @param DCI
-	 *            the DCI to set
+	 * Permet de modifier la DCI
+	 * @param DCI - String
 	 */
 	public void setDCI(String DCI) {
 		this.DCI = DCI;
 	}
 
 	/**
-	 * @return the dosage
+	 * Permet de récupérer le dosage
+	 * @return dosage - String
 	 */
 	public String getDosage() {
 		return dosage;
 	}
 
 	/**
-	 * @param dosage
-	 *            the dosage to set
+	 * Permet de odifier le dosage
+	 * @param dosage - String
 	 */
 	public void setDosage(String dosage) {
 		this.dosage = dosage;
 	}
 
 	/**
-	 * @return the reference
+	 * Permer de récupérer la référence
+	 * @return reference - String
 	 */
 	public String getReference() {
 		return reference;
 	}
 
 	/**
-	 * @param reference
-	 *            the reference to set
+	 * Permet de modifier la référence
+	 * @param reference - String
 	 */
 	public void setReference(String reference) {
 		this.reference = reference;
 	}
 
 	/**
-	 * @return the name
+	 * Permet de récupérer le nom
+	 * @return name - String
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @param name
-	 *            the name to set
+	 * Permet de modifier le nom
+	 * @param name - String
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -186,8 +206,7 @@ public class Product{
 
 	/**
 	 * Méthode permettant de vérifier l'état de criticité du stock de produit
-	 * 
-	 * @return test_quantite
+	 * @return test_quantite - boolean
 	 */
 	public boolean etatCritique() {
 		boolean test_quantite = false;
@@ -199,7 +218,6 @@ public class Product{
 	/**
 	 * Fonction appeller pour la génération d'un fichier texte simple de
 	 * récapitulatif des informations
-	 * 
 	 * @throws IOException
 	 */
 	public void printFile() throws IOException {
@@ -211,38 +229,73 @@ public class Product{
 		writer.close();
 	}
 
+	/**
+	 * Permet de récupérer le numéro de caisse 
+	 * @return Ncaisse - int
+	 */
 	public int getNcaisse() {
 		return Ncaisse;
 	}
 
+	/**
+	 * Permet de modifier le numéro de caisse
+	 * @param ncaisse - int
+	 */
 	public void setNcaisse(int ncaisse) {
 		Ncaisse = ncaisse;
 	}
-
+	
+	/**
+	 * Permet de récupérer la classe thérapeutique
+	 * @return classe - String
+	 */
 	public String getClasse() {
 		return classe;
 	}
-
+	
+	/**
+	 * Permet de modifier la classe thérapeutique
+	 * @param classe - String
+	 */
 	public void setClasse(String classe) {
 		this.classe = classe;
 	}
 
+	/**
+	 * Permet de récupérer la caisse
+	 * @return caisse - String
+	 */
 	public String getCaisse() {
 		return caisse;
 	}
-
+	
+	/**
+	 * Permet de modifier la caisse
+	 * @param caisse - String
+	 */
 	public void setCaisse(String caisse) {
 		this.caisse = caisse;
 	}
-
+	
+	/**
+	 * Permet de récupérer la dotation
+	 * @return dotation - String
+	 */
 	public String getDotation() {
 		return dotation;
 	}
-
+	
+	/**
+	 * Permet de modifier la dotation
+	 * @param dotation - String
+	 */
 	public void setDotation(String dotation) {
 		this.dotation = dotation;
 	}
 	
+	/**
+	 * Permet d'afficher toutes les infos d'un produit / Fonction de test
+	 */
 	public void affichage(){
 		System.out.println(name+" "+DCI+" "+dosage+" "+DLU+" "+quantity+" "+lot+" "+classe+" "+Ncaisse+" "+caisse+" "+dotation);
 	}

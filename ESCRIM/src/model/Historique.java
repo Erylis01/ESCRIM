@@ -9,9 +9,17 @@ import javax.swing.table.AbstractTableModel;
 
 import controller.Bdd;
 
+/**
+ * Implémentation de la classe métier des historiques
+ * @author William
+ *
+ */
 @SuppressWarnings("serial")
 public class Historique extends AbstractTableModel {
-
+	
+	/**
+	 * Attributs de la classe
+	 */
 	private String id, date, pays, config, avion;
 	private String[][] configs;
 	private final String[] entetes = { "ID", "DATE", "PAYS", "CONFIGURATION", "AVION" };
@@ -24,13 +32,12 @@ public class Historique extends AbstractTableModel {
 	}
 
 	/**
-	 * Constructeur
-	 * 
-	 * @param id
-	 * @param date
-	 * @param pays
-	 * @param config
-	 * @param avion
+	 * Constructeur de la classe
+	 * @param id - String
+	 * @param date - String
+	 * @param pays - String
+	 * @param config - String
+	 * @param avion - String
 	 */
 	public Historique(String id, String date, String pays, String config, String avion) {
 		this.id = id;
@@ -39,22 +46,41 @@ public class Historique extends AbstractTableModel {
 		this.config = config;
 		this.avion = avion;
 	}
-
+	
+	/**
+	 * Renvoie le nombre de colonne
+	 * @return columnCount - int
+	 */
 	@Override
 	public int getColumnCount() {
 		return entetes.length;
 	}
-
+	
+	/**
+	 * Renvoie le nombre de ligne
+	 * @return rowCount - int
+	 */
 	@Override
 	public int getRowCount() {
 		return configs.length;
 	}
 
+	/**
+	 * Renvoie le nom des colonnes suivant l'index de la colonne
+	 * @param columnIndex - int
+	 * @return columnName - String
+	 */
 	@Override
 	public String getColumnName(int columnIndex) {
 		return entetes[columnIndex];
 	}
-
+	
+	/**
+	 * Renvoie la valeur du cellule
+	 * @param rowIndex - int
+	 * @param columnIndex - int
+	 * @return value - Object
+	 */
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		return configs[rowIndex][columnIndex];
@@ -63,8 +89,7 @@ public class Historique extends AbstractTableModel {
 	/**
 	 * Permet de récupérer l'ensemble des configurations et de remplir dans un
 	 * tableau de string
-	 * 
-	 * @return Tableau de string de config
+	 * @return configs - String[]
 	 */
 	public String[][] getList() {
 		Connection conn = Bdd.ConnectDB();
@@ -82,9 +107,8 @@ public class Historique extends AbstractTableModel {
 
 	/**
 	 * Permet de récupérer la liste des configurations filtrer par date
-	 * 
-	 * @param Date
-	 * @return
+	 * @param date - Date
+	 * @return configs - String[]
 	 * @throws ParseException
 	 */
 	public String[][] getListDate(Date date) throws ParseException {
@@ -100,7 +124,12 @@ public class Historique extends AbstractTableModel {
 		}
 		return configs;
 	}
-
+	
+	/**
+	 * Permet de récupérer une liste de configuration en fonction d'un pays
+	 * @param Pays - String
+	 * @return configs - String[]
+	 */
 	public String[][] getListPays(String Pays){
 		Connection conn = Bdd.ConnectDB();
 		ArrayList<Historique> liste_configs =Bdd.RecupHisto(Pays, conn);
@@ -128,75 +157,80 @@ public class Historique extends AbstractTableModel {
 	}
 
 	/**
-	 * @return the id
+	 * Permet de récupérer l'id
+	 * @return id - String
 	 */
 	public String getId() {
 		return id;
 	}
 
 	/**
-	 * @param id
-	 *            the id to set
+	 * Permet de modifier l'id
+	 * @param id - String
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
 	/**
-	 * @return the date
+	 * Permet de renvoyer la date
+	 * @return date - String
 	 */
 	public String getDate() {
 		return date;
 	}
 
 	/**
-	 * @param date
-	 *            the date to set
+	 * Permet de modifier la date
+	 * @param date - Date
 	 */
 	public void setDate(String date) {
 		this.date = date;
 	}
 
 	/**
-	 * @return the pays
+	 * Permet de renvoyer le pays
+	 * @return pays - String
 	 */
 	public String getPays() {
 		return pays;
 	}
 
 	/**
-	 * @param pays
-	 *            the pays to set
+	 * Permet de modifier le pays
+	 * @param pays - String
 	 */
 	public void setPays(String pays) {
 		this.pays = pays;
 	}
 
 	/**
-	 * @return the config
+	 * Permet de récupérer une configuration
+	 * @return config - String
 	 */
 	public String getConfig() {
 		return config;
 	}
 
 	/**
-	 * @param config
-	 *            the config to set
+	 * Permet de modifier la config
+	 * @param config - config
 	 */
 	public void setConfig(String config) {
 		this.config = config;
 	}
 
 	/**
-	 * @return the avion
+	 * .Permet de récupérer l'avion
+	 * @return avion - String
 	 */
 	public String getAvion() {
 		return avion;
 	}
 
 	/**
-	 * @param avion
-	 *            the avion to set
+	 * Permet de modifier l'avion
+	 * @param avion - String
 	 */
 	public void setAvion(String avion) {
 		this.avion = avion;

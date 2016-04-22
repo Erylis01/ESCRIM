@@ -1,16 +1,21 @@
 package model;
 
+/**
+ * Classe de mise en place des contenair
+ * @author William
+ *
+ */
 public class Container {
 
 	private int ID_contenair,volume,depth,width,height;
 	
 	/**
 	 * Constructeur de la classe Container
-	 * @param ID_contenair
-	 * @param volume
-	 * @param depth
-	 * @param width
-	 * @param height
+	 * @param ID_contenair - int
+	 * @param volume - int
+	 * @param depth - int
+	 * @param width - int
+	 * @param height - int
 	 */
 	public Container(int volume, int depth, int width, int height){ 
 		this.volume = volume;
@@ -21,8 +26,8 @@ public class Container {
 
 	
 	/**
-	 * 
-	 * @return ID_contenair
+	 * Renvoi l'ID du contenair
+	 * @return ID_contenair - int
 	 */
 	public int getID_contenair() {
 		return ID_contenair;
@@ -30,8 +35,8 @@ public class Container {
 
 
 	/**
-	 * 
-	 * @param iD_contenair
+	 * Modifie l'ID du contenair
+	 * @param iD_contenair - int
 	 */
 	public void setID_contenair(int iD_contenair) {
 		ID_contenair = iD_contenair;
@@ -40,56 +45,64 @@ public class Container {
 
 
 	/**
-	 * @return the volume
+	 * Renvoie le volume du contenair
+	 * @return volume - int
 	 */
 	public int getVolume() {
 		return volume;
 	}
 
 	/**
-	 * @param volume the volume to set
+	 * Modifie le volume du contenair
+	 * @param volume - int
 	 */
 	public void setVolume(int volume) {
 		this.volume = volume;
 	}
 
 	/**
-	 * @return the depth
+	 * Renvoie la profondeur du contenair
+	 * @return depth - int
 	 */
 	public int getDepth() {
 		return depth;
 	}
 
 	/**
-	 * @param depth the depth to set
+	 * Modifie la valeur du contenair
+	 * @param depth - int
 	 */
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
 
 	/**
-	 * @return the width
+	 * Renvoie la largeur du contenair
+	 * @return width - int
 	 */
 	public int getWidth() {
 		return width;
 	}
 
 	/**
-	 * @param width the width to set
+	 * Modifie la largeur du contenair
+	 * @param width - int
 	 */
 	public void setWidth(int width) {
 		this.width = width;
 	}
 
 	/**
-	 * @return the height
+	 * Renvoie la hauteur du contenair
+	 * @return height - int
 	 */
 	public int getHeight() {
 		return height;
 	}
 
 	/**
-	 * @param height the height to set
+	 * Modifie la hauteur du contenair
+	 * @param height - int
 	 */
 	public void setHeight(int height) {
 		this.height = height;
